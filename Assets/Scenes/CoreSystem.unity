@@ -148,7 +148,8 @@ MonoBehaviour:
   updateInterval: 50
   runInBackground: 1
   statsResetInterval: 1000
-  speakerPrefab: {fileID: 0}
+  speakerPrefab: {fileID: 1979024068460804, guid: f72e4ffe74d520b4e8b5376aa10e0e2e,
+    type: 2}
   Settings:
     AppIdRealtime: 
     AppIdChat: 
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d523aa7206658a4eb2d74fa1860ea40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatar: {fileID: 0}
+  avatar: {fileID: 1979024068460804, guid: f72e4ffe74d520b4e8b5376aa10e0e2e, type: 2}
 --- !u!4 &1586350633
 Transform:
   m_ObjectHideFlags: 0
