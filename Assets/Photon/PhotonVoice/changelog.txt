@@ -1,0 +1,39 @@
+Photon Voice Change Log
+
+v2.1.3 (December 7th, 2018)
+    PUN2: v2.5 (4d59ede)
+    PhotonVoiceApi: revision 4915
+    FIXED: disconnects during delays due to scene loading
+    FIXED: iOS crash due to native plugin files versions mismatch
+    CHANGED: iOS audio output forced to speaker by default when using Photon microphone type
+    
+v2.1.2 (December 3rd, 2018)
+    PUN2: v2.5 (4d59ede)
+    PhotonVoiceApi: revision 4876
+    FIXED: issue due to using Mic. name/Id from Editor in builds
+    CHANGED: renamed Recorder.PhotonVoiceCreatedParams.AudioSource to Recorder.PhotonVoiceCreatedParams.AudioDesc 
+    CHANGED: renamed VoiceAudioPreprocessor to WebRtcAudioDsp
+
+v2.1.1 (November 21st, 2018)
+    PUN2: v2.5 (4d59ede)
+    PhotonVoiceApi: revision 4876 
+    FIXED: Unity Editor freezing when using PUN 2 integration
+
+v2.1 (November 8th, 2018)
+    PUN2: v2.4.1v (14cb68f)
+    PhotonVoiceApi: revision 4876 
+    FIXED: PhotonVoiceNetwork fields can now be updated from the Unity Editor
+    ADDED: Assembly Definitions for Photon Voice 2
+    ADDED: Photon Chat as it was forgotten in initial release
+    FIXED: Photon Voice 2 can connect to self-hosted Photon Server after setting SerializtionProtocol version to 1.6 in this case
+    FIXED: NullRefException when trying to access Recorder.Logger before Recorder.Awake is called
+    FIXED: PhotonVoiceView's Recorder setup when the ViewID changes if the Recorder is not part of the prefab
+    FIXED: Errors or crashes when trying to setup local voice due to exceptions
+    CHANGED: Recorder falls back to Unity microphone if Photon microphone setup encounter an error
+
+v2.0 (October 10th, 2018)
+    PUN2: v2.2.1 (3cd5540)
+    PhotonVoiceApi: revision 4823
+    Initial release of the new major Photon Voice version 2.
+    Work-in-progress documentation: https://doc.photonengine.com/en-us/voice/v2
+    PhotonVoice reference API: https://doc-api.photonengine.com/en/voice/v2
