@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33621525137281972}
   - component: {fileID: 23906788150381406}
   - component: {fileID: 136824706619926794}
+  - component: {fileID: 143774650368354778}
   - component: {fileID: 114954713101854178}
   - component: {fileID: 114796262481270532}
   - component: {fileID: 114378600696460104}
@@ -306,4 +307,21 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!143 &143774650368354778
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979024068460804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
