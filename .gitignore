@@ -35,3 +35,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Assets\Photon\PhotonVoice\PhotonVoiceLibs\iOS\libwebrtc-audio.a
