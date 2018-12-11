@@ -39,6 +39,6 @@ public class PUNNetworkManager : MonoBehaviourPunCallbacks {
     public override void OnJoinedRoom()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-        PhotonNetwork.Instantiate(avatar.name, new Vector3(0f, 1.5f, 0f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(avatar.name, new Vector3(0f, 1.5f, 0f), Quaternion.identity);
     }
 }

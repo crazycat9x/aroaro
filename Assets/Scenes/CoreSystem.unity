@@ -918,7 +918,7 @@ MonoBehaviour:
   updateInterval: 50
   runInBackground: 1
   statsResetInterval: 1000
-  speakerPrefab: {fileID: 1979024068460804, guid: f72e4ffe74d520b4e8b5376aa10e0e2e,
+  speakerPrefab: {fileID: 1115095681885242, guid: f72e4ffe74d520b4e8b5376aa10e0e2e,
     type: 2}
   Settings:
     AppIdRealtime: 
@@ -933,8 +933,7 @@ MonoBehaviour:
     EnableLobbyStatistics: 0
     NetworkLogging: 1
   ShowSettings: 0
-  PrimaryRecorder: {fileID: 114828067616169858, guid: f72e4ffe74d520b4e8b5376aa10e0e2e,
-    type: 2}
+  PrimaryRecorder: {fileID: 0}
   AutoConnectAndJoin: 1
   AutoLeaveAndDisconnect: 1
   AutoCreateSpeakerIfNotFound: 1
@@ -2529,7 +2528,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 897927098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 747804198}
@@ -5059,7 +5058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d523aa7206658a4eb2d74fa1860ea40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatar: {fileID: 1979024068460804, guid: f72e4ffe74d520b4e8b5376aa10e0e2e, type: 2}
+  avatar: {fileID: 1115095681885242, guid: f72e4ffe74d520b4e8b5376aa10e0e2e, type: 2}
 --- !u!4 &1586350633
 Transform:
   m_ObjectHideFlags: 0
