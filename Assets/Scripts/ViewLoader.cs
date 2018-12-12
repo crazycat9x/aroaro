@@ -1,17 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿namespace Aroaro
+{
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
 
-public class ViewLoader : MonoBehaviour {
-    private string coreSystemScene = "CoreSystem";
+    /// <summary>
+    /// Defines the <see cref="ViewLoader" />
+    /// </summary>
+    public class ViewLoader : MonoBehaviour
+    {
+        /// <summary>
+        /// Defines the coreSystemScene
+        /// </summary>
+        private string coreSystemScene = "CoreSystem";
 
-	// Use this for initialization
-	void Start () {
-        SceneManager.LoadScene(coreSystemScene, LoadSceneMode.Additive);
+        // Use this for initialization
+        /// <summary>
+        /// The Start
+        /// </summary>
+        internal void Start()
+        {
+            SceneManager.LoadScene(coreSystemScene, LoadSceneMode.Additive);
+        }
+
+        // Update is called once per frame
+        /// <summary>
+        /// The Update
+        /// </summary>
+        internal void Update()
+        {
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	}
 }
