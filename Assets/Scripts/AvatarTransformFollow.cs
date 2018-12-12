@@ -14,13 +14,13 @@ public class AvatarTransformFollow : MonoBehaviourPunCallbacks
 	void Start () {
         if (!photonView.IsMine) return;
 
-        Transform sdkTransform = VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform;
-        sdkTransform.position = transform.position;
-        sdkTransform.rotation = transform.rotation;
+        GameObject sdk = VRTK_SDKManager.instance.loadedSetup.actualBoundaries;
+        sdk.transform.position = transform.position;
+        sdk.transform.rotation = transform.rotation;
 
         leftHand.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = VRTK_DeviceFinder.GetControllerLeftHand();
         rightHand.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = VRTK_DeviceFinder.GetControllerRightHand();
-
+        gameObject.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = sdk;
 
         head.GetComponent<MeshRenderer>().enabled = false;
         leftHand.GetComponent<MeshRenderer>().enabled = false;
