@@ -3,6 +3,7 @@
     using Photon.Pun;
     using Photon.Realtime;
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
     /// <summary>
     /// Defines the <see cref="PUNNetworkManager" />
@@ -19,7 +20,6 @@
         /// </summary>
         public GameObject avatar;
 
-        // Use this for initialization
         /// <summary>
         /// The Start
         /// </summary>
@@ -28,7 +28,7 @@
             if (PhotonNetwork.IsConnected)
             {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
             }
             else
             {
@@ -44,7 +44,7 @@
         public override void OnConnectedToMaster()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-            PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@
             Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom(null, new RoomOptions());
+            PhotonNetwork.CreateRoom(SceneManager.GetActiveScene().name, new RoomOptions());
         }
 
         /// <summary>
