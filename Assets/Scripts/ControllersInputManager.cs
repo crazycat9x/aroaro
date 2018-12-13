@@ -56,32 +56,34 @@
             {
                 // Wait for SDKSetup to load
                 if (boundary == null) return;
-                // Must be called twice to be able to turn off again (weird bug)
-                teleportPointer.Toggle(true);
-                teleportPointer.Toggle(true);
+
+                // Touchpad right pressed
                 if (args.touchpadAxis.x > 0.5)
                 {
                     boundary.rotation *= Quaternion.Euler(0, 30, 0);
                 }
+                // Touchpad left pressed
                 else if (args.touchpadAxis.x < -0.5)
                 {
                     boundary.rotation *= Quaternion.Euler(0, -30, 0);
                 }
+                // Touchpad top pressed
+                else if (args.touchpadAxis.y >= 0)
+                {
+                    // Must be called twice to be able to turn off again (weird bug)
+                    teleportPointer.Toggle(true);
+                    teleportPointer.Toggle(true);
+                }
             };
+
             teleportPointer.SelectionButtonReleased += (object _, ControllerInteractionEventArgs args) =>
             {
-                if (args.touchpadAxis.x < -0.5 || args.touchpadAxis.x > 0.5 || args.touchpadAxis.y < 0) return;
-                if(teleportPointer.IsStateValid())
-                {
-                    teleportPointer.DestinationMarkerSet += (object __, DestinationMarkerEventArgs ___) =>
-                    {
-                        teleportPointer.Toggle(false);
-                    };
-                }
-                else
-                {
-                    teleportPointer.Toggle(false);
-                }
+                if (!teleportPointer.IsStateValid()) teleportPointer.Toggle(false);
+            };
+
+            teleportPointer.DestinationMarkerSet += (object __, DestinationMarkerEventArgs ___) =>
+            {
+                teleportPointer.Toggle(false);
             };
         }
     }
