@@ -14,6 +14,11 @@
         public VRTK_ControllerEvents controllerEvents;
 
         /// <summary>
+        /// Defines the teleportPointer
+        /// </summary>
+        public VRTK_Pointer teleportPointer;
+
+        /// <summary>
         /// Defines the boundary
         /// </summary>
         private Transform boundary;
@@ -47,20 +52,37 @@
         /// </summary>
         internal void Start()
         {
-
-            controllerEvents.SubscribeToButtonAliasEvent(VRTK_ControllerEvents.ButtonAlias.TouchpadPress, true, (object sender, ControllerInteractionEventArgs args) =>
+            teleportPointer.SelectionButtonPressed += (object _, ControllerInteractionEventArgs args) =>
             {
-                Debug.Log(boundary);
+                // Wait for SDKSetup to load
                 if (boundary == null) return;
-                if (args.touchpadAxis.x > 0)
+                // Must be called twice to be able to turn off again (weird bug)
+                teleportPointer.Toggle(true);
+                teleportPointer.Toggle(true);
+                if (args.touchpadAxis.x > 0.5)
                 {
                     boundary.rotation *= Quaternion.Euler(0, 30, 0);
                 }
-                else if (args.touchpadAxis.x < 0)
+                else if (args.touchpadAxis.x < -0.5)
                 {
                     boundary.rotation *= Quaternion.Euler(0, -30, 0);
                 }
-            });
+            };
+            teleportPointer.SelectionButtonReleased += (object _, ControllerInteractionEventArgs args) =>
+            {
+                if (args.touchpadAxis.x < -0.5 || args.touchpadAxis.x > 0.5 || args.touchpadAxis.y < 0) return;
+                if(teleportPointer.IsStateValid())
+                {
+                    teleportPointer.DestinationMarkerSet += (object __, DestinationMarkerEventArgs ___) =>
+                    {
+                        teleportPointer.Toggle(false);
+                    };
+                }
+                else
+                {
+                    teleportPointer.Toggle(false);
+                }
+            };
         }
     }
 }
