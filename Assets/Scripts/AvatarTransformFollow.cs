@@ -32,8 +32,6 @@
             if (!photonView.IsMine) return;
 
             GameObject sdk = VRTK_SDKManager.instance.loadedSetup.actualBoundaries;
-            sdk.transform.position = transform.position;
-            sdk.transform.rotation = transform.rotation;
 
             leftHand.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = VRTK_DeviceFinder.GetControllerLeftHand();
             rightHand.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = VRTK_DeviceFinder.GetControllerRightHand();
