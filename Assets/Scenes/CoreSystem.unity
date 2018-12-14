@@ -2636,6 +2636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7c03e92fa6ed142a0c54f6c8227295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSpawnPosition: {x: 0, y: 0, z: 0}
+  defaultSpawnRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!4 &941554857
 Transform:
   m_ObjectHideFlags: 0
@@ -2647,7 +2649,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &946540779
 GameObject:
@@ -5670,6 +5672,8 @@ GameObject:
   - component: {fileID: 1837953951}
   - component: {fileID: 1837953946}
   - component: {fileID: 1837953950}
+  - component: {fileID: 1837953953}
+  - component: {fileID: 1837953954}
   - component: {fileID: 1837953952}
   m_Layer: 0
   m_Name: LeftController
@@ -5882,6 +5886,36 @@ MonoBehaviour:
   controllerEvents: {fileID: 1837953948}
   teleportPointer: {fileID: 1837953951}
   dashTime: 0
+--- !u!114 &1837953953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837953945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e104da36bd3b04b90c6ae969ac66dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customColliderContainer: {fileID: 0}
+--- !u!114 &1837953954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837953945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947b27445602ed640b885db7e667dfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabButton: 7
+  grabPrecognition: 0
+  throwMultiplier: 1
+  createRigidBodyWhenNotTouching: 0
+  controllerAttachPoint: {fileID: 0}
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
 --- !u!1 &1899443335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6071,6 +6105,8 @@ GameObject:
   - component: {fileID: 2002548843}
   - component: {fileID: 2002548838}
   - component: {fileID: 2002548842}
+  - component: {fileID: 2002548845}
+  - component: {fileID: 2002548846}
   - component: {fileID: 2002548844}
   m_Layer: 0
   m_Name: RightController
@@ -6283,6 +6319,36 @@ MonoBehaviour:
   controllerEvents: {fileID: 2002548840}
   teleportPointer: {fileID: 2002548843}
   dashTime: 0
+--- !u!114 &2002548845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002548837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e104da36bd3b04b90c6ae969ac66dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customColliderContainer: {fileID: 0}
+--- !u!114 &2002548846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002548837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947b27445602ed640b885db7e667dfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabButton: 7
+  grabPrecognition: 0
+  throwMultiplier: 1
+  createRigidBodyWhenNotTouching: 0
+  controllerAttachPoint: {fileID: 0}
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
 --- !u!1 &2004866745
 GameObject:
   m_ObjectHideFlags: 0
