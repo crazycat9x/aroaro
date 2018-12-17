@@ -14,7 +14,7 @@
         /// <summary>
         /// Defines the textureWidth
         /// </summary>
-        public int textureWidth = 2048;
+        private int textureWidth = 2048;
 
         /// <summary>
         /// Defines the textureHeight
@@ -57,8 +57,8 @@
         private void DrawAndBroadCast(int penId, Vector2 position, int penSize, byte r, byte g, byte b, byte a)
         {
             Color32 penColor = new Color32(r, g, b, a);
-            int x = Mathf.RoundToInt(position.x * texture.height - (penSize / 2));
-            int y = Mathf.RoundToInt(position.y * texture.width - (penSize / 2));
+            int x = Mathf.RoundToInt(position.x * texture.width - (penSize / 2));
+            int y = Mathf.RoundToInt(position.y * texture.height - (penSize / 2));
             Color32[] colors = Enumerable.Repeat<Color32>(penColor, penSize * penSize).ToArray<Color32>();
 
             texture.SetPixels32(x, y, penSize, penSize, colors);
@@ -100,11 +100,21 @@
         /// </summary>
         private void Start()
         {
+            float localScaleX = transform.localScale.x;
             float localScaleY = transform.localScale.y;
-            float localScaleZ = transform.localScale.z;
-            textureHeight = Mathf.RoundToInt(textureWidth * localScaleY / localScaleZ);
+            if (localScaleY > localScaleX)
+            {
+                textureWidth = 2048;
+                textureHeight = Mathf.RoundToInt(textureWidth * localScaleY / localScaleX);
+            }
+            else
+            {
+                textureHeight = 2048;
+                textureWidth = Mathf.RoundToInt(textureWidth * localScaleX / localScaleY);
+            }
             texture = new Texture2D(textureWidth, textureHeight);
             GetComponent<Renderer>().material.mainTexture = (Texture)texture;
+            Debug.Log(textureWidth + " " + textureHeight);
         }
 
         /// <summary>
@@ -112,7 +122,7 @@
         /// </summary>
         private void Update()
         {
-            texture.Apply();
+            if (previousPositions.Count() != 0) texture.Apply();
         }
     }
 }
