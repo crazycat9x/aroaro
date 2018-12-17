@@ -14,7 +14,7 @@
         /// <summary>
         /// Defines the textureWidth
         /// </summary>
-        private int textureWidth = 2048;
+        private int textureWidth;
 
         /// <summary>
         /// Defines the textureHeight
@@ -104,12 +104,12 @@
             float localScaleY = transform.localScale.y;
             if (localScaleY > localScaleX)
             {
-                textureWidth = 2048;
+                textureWidth = 1024;
                 textureHeight = Mathf.RoundToInt(textureWidth * localScaleY / localScaleX);
             }
             else
             {
-                textureHeight = 2048;
+                textureHeight = 1024;
                 textureWidth = Mathf.RoundToInt(textureWidth * localScaleX / localScaleY);
             }
             texture = new Texture2D(textureWidth, textureHeight);
