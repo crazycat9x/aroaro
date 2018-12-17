@@ -31,4 +31,6 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - DrawAndBroadCast
+  - EndStroke
   DisableAutoOpenWizard: 1
