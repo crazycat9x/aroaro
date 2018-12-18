@@ -95,7 +95,7 @@
         /// <summary>
         /// The Awake
         /// </summary>
-        private void Awake()
+        internal void Awake()
         {
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
         }
@@ -103,7 +103,7 @@
         /// <summary>
         /// The OnEnable
         /// </summary>
-        private void OnEnable()
+        internal void OnEnable()
         {
             boundary = VRTK_DeviceFinder.PlayAreaTransform();
             teleportPointer.SelectionButtonPressed += SelectionButtonPressedHandler;
@@ -114,7 +114,7 @@
         /// <summary>
         /// The OnDisable
         /// </summary>
-        private void OnDisable()
+        internal void OnDisable()
         {
             TearDownEventHandlers();
         }
@@ -122,7 +122,7 @@
         /// <summary>
         /// The OnDestroy
         /// </summary>
-        private void OnDestroy()
+        internal void OnDestroy()
         {
             VRTK_SDKManager.instance.RemoveBehaviourToToggleOnLoadedSetupChange(this);
             TearDownEventHandlers();

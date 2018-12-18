@@ -26,7 +26,7 @@
         /// The OnCollisionEnter
         /// </summary>
         /// <param name="collision">The collision<see cref="Collision"/></param>
-        private void OnCollisionEnter(Collision collision)
+        internal void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.GetComponent<Drawable>() != null)
             {
@@ -39,7 +39,7 @@
         /// The OnCollisionExit
         /// </summary>
         /// <param name="collision">The collision<see cref="Collision"/></param>
-        private void OnCollisionExit(Collision collision)
+        internal void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.GetComponent<Drawable>() != null)
             {
@@ -51,7 +51,7 @@
         /// <summary>
         /// The Start
         /// </summary>
-        private void Start()
+        internal void Start()
         {
             penTipTransform = transform.Find("Tip");
         }
@@ -59,7 +59,7 @@
         /// <summary>
         /// The Update
         /// </summary>
-        private void Update()
+        internal void Update()
         {
             if (canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
             {

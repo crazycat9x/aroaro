@@ -21,24 +21,6 @@
         public GameObject avatar;
 
         /// <summary>
-        /// The Start
-        /// </summary>
-        internal void Start()
-        {
-            if (PhotonNetwork.IsConnected)
-            {
-                // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
-            }
-            else
-            {
-                // #Critical, we must first and foremost connect to Photon Online Server.
-                PhotonNetwork.GameVersion = gameVersion;
-                PhotonNetwork.ConnectUsingSettings();
-            }
-        }
-
-        /// <summary>
         /// The OnConnectedToMaster
         /// </summary>
         public override void OnConnectedToMaster()
@@ -68,6 +50,24 @@
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             Color randomColor = Random.ColorHSV();
             PhotonNetwork.Instantiate(avatar.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0, new object[] { randomColor.r, randomColor.g, randomColor.b, randomColor.a });
+        }
+
+        /// <summary>
+        /// The Start
+        /// </summary>
+        internal void Start()
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+                // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
+                PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
+            }
+            else
+            {
+                // #Critical, we must first and foremost connect to Photon Online Server.
+                PhotonNetwork.GameVersion = gameVersion;
+                PhotonNetwork.ConnectUsingSettings();
+            }
         }
     }
 }

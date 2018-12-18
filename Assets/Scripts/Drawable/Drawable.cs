@@ -90,7 +90,7 @@
         /// The OnCollisionExit
         /// </summary>
         /// <param name="collision">The collision<see cref="Collision"/></param>
-        private void OnCollisionExit(Collision collision)
+        internal void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.GetComponent<Pen>() != null) gameObject.GetComponent<PhotonView>().RPC("EndStroke", RpcTarget.AllBufferedViaServer, collision.gameObject.GetInstanceID());
         }
@@ -98,7 +98,7 @@
         /// <summary>
         /// The Start
         /// </summary>
-        private void Start()
+        internal void Start()
         {
             float localScaleX = transform.localScale.x;
             float localScaleY = transform.localScale.y;
@@ -120,7 +120,7 @@
         /// <summary>
         /// The Update
         /// </summary>
-        private void Update()
+        internal void Update()
         {
             if (previousPositions.Count() != 0) texture.Apply();
         }
