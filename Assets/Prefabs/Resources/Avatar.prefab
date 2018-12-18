@@ -44,8 +44,9 @@ GameObject:
   - component: {fileID: 114147586680226176}
   - component: {fileID: 82189709007317084}
   - component: {fileID: 114407879136182678}
-  - component: {fileID: 114237145657355014}
   - component: {fileID: 114718338594581192}
+  - component: {fileID: 114170805801080764}
+  - component: {fileID: 114237145657355014}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -193,7 +194,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7a0f561ffcc4954ea86b01f2deb4ecd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -228,7 +229,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7a0f561ffcc4954ea86b01f2deb4ecd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -263,7 +264,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b0358a525c05be94fb3293e3c422f7a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -298,7 +299,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7a0f561ffcc4954ea86b01f2deb4ecd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -456,7 +457,7 @@ MonoBehaviour:
   voiceDetection: 1
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Microphone (Rift Audio)
+  unityMicrophoneDevice: 
   photonMicrophoneDeviceId: 0
   audioGroup: 0
   debugEchoMode: 0
@@ -471,6 +472,20 @@ MonoBehaviour:
   typeConvert: 0
   audioClip: {fileID: 0}
   loopAudioClip: 1
+--- !u!114 &114170805801080764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1115095681885242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecfef4b825f79349b238d48af887a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 1783470650965166}
+  leftHand: {fileID: 1072722563706658}
+  rightHand: {fileID: 1869868695920068}
 --- !u!114 &114222398417098600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -556,8 +571,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114760501831926422}
-  viewIdField: 0
-  InstantiationId: 0
+  viewIdField: 2
+  InstantiationId: 2
   isRuntimeInstantiated: 0
 --- !u!114 &114594060800210466
 MonoBehaviour:
@@ -600,8 +615,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114805629303459014}
-  viewIdField: 0
-  InstantiationId: 0
+  viewIdField: 3
+  InstantiationId: 3
   isRuntimeInstantiated: 0
 --- !u!114 &114690450243914770
 MonoBehaviour:
@@ -621,8 +636,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114708251233118528}
-  viewIdField: 0
-  InstantiationId: 0
+  viewIdField: 4
+  InstantiationId: 4
   isRuntimeInstantiated: 0
 --- !u!114 &114708251233118528
 MonoBehaviour:
@@ -707,6 +722,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 1
+  viewIdField: 5
+  InstantiationId: 5
   isRuntimeInstantiated: 0
