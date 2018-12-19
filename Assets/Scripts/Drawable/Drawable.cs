@@ -12,6 +12,11 @@
     public class Drawable : MonoBehaviour
     {
         /// <summary>
+        /// Defines the drawableMaterial
+        /// </summary>
+        public Material drawableMaterial;
+
+        /// <summary>
         /// Defines the textureWidth
         /// </summary>
         private int textureWidth;
@@ -24,7 +29,7 @@
         /// <summary>
         /// Defines the texture
         /// </summary>
-        private Texture2D texture;
+        private RenderTexture texture;
 
         /// <summary>
         /// Defines the previousPositions
@@ -54,14 +59,17 @@
         /// <param name="b">The b<see cref="byte"/></param>
         /// <param name="a">The a<see cref="byte"/></param>
         [PunRPC]
-        private void DrawAndBroadCast(int penId, Vector2 position, int penSize, byte r, byte g, byte b, byte a)
+        private void DrawAndBroadCast(int penId, Vector2 position, float penSize, byte r, byte g, byte b, byte a)
         {
             Color32 penColor = new Color32(r, g, b, a);
             int x = Mathf.RoundToInt(position.x * texture.width - (penSize / 2));
             int y = Mathf.RoundToInt(position.y * texture.height - (penSize / 2));
-            Color32[] colors = Enumerable.Repeat<Color32>(penColor, penSize * penSize).ToArray<Color32>();
+            Vector2 coord = new Vector2(x, y);
 
-            texture.SetPixels32(x, y, penSize, penSize, colors);
+            drawableMaterial.SetVector("_PenCoord", coord);
+            drawableMaterial.SetColor("_PenColor", penColor);
+            drawableMaterial.SetFloat("_PenWidth", penSize);
+            Graphics.Blit(texture, texture, drawableMaterial);
 
             Vector2 previousPosition;
             if (previousPositions.TryGetValue(penId, out previousPosition))
@@ -70,10 +78,12 @@
                 {
                     int lerpX = Mathf.RoundToInt(Mathf.Lerp(previousPosition.x, (float)x, t));
                     int lerpY = Mathf.RoundToInt(Mathf.Lerp(previousPosition.y, (float)y, t));
-                    texture.SetPixels32(lerpX, lerpY, penSize, penSize, colors);
+                    Vector2 lerpCoord = new Vector2(lerpX, lerpY);
+                    drawableMaterial.SetVector("_PenCoord", lerpCoord);
+                    Graphics.Blit(texture, texture, drawableMaterial);
                 }
             }
-            previousPositions[penId] = new Vector2(x, y);
+            previousPositions[penId] = coord;
         }
 
         /// <summary>
@@ -112,9 +122,17 @@
                 textureHeight = 1024;
                 textureWidth = Mathf.RoundToInt(textureWidth * localScaleX / localScaleY);
             }
-            texture = new Texture2D(textureWidth, textureHeight);
-            GetComponent<Renderer>().material.mainTexture = (Texture)texture;
-            Debug.Log(textureWidth + " " + textureHeight);
+            drawableMaterial.SetFloat("_TexWidth", textureWidth);
+            drawableMaterial.SetFloat("_TexHeight", textureHeight);
+            Texture2D sourceTexture = new Texture2D(textureWidth, textureHeight);
+            texture = new RenderTexture(textureWidth, textureHeight, 0);
+            Graphics.Blit(sourceTexture, texture);
+            GetComponent<Renderer>().material.mainTexture = texture;
+
+            Color32 tempCol = Color.red;
+            //DrawAndBroadCast(1, new Vector2(0.1f, 0.1f), 0.01f, tempCol.r, tempCol.g, tempCol.b, tempCol.a);
+            //DrawAndBroadCast(1, new Vector2(0.2f, 0.2f), 0.01f, tempCol.r, tempCol.g, tempCol.b, tempCol.a);
+            //DrawAndBroadCast(1, new Vector2(0.3f, 0.3f), 0.01f, tempCol.r, tempCol.g, tempCol.b, tempCol.a);
         }
 
         /// <summary>
@@ -122,7 +140,7 @@
         /// </summary>
         internal void Update()
         {
-            if (previousPositions.Count() != 0) texture.Apply();
+            //if (previousPositions.Count() != 0) texture.Apply();
         }
     }
 }
