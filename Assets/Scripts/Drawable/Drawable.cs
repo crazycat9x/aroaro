@@ -114,7 +114,6 @@
             }
             texture = new Texture2D(textureWidth, textureHeight);
             GetComponent<Renderer>().material.mainTexture = (Texture)texture;
-            Debug.Log(textureWidth + " " + textureHeight);
         }
 
         /// <summary>
