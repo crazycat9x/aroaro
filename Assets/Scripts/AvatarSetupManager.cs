@@ -1,6 +1,8 @@
 ﻿namespace Aroaro
 {
+    using ExitGames.Client.Photon;
     using Photon.Pun;
+    using Photon.Realtime;
     using UnityEngine;
     using VRTK;
 
@@ -36,10 +38,19 @@
         private VRTK_StraightPointerRenderer gazePointer;
 
         /// <summary>
+        /// The OnPlayerPropertiesUpdate
+        /// </summary>
+        /// <param name="target">The target<see cref="Player"/></param>
+        /// <param name="changedProps">The changedProps<see cref="Hashtable"/></param>
+        public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
+        {
+            if (target.ActorNumber == photonView.OwnerActorNr && !photonView.IsMine) ToggleGazePointer((bool)changedProps["gazePointerState"]);
+        }
+
+        /// <summary>
         /// The ToggleGazePointer
         /// </summary>
         /// <param name="state">The state<see cref="bool"/></param>
-        [PunRPC]
         public void ToggleGazePointer(bool state)
         {
             VRTK_BasePointerRenderer.VisibilityStates visibilitySate = state ? VRTK_BasePointerRenderer.VisibilityStates.AlwaysOn : VRTK_BasePointerRenderer.VisibilityStates.AlwaysOff;
@@ -77,6 +88,10 @@
             {
                 // Hide gaze line for local avatar by default
                 ToggleGazePointer(false);
+            }
+            else
+            {
+                ToggleGazePointer((bool)photonView.Owner.CustomProperties["gazePointerState"]);
             }
         }
     }

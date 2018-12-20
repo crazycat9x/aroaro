@@ -1,5 +1,7 @@
 ﻿namespace Aroaro
 {
+    using ExitGames.Client.Photon;
+    using Photon.Pun;
     using UnityEngine;
     using VRTK;
 
@@ -12,6 +14,30 @@
         /// Defines the snapJoint
         /// </summary>
         public VRTK_TransformFollow snapJoint;
+
+        /// <summary>
+        /// Sets the AvatarSetup
+        /// </summary>
+        public AvatarSetupManager AvatarSetup { private get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether GazePointerState
+        /// </summary>
+        public bool GazePointerState
+        {
+            get { return gazePointerState; }
+            set
+            {
+                gazePointerState = value;
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable() { { "gazePointerState", gazePointerState } });
+                Debug.Log("gaze set");
+            }
+        }
+
+        /// <summary>
+        /// Defines the gazePointerState
+        /// </summary>
+        private bool gazePointerState;
 
         /// <summary>
         /// Defines the leftController
@@ -56,6 +82,14 @@
             leftController = VRTK_DeviceFinder.GetControllerLeftHand();
             snapJoint.gameObjectToFollow = leftController;
             toggleControlPanel(true);
+        }
+
+        /// <summary>
+        /// The Start
+        /// </summary>
+        internal void Start()
+        {
+            GazePointerState = false;
         }
 
         /// <summary>
