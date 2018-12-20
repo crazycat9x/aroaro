@@ -16,11 +16,6 @@
         public VRTK_TransformFollow snapJoint;
 
         /// <summary>
-        /// Sets the AvatarSetup
-        /// </summary>
-        public AvatarSetupManager AvatarSetup { private get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether GazePointerState
         /// </summary>
         public bool GazePointerState
