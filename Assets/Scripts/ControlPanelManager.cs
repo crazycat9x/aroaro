@@ -29,8 +29,7 @@
             set
             {
                 gazePointerState = value;
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable() { { "gazePointerState", gazePointerState } });
-                Debug.Log("gaze set");
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable() { { CustomPlayerProperties.GazePointerState, gazePointerState } });
             }
         }
 
@@ -89,7 +88,7 @@
         /// </summary>
         internal void Start()
         {
-            GazePointerState = false;
+            GazePointerState = true;
         }
 
         /// <summary>

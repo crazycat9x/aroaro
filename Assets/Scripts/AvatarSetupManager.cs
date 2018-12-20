@@ -44,7 +44,7 @@
         /// <param name="changedProps">The changedProps<see cref="Hashtable"/></param>
         public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
         {
-            if (target.ActorNumber == photonView.OwnerActorNr && !photonView.IsMine) ToggleGazePointer((bool)changedProps["gazePointerState"]);
+            if (target.ActorNumber == photonView.OwnerActorNr && !photonView.IsMine) ToggleGazePointer((bool)changedProps[CustomPlayerProperties.GazePointerState]);
         }
 
         /// <summary>
@@ -86,12 +86,13 @@
             SetupAvatarColor();
             if (photonView.IsMine)
             {
-                // Hide gaze line for local avatar by default
+                // Hide gaze pointer for local avatar by default
                 ToggleGazePointer(false);
             }
             else
             {
-                ToggleGazePointer((bool)photonView.Owner.CustomProperties["gazePointerState"]);
+                // Get current gaze pointer state of remote user
+                ToggleGazePointer((bool)photonView.Owner.CustomProperties[CustomPlayerProperties.GazePointerState]);
             }
         }
     }
