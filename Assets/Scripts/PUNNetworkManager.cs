@@ -25,21 +25,19 @@
         /// </summary>
         public override void OnConnectedToMaster()
         {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-            PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
+            Debug.Log("Connected to master and now join " + SceneManager.GetActiveScene().name);
+            PhotonNetwork.JoinRoom(SceneManager.GetActiveScene().name);
         }
 
         /// <summary>
-        /// The OnJoinRandomFailed
+        /// The OnJoinRoomFailed
         /// </summary>
         /// <param name="returnCode">The returnCode<see cref="short"/></param>
         /// <param name="message">The message<see cref="string"/></param>
-        public override void OnJoinRandomFailed(short returnCode, string message)
+        public override void OnJoinRoomFailed(short returnCode, string message)
         {
-            Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
-
-            // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom(SceneManager.GetActiveScene().name, new RoomOptions());
+            Debug.Log("Joined room failed and now will create and join " + SceneManager.GetActiveScene().name);
+            PhotonNetwork.CreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
         }
 
         /// <summary>
@@ -47,9 +45,17 @@
         /// </summary>
         public override void OnJoinedRoom()
         {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+            Debug.Log("Joined room success");
             Color randomColor = Random.ColorHSV();
             PhotonNetwork.Instantiate(avatar.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0, new object[] { randomColor.r, randomColor.g, randomColor.b, randomColor.a });
+        }
+
+        /// <summary>
+        /// The Awake
+        /// </summary>
+        internal void Awake()
+        {
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
 
         /// <summary>
@@ -57,10 +63,12 @@
         /// </summary>
         internal void Start()
         {
+            // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name, new RoomOptions(), TypedLobby.Default);
+                Debug.Log("Is connected and now join " + SceneManager.GetActiveScene().name);
+                PhotonNetwork.JoinRoom(SceneManager.GetActiveScene().name);
             }
             else
             {
