@@ -1,6 +1,8 @@
 ﻿namespace Aroaro
 {
+    using ExitGames.Client.Photon;
     using Photon.Pun;
+    using Photon.Realtime;
     using UnityEngine;
     using VRTK;
 
@@ -31,6 +33,32 @@
         private object[] instantiationData;
 
         /// <summary>
+        /// Defines the gazePointer
+        /// </summary>
+        private VRTK_StraightPointerRenderer gazePointer;
+
+        /// <summary>
+        /// The OnPlayerPropertiesUpdate
+        /// </summary>
+        /// <param name="target">The target<see cref="Player"/></param>
+        /// <param name="changedProps">The changedProps<see cref="Hashtable"/></param>
+        public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
+        {
+            if (target.ActorNumber == photonView.OwnerActorNr && !photonView.IsMine) ToggleGazePointer((bool)changedProps[CustomPlayerProperties.GazePointerState]);
+        }
+
+        /// <summary>
+        /// The ToggleGazePointer
+        /// </summary>
+        /// <param name="state">The state<see cref="bool"/></param>
+        public void ToggleGazePointer(bool state)
+        {
+            VRTK_BasePointerRenderer.VisibilityStates visibilitySate = state ? VRTK_BasePointerRenderer.VisibilityStates.AlwaysOn : VRTK_BasePointerRenderer.VisibilityStates.AlwaysOff;
+            gazePointer.tracerVisibility = visibilitySate;
+            gazePointer.cursorVisibility = visibilitySate;
+        }
+
+        /// <summary>
         /// The SetupAvatarColor
         /// </summary>
         private void SetupAvatarColor()
@@ -42,14 +70,12 @@
         }
 
         /// <summary>
-        /// The ToggleGazePointer
+        /// The Awake
         /// </summary>
-        private void ToggleGazePointer()
+        internal void Awake()
         {
-            if (photonView.IsMine) return;
-            VRTK_StraightPointerRenderer gazePointer = head.GetComponent<VRTK_StraightPointerRenderer>();
-            gazePointer.tracerVisibility = VRTK_BasePointerRenderer.VisibilityStates.AlwaysOn;
-            gazePointer.cursorVisibility = VRTK_BasePointerRenderer.VisibilityStates.AlwaysOn;
+            instantiationData = gameObject.GetComponent<PhotonView>().InstantiationData;
+            gazePointer = head.GetComponent<VRTK_StraightPointerRenderer>();
         }
 
         /// <summary>
@@ -57,9 +83,17 @@
         /// </summary>
         internal void Start()
         {
-            instantiationData = gameObject.GetComponent<PhotonView>().InstantiationData;
             SetupAvatarColor();
-            ToggleGazePointer();
+            if (photonView.IsMine)
+            {
+                // Hide gaze pointer for local avatar by default
+                ToggleGazePointer(false);
+            }
+            else
+            {
+                // Get current gaze pointer state of remote user
+                ToggleGazePointer((bool)photonView.Owner.CustomProperties[CustomPlayerProperties.GazePointerState]);
+            }
         }
     }
 }
