@@ -8,6 +8,7 @@
     /// <summary>
     /// Defines the <see cref="Portal" />
     /// </summary>
+    [RequireComponent(typeof(Collider))]
     public class Portal : MonoBehaviour
     {
         /// <summary>
@@ -30,17 +31,11 @@
         }
 
         /// <summary>
-        /// The Start
+        /// The Awake
         /// </summary>
-        internal void Start()
+        internal void Awake()
         {
-        }
-
-        /// <summary>
-        /// The Update
-        /// </summary>
-        internal void Update()
-        {
+            gameObject.GetComponent<Collider>().isTrigger = true;
         }
     }
 }
