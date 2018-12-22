@@ -18,14 +18,7 @@
         /// </summary>
         internal void Start()
         {
-            if (GameObject.Find(coreSystem)) SceneManager.LoadScene(coreSystem, LoadSceneMode.Additive);
-        }
-
-        /// <summary>
-        /// The Update
-        /// </summary>
-        internal void Update()
-        {
+            if (!GameObject.Find(coreSystem)) SceneManager.LoadScene(coreSystem, LoadSceneMode.Additive);
         }
     }
 }
