@@ -1,6 +1,7 @@
 ﻿namespace Aroaro
 {
     using Photon.Pun;
+    using System.Collections;
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using VRTK;
@@ -17,6 +18,28 @@
         public string sceneName;
 
         /// <summary>
+        /// The LoadPortalScene
+        /// </summary>
+        /// <returns>The <see cref="IEnumerator"/></returns>
+        private IEnumerator LoadPortalScene()
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            // Don't let the scene activate right away, we still need to leave the current room
+            asyncLoad.allowSceneActivation = false;
+            // Wait for scene to fully load
+            while (!asyncLoad.isDone)
+            {
+                if (asyncLoad.progress >= 0.9f)
+                {
+                    asyncLoad.allowSceneActivation = true;
+                    // Leave current room in preparation to enter new room
+                    PhotonNetwork.LeaveRoom();
+                }
+                yield return null;
+            }
+        }
+
+        /// <summary>
         /// The OnCollisionEnter
         /// </summary>
         /// <param name="other">The other<see cref="Collider"/></param>
@@ -25,8 +48,7 @@
             VRTK_PlayerObject playerObject = other.gameObject.GetComponent<VRTK_PlayerObject>();
             if (playerObject != null && playerObject.objectType == VRTK_PlayerObject.ObjectTypes.Collider)
             {
-                PhotonNetwork.LeaveRoom();
-                SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+                StartCoroutine(LoadPortalScene());
             }
         }
 
