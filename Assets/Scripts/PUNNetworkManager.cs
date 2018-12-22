@@ -64,7 +64,7 @@
         internal void Start()
         {
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
-            if (PhotonNetwork.IsConnected)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
                 Debug.Log("Is connected and now join " + SceneManager.GetActiveScene().name);
