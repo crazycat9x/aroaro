@@ -9,20 +9,18 @@
     public class ViewLoader : MonoBehaviour
     {
         /// <summary>
-        /// Defines the coreSystemScene
+        /// Defines the coreSystem
         /// </summary>
-        private string coreSystemScene = "CoreSystem";
+        private string coreSystem = "CoreSystem";
 
-        // Use this for initialization
         /// <summary>
         /// The Start
         /// </summary>
         internal void Start()
         {
-            SceneManager.LoadScene(coreSystemScene, LoadSceneMode.Additive);
+            if (GameObject.Find(coreSystem)) SceneManager.LoadScene(coreSystem, LoadSceneMode.Additive);
         }
 
-        // Update is called once per frame
         /// <summary>
         /// The Update
         /// </summary>
