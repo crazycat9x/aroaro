@@ -5,8 +5,34 @@
     /// <summary>
     /// Defines the <see cref="Pen" />
     /// </summary>
+    [ExecuteAlways]
     public class Pen : MonoBehaviour
     {
+        /// <summary>
+        /// Gets or sets the PenColor
+        /// </summary>
+        public Color PenColor
+        {
+            get { return penColor; }
+            set
+            {
+                penColor = value;
+                penTipTransform.gameObject.GetComponent<Renderer>().material.color = value;
+            }
+        }
+
+        /// <summary>
+        /// Defines the penColor
+        /// </summary>
+        [SerializeField]
+        private Color penColor;
+
+        /// <summary>
+        /// Defines the penSize
+        /// </summary>
+        [Range(1, 10)]
+        public int penSize;
+
         /// <summary>
         /// Defines the penTipTransform
         /// </summary>
@@ -49,9 +75,9 @@
         }
 
         /// <summary>
-        /// The Start
+        /// The Awake
         /// </summary>
-        internal void Start()
+        internal void Awake()
         {
             penTipTransform = transform.Find("Tip");
         }
@@ -61,9 +87,9 @@
         /// </summary>
         internal void Update()
         {
-            if (canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
+            if (Application.isPlaying && canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
             {
-                canvas.Draw(gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), 10, Color.blue);
+                canvas.Draw(gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, PenColor);
             }
         }
     }
