@@ -5,22 +5,8 @@
     /// <summary>
     /// Defines the <see cref="Pen" />
     /// </summary>
-    [ExecuteAlways]
     public class Pen : MonoBehaviour
     {
-        /// <summary>
-        /// Gets or sets the PenColor
-        /// </summary>
-        public Color PenColor
-        {
-            get { return penColor; }
-            set
-            {
-                penColor = value;
-                penTipTransform.gameObject.GetComponent<Renderer>().material.color = value;
-            }
-        }
-
         /// <summary>
         /// Defines the penColor
         /// </summary>
@@ -39,6 +25,11 @@
         private Transform penTipTransform;
 
         /// <summary>
+        /// Defines the penEndTransform
+        /// </summary>
+        private Transform penEndTransform;
+
+        /// <summary>
         /// Defines the hit
         /// </summary>
         private RaycastHit hit;
@@ -47,6 +38,20 @@
         /// Defines the canvas
         /// </summary>
         private Drawable canvas;
+
+        /// <summary>
+        /// Gets or sets the PenColor
+        /// </summary>
+        public Color PenColor
+        {
+            get { return penColor; }
+            set
+            {
+                penColor = value;
+                penTipTransform.gameObject.GetComponent<Renderer>().material.color = penColor;
+                penEndTransform.gameObject.GetComponent<Renderer>().material.color = penColor;
+            }
+        }
 
         /// <summary>
         /// The OnCollisionEnter
@@ -80,6 +85,8 @@
         internal void Awake()
         {
             penTipTransform = transform.Find("Tip");
+            penEndTransform = transform.Find("End");
+            PenColor = penColor;
         }
 
         /// <summary>
