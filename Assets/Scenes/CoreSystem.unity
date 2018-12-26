@@ -2744,8 +2744,8 @@ MonoBehaviour:
   autoManageVRSettings: 1
   autoLoadSetup: 1
   setups:
-  - {fileID: 1630988039}
   - {fileID: 1705809333}
+  - {fileID: 1630988039}
   - {fileID: 790871807}
   - {fileID: 964384419}
   excludeTargetGroups: 1a0000001b000000
@@ -3121,12 +3121,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 0}
-  actualHeadset: {fileID: 0}
-  actualLeftController: {fileID: 0}
-  actualRightController: {fileID: 0}
-  modelAliasLeftController: {fileID: 0}
-  modelAliasRightController: {fileID: 0}
+  actualBoundaries: {fileID: 990847671}
+  actualHeadset: {fileID: 84920817}
+  actualLeftController: {fileID: 1107007811}
+  actualRightController: {fileID: 1251544561}
+  modelAliasLeftController: {fileID: 605246882}
+  modelAliasRightController: {fileID: 901176797}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -6388,7 +6388,7 @@ MonoBehaviour:
   validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
   tracerVisibility: 2
-  cursorVisibility: 1
+  cursorVisibility: 0
   maximumLength: 100
   scaleFactor: 0.002
   cursorScaleMultiplier: 25
@@ -6574,7 +6574,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 1837953948}
+  interactGrab: {fileID: 1837953954}
   teleportPointer: {fileID: 1837953951}
+  cursorPointer: {fileID: 1837953947}
   dashTime: 0
 --- !u!114 &1837953953
 MonoBehaviour:
@@ -6873,7 +6875,7 @@ MonoBehaviour:
   validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
   tracerVisibility: 2
-  cursorVisibility: 1
+  cursorVisibility: 0
   maximumLength: 100
   scaleFactor: 0.002
   cursorScaleMultiplier: 25
@@ -7059,7 +7061,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 2002548840}
+  interactGrab: {fileID: 2002548846}
   teleportPointer: {fileID: 2002548843}
+  cursorPointer: {fileID: 2002548839}
   dashTime: 0
 --- !u!114 &2002548845
 MonoBehaviour:

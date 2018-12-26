@@ -1,6 +1,7 @@
 ﻿namespace Aroaro
 {
     using UnityEngine;
+    using VRTK;
 
     /// <summary>
     /// Defines the <see cref="Pen" />

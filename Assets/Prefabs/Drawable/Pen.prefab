@@ -10,7 +10,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3614511106963642116}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GrabJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 3614511107131011475}
   - component: {fileID: 3614511107131011481}
   - component: {fileID: 3614511107131011480}
-  - component: {fileID: 3614511107131011472}
-  m_Layer: 0
+  - component: {fileID: 2280571886290547695}
+  m_Layer: 2
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,8 +114,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3614511107131011472
-MeshCollider:
+--- !u!136 &2280571886290547695
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,10 +124,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300020, guid: 7f3aa3854bcde4755a9c621b4b06882f, type: 3}
+  m_Radius: 0.1
+  m_Height: 1.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 3.14796e-15, z: -0.25}
 --- !u!1 &3614511107253452648
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 3614511107253452663}
   - component: {fileID: 560548842279869475}
   - component: {fileID: 3614511107253452662}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 3614511107700623645}
   - component: {fileID: 3614511107700623644}
   - component: {fileID: 3614511107700623642}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 3614511108041244665}
   - component: {fileID: 3614511108041244664}
   - component: {fileID: 3614511108041244614}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,5 +524,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16000004, z: 0.08636102}
+  m_Size: {x: 0.13, y: 0.13, z: 0.08636102}
   m_Center: {x: 0, y: 0, z: -0.0011455009}

@@ -13,10 +13,14 @@
         /// </summary>
         public VRTK_ControllerEvents controllerEvents;
 
+        public VRTK_InteractGrab interactGrab;
+
         /// <summary>
         /// Defines the teleportPointer
         /// </summary>
         public VRTK_Pointer teleportPointer;
+
+        public VRTK_Pointer cursorPointer;
 
         /// <summary>
         /// Defines the dashTime
@@ -77,9 +81,23 @@
         /// </summary>
         /// <param name="__">The __<see cref="object"/></param>
         /// <param name="___">The ___<see cref="DestinationMarkerEventArgs"/></param>
-        private void DestinationMarkerSetHandler(object __, DestinationMarkerEventArgs ___)
+        private void DestinationMarkerSetHandler(object sender, DestinationMarkerEventArgs args)
         {
             teleportPointer.Toggle(false);
+        }
+
+        private void ObjectGrabbedHandler(object sender, ObjectInteractEventArgs args)
+        {
+            // Must be called twice to be able to turn off again (weird bug)
+            cursorPointer.Toggle(true);
+            cursorPointer.Toggle(false);
+        }
+
+        private void ObjectUngrabbedHandler(object sender, ObjectInteractEventArgs args)
+        {
+            // Must be called twice to be able to turn off again (weird bug)
+            cursorPointer.Toggle(true);
+            cursorPointer.Toggle(true);
         }
 
         /// <summary>
@@ -90,6 +108,8 @@
             teleportPointer.SelectionButtonPressed -= SelectionButtonPressedHandler;
             teleportPointer.SelectionButtonReleased -= SelectionButtonReleasedHandler;
             teleportPointer.DestinationMarkerSet -= DestinationMarkerSetHandler;
+            interactGrab.ControllerGrabInteractableObject -= ObjectGrabbedHandler;
+            interactGrab.ControllerUngrabInteractableObject -= ObjectUngrabbedHandler;
         }
 
         /// <summary>
@@ -109,6 +129,10 @@
             teleportPointer.SelectionButtonPressed += SelectionButtonPressedHandler;
             teleportPointer.SelectionButtonReleased += SelectionButtonReleasedHandler;
             teleportPointer.DestinationMarkerSet += DestinationMarkerSetHandler;
+            interactGrab.ControllerGrabInteractableObject += ObjectGrabbedHandler;
+            interactGrab.ControllerUngrabInteractableObject += ObjectUngrabbedHandler;
+
+            
         }
 
         /// <summary>
