@@ -150,6 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4641977259244902}
+  - component: {fileID: 2509282409108044859}
   - component: {fileID: 114985692444144586}
   - component: {fileID: 255611544614102554}
   - component: {fileID: 114228462516909540}
@@ -159,7 +160,6 @@ GameObject:
   - component: {fileID: 114718338594581192}
   - component: {fileID: 114170805801080764}
   - component: {fileID: 114237145657355014}
-  - component: {fileID: 2509282409108044859}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -185,6 +185,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2509282409108044859
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115095681885242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.63901454
+  m_Center: {x: 0, y: 0.64083856, z: 0}
 --- !u!114 &114985692444144586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +433,7 @@ MonoBehaviour:
   head: {fileID: 1783470650965166}
   leftHand: {fileID: 1072722563706658}
   rightHand: {fileID: 1869868695920068}
+  menuScript: {fileID: 302305025175367936}
 --- !u!114 &114237145657355014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,19 +449,6 @@ MonoBehaviour:
   head: {fileID: 1783470650965166}
   leftHand: {fileID: 1072722563706658}
   rightHand: {fileID: 1869868695920068}
---- !u!135 &2509282409108044859
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115095681885242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6737152
-  m_Center: {x: 0, y: 0.6755392, z: 0}
 --- !u!1 &1187139325968110
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +863,7 @@ GameObject:
   - component: {fileID: 58597847924467018}
   - component: {fileID: 302305025175367936}
   m_Layer: 5
-  m_Name: RemotePlayerMenu
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

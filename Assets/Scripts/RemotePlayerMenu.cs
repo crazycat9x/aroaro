@@ -1,6 +1,5 @@
 ﻿namespace Aroaro
 {
-    using Photon.Pun;
     using Photon.Voice.Unity;
     using UnityEngine;
 
@@ -14,6 +13,8 @@
         /// </summary>
         public GameObject avatar;
 
+        public bool AvatarIsHovered { get; set; } = false;
+
         /// <summary>
         /// The ToggleSpeaker
         /// </summary>
@@ -21,14 +22,6 @@
         public void ToggleSpeaker(bool state)
         {
             avatar.GetComponent<Speaker>().enabled = state;
-        }
-
-        /// <summary>
-        /// The Start
-        /// </summary>
-        internal void Start()
-        {
-            if (avatar.GetComponent<PhotonView>().IsMine) gameObject.SetActive(false);
         }
     }
 }

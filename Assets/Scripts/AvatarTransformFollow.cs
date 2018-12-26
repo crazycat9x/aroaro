@@ -44,14 +44,6 @@
             leftHand.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = VRTK_DeviceFinder.GetControllerLeftHand();
             rightHand.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = VRTK_DeviceFinder.GetControllerRightHand();
             gameObject.GetComponent<VRTK_TransformFollow>().gameObjectToFollow = sdk;
-
-            head.GetComponent<MeshRenderer>().enabled = false;
-            leftHand.GetComponent<MeshRenderer>().enabled = false;
-            rightHand.GetComponent<MeshRenderer>().enabled = false;
-            foreach (MeshRenderer r in head.GetComponentsInChildren<MeshRenderer>())
-            {
-                r.enabled = false;
-            }
         }
 
         /// <summary>
