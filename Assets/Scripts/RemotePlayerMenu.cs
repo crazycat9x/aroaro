@@ -66,7 +66,7 @@
         /// <param name="other">The other<see cref="Collider"/></param>
         internal void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Pointer)
+            if (PointerUtilities.IsLocalPointer(other.gameObject))
                 pointerCount++;
         }
 
@@ -76,7 +76,7 @@
         /// <param name="other">The other<see cref="Collider"/></param>
         internal void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Pointer)
+            if (PointerUtilities.IsLocalPointer(other.gameObject))
             {
                 pointerCount--;
                 StartCoroutine(ToggleMenu(false));
