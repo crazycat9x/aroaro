@@ -40,11 +40,11 @@
         {
             while (delay > 0f)
             {
-                if (!state && pointerCount == 0 && avatarSetup.pointerCount == 0) yield break;
+                if (!state && pointerCount + avatarSetup.pointerCount != 0) yield break;
                 delay -= Time.deltaTime;
                 yield return null;
             }
-            if (state || pointerCount == 0 && avatarSetup.pointerCount == 0)
+            if (state || pointerCount + avatarSetup.pointerCount == 0)
             {
                 canvas.enabled = state;
                 gameObject.GetComponent<Collider>().enabled = state;
