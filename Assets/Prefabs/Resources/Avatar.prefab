@@ -124,7 +124,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114708251233118528}
   viewIdField: 0
-  InstantiationId: 2
+  InstantiationId: 5
   isRuntimeInstantiated: 0
 --- !u!114 &114708251233118528
 MonoBehaviour:
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4641977259244902}
-  - component: {fileID: 2509282409108044859}
+  - component: {fileID: 623148374168518752}
   - component: {fileID: 114985692444144586}
   - component: {fileID: 255611544614102554}
   - component: {fileID: 114228462516909540}
@@ -185,19 +185,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2509282409108044859
-SphereCollider:
+--- !u!136 &623148374168518752
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115095681885242}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.63901454
-  m_Center: {x: 0, y: 0.64083856, z: 0}
+  m_Radius: 0.5
+  m_Height: 1.8472142
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0284283, z: 0}
 --- !u!114 &114985692444144586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +219,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 255611544614102554}
   viewIdField: 0
-  InstantiationId: 1
+  InstantiationId: 4
   isRuntimeInstantiated: 0
 --- !u!114 &255611544614102554
 MonoBehaviour:
@@ -434,6 +435,7 @@ MonoBehaviour:
   leftHand: {fileID: 1072722563706658}
   rightHand: {fileID: 1869868695920068}
   menuScript: {fileID: 302305025175367936}
+  pointerCount: 0
 --- !u!114 &114237145657355014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +630,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114805629303459014}
   viewIdField: 0
-  InstantiationId: 3
+  InstantiationId: 6
   isRuntimeInstantiated: 0
 --- !u!114 &114805629303459014
 MonoBehaviour:
@@ -831,7 +833,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114760501831926422}
   viewIdField: 0
-  InstantiationId: 7
+  InstantiationId: 8
   isRuntimeInstantiated: 0
 --- !u!114 &114760501831926422
 MonoBehaviour:
@@ -886,7 +888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.53}
+  m_AnchoredPosition: {x: 0, y: 1.968}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1400555034027711860
@@ -976,6 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatar: {fileID: 1115095681885242}
+  avatarSetup: {fileID: 0}
 --- !u!1 &448737153367644953
 GameObject:
   m_ObjectHideFlags: 0
