@@ -44,9 +44,9 @@
         private Canvas canvas;
 
         /// <summary>
-        /// Defines the vrtkCanvas
+        /// Defines the canvasCollider
         /// </summary>
-        private VRTK_UICanvas vrtkCanvas;
+        private Collider canvasCollider;
 
         /// <summary>
         /// The toggleControlPanel
@@ -54,8 +54,7 @@
         /// <param name="state">The state<see cref="bool"/></param>
         public void toggleControlPanel(bool state)
         {
-            canvas.enabled = state;
-            vrtkCanvas.enabled = state;
+            canvas.enabled = canvasCollider.enabled = state;
         }
 
         /// <summary>
@@ -65,7 +64,7 @@
         {
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
             canvas = gameObject.GetComponent<Canvas>();
-            vrtkCanvas = gameObject.GetComponent<VRTK_UICanvas>();
+            canvasCollider = gameObject.GetComponent<Collider>();
         }
 
         /// <summary>

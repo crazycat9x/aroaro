@@ -33,6 +33,12 @@
         public RemotePlayerMenu menuScript;
 
         /// <summary>
+        /// Defines the pointerCount
+        /// </summary>
+        [HideInInspector]
+        public int pointerCount;
+
+        /// <summary>
         /// Defines the instantiationData
         /// </summary>
         private object[] instantiationData;
@@ -41,11 +47,6 @@
         /// Defines the gazePointer
         /// </summary>
         private VRTK_StraightPointerRenderer gazePointer;
-
-        /// <summary>
-        /// Defines the pointerCount
-        /// </summary>
-        private int pointerCount;
 
         /// <summary>
         /// The OnPlayerPropertiesUpdate
@@ -81,28 +82,28 @@
         }
 
         /// <summary>
-        /// The OnCollisionEnter
+        /// The OnTriggerEnter
         /// </summary>
-        /// <param name="collision">The collision<see cref="Collision"/></param>
-        internal void OnCollisionEnter(Collision collision)
+        /// <param name="other">The other<see cref="Collider"/></param>
+        internal void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Pointer)
+            if (other.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Pointer)
             {
                 pointerCount++;
-                if (pointerCount > 0) menuScript.AvatarIsHovered = true;
+                if (pointerCount > 0) StartCoroutine(menuScript.ToggleMenu(true));
             }
         }
 
         /// <summary>
-        /// The OnCollisionExit
+        /// The OnTriggerExit
         /// </summary>
-        /// <param name="collision">The collision<see cref="Collision"/></param>
-        internal void OnCollisionExit(Collision collision)
+        /// <param name="other">The other<see cref="Collider"/></param>
+        internal void OnTriggerExit(Collider other)
         {
-            if (collision.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Pointer)
+            if (other.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Pointer)
             {
                 pointerCount--;
-                if (pointerCount == 0) menuScript.AvatarIsHovered = false;
+                if (pointerCount == 0) StartCoroutine(menuScript.ToggleMenu(false, 1f));
             }
         }
 
