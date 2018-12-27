@@ -26,11 +26,6 @@
         private Canvas canvas;
 
         /// <summary>
-        /// Defines the canvasCollider
-        /// </summary>
-        private Collider canvasCollider;
-
-        /// <summary>
         /// Defines the pointerCount
         /// </summary>
         private int pointerCount = 0;
@@ -50,7 +45,10 @@
                 yield return null;
             }
             if (state || pointerCount == 0 && avatarSetup.pointerCount == 0)
-                canvas.enabled = canvasCollider.enabled = state;
+            {
+                canvas.enabled = state;
+                gameObject.GetComponent<Collider>().enabled = state;
+            }
         }
 
         /// <summary>
@@ -92,7 +90,6 @@
         {
             avatarSetup = avatar.GetComponent<AvatarSetupManager>();
             canvas = gameObject.GetComponent<Canvas>();
-            canvasCollider = gameObject.GetComponent<Collider>();
         }
     }
 }

@@ -44,17 +44,14 @@
         private Canvas canvas;
 
         /// <summary>
-        /// Defines the canvasCollider
-        /// </summary>
-        private Collider canvasCollider;
-
-        /// <summary>
         /// The toggleControlPanel
         /// </summary>
         /// <param name="state">The state<see cref="bool"/></param>
         public void toggleControlPanel(bool state)
         {
-            canvas.enabled = canvasCollider.enabled = state;
+
+            canvas.enabled = state;
+            gameObject.GetComponent<Collider>().enabled = state;
         }
 
         /// <summary>
@@ -64,7 +61,6 @@
         {
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
             canvas = gameObject.GetComponent<Canvas>();
-            canvasCollider = gameObject.GetComponent<Collider>();
         }
 
         /// <summary>
