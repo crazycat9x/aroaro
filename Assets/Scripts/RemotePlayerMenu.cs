@@ -91,5 +91,11 @@
             avatarSetup = avatar.GetComponent<AvatarSetupManager>();
             canvas = gameObject.GetComponent<Canvas>();
         }
+
+        internal void Update()
+        {
+            if (canvas.enabled)
+                transform.rotation = Quaternion.LookRotation(transform.position - VRTK_DeviceFinder.HeadsetTransform().position);
+        }
     }
 }
