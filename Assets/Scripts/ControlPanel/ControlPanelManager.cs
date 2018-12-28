@@ -2,6 +2,7 @@
 {
     using ExitGames.Client.Photon;
     using Photon.Pun;
+    using Photon.Voice.Unity;
     using UnityEngine;
     using VRTK;
 
@@ -14,6 +15,31 @@
         /// Defines the snapJoint
         /// </summary>
         public VRTK_TransformFollow snapJoint;
+
+        /// <summary>
+        /// Defines the recorder
+        /// </summary>
+        public Recorder recorder;
+
+        /// <summary>
+        /// Defines the leftController
+        /// </summary>
+        private GameObject leftController;
+
+        /// <summary>
+        /// Defines the canvas
+        /// </summary>
+        private Canvas canvas;
+
+        /// <summary>
+        /// Defines the gazePointerState
+        /// </summary>
+        private bool gazePointerState;
+
+        /// <summary>
+        /// Defines the transmitEnabled
+        /// </summary>
+        private bool transmitEnabled;
 
         /// <summary>
         /// Gets or sets a value indicating whether GazePointerState
@@ -29,25 +55,23 @@
         }
 
         /// <summary>
-        /// Defines the gazePointerState
+        /// Gets or sets a value indicating whether TransmitEnabled
         /// </summary>
-        private bool gazePointerState;
-
-        /// <summary>
-        /// Defines the leftController
-        /// </summary>
-        private GameObject leftController;
-
-        /// <summary>
-        /// Defines the canvas
-        /// </summary>
-        private Canvas canvas;
+        public bool TransmitEnabled
+        {
+            get { return transmitEnabled; }
+            set
+            {
+                transmitEnabled = value;
+                recorder.TransmitEnabled = transmitEnabled;
+            }
+        }
 
         /// <summary>
         /// The toggleControlPanel
         /// </summary>
         /// <param name="state">The state<see cref="bool"/></param>
-        public void toggleControlPanel(bool state)
+        public void ToggleControlPanel(bool state)
         {
 
             canvas.enabled = state;
@@ -70,7 +94,7 @@
         {
             leftController = VRTK_DeviceFinder.GetControllerLeftHand();
             snapJoint.gameObjectToFollow = leftController;
-            toggleControlPanel(true);
+            ToggleControlPanel(true);
         }
 
         /// <summary>
