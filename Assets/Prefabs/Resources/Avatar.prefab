@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatar: {fileID: 1115095681885242}
-  avatarSetup: {fileID: 0}
+  avatarSetup: {fileID: 114170805801080764}
 --- !u!1 &448737153367644953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1281,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Voice
+  m_Text: Mute
 --- !u!1 &8120132492267292007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1293,7 @@ GameObject:
   - component: {fileID: 7210240753488517061}
   - component: {fileID: 9004293217026246205}
   m_Layer: 5
-  m_Name: VoiceToggle
+  m_Name: MuteToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1364,7 +1364,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 302305025175367936}
-        m_MethodName: ToggleSpeaker
+        m_MethodName: Mute
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1376,4 +1376,4 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0

@@ -1,6 +1,5 @@
 ﻿namespace Aroaro
 {
-    using Photon.Voice.Unity;
     using System.Collections;
     using UnityEngine;
     using VRTK;
@@ -24,6 +23,11 @@
         /// Defines the canvas
         /// </summary>
         private Canvas canvas;
+
+        /// <summary>
+        /// Defines the audioSource
+        /// </summary>
+        private AudioSource audioSource;
 
         /// <summary>
         /// Defines the pointerCount
@@ -52,12 +56,12 @@
         }
 
         /// <summary>
-        /// The ToggleSpeaker
+        /// The Mute
         /// </summary>
-        /// <param name="state">The state<see cref="bool"/></param>
-        public void ToggleSpeaker(bool state)
+        /// <param name="muted">The muted<see cref="bool"/></param>
+        public void Mute(bool muted)
         {
-            avatar.GetComponent<Speaker>().enabled = state;
+            audioSource.volume = muted ? 0f : 1f;
         }
 
         /// <summary>
@@ -88,10 +92,13 @@
         /// </summary>
         internal void Awake()
         {
-            avatarSetup = avatar.GetComponent<AvatarSetupManager>();
             canvas = gameObject.GetComponent<Canvas>();
+            audioSource = avatar.GetComponent<AudioSource>();
         }
 
+        /// <summary>
+        /// The Update
+        /// </summary>
         internal void Update()
         {
             if (canvas.enabled)
