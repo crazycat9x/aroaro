@@ -123,7 +123,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114708251233118528}
-  viewIdField: 0
+  viewIdField: 5
   InstantiationId: 5
   isRuntimeInstantiated: 0
 --- !u!114 &114708251233118528
@@ -154,9 +154,8 @@ GameObject:
   - component: {fileID: 114985692444144586}
   - component: {fileID: 255611544614102554}
   - component: {fileID: 114228462516909540}
-  - component: {fileID: 114147586680226176}
-  - component: {fileID: 82189709007317084}
   - component: {fileID: 114407879136182678}
+  - component: {fileID: 82189709007317084}
   - component: {fileID: 114718338594581192}
   - component: {fileID: 114170805801080764}
   - component: {fileID: 114237145657355014}
@@ -218,7 +217,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 255611544614102554}
-  viewIdField: 0
+  viewIdField: 4
   InstantiationId: 4
   isRuntimeInstantiated: 0
 --- !u!114 &255611544614102554
@@ -249,12 +248,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logLevel: 1
-  recorderInUse: {fileID: 114147586680226176}
+  recorderInUse: {fileID: 0}
   speakerInUse: {fileID: 114407879136182678}
   AutoCreateRecorderIfNotFound: 0
-  UsePrimaryRecorder: 0
+  UsePrimaryRecorder: 1
   SetupDebugSpeaker: 0
---- !u!114 &114147586680226176
+--- !u!114 &114407879136182678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,28 +262,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1115095681885242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
+  m_Script: {fileID: 11500000, guid: dd7fea91fe63f4e1b884ef1e16a975c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   logLevel: 1
-  voiceDetection: 1
-  voiceDetectionThreshold: 0.01
-  voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: 
-  photonMicrophoneDeviceId: 0
-  audioGroup: 0
-  debugEchoMode: 0
-  reliableMode: 0
-  encrypt: 0
-  transmitEnabled: 1
-  samplingRate: 24000
-  frameDuration: 20000
-  bitrate: 30000
-  sourceType: 0
-  microphoneType: 1
-  typeConvert: 0
-  audioClip: {fileID: 0}
-  loopAudioClip: 1
+  PlayDelayMs: 200
 --- !u!82 &82189709007317084
 AudioSource:
   m_ObjectHideFlags: 0
@@ -381,20 +363,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114407879136182678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115095681885242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7fea91fe63f4e1b884ef1e16a975c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 1
-  PlayDelayMs: 200
 --- !u!114 &114718338594581192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +597,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114805629303459014}
-  viewIdField: 0
+  viewIdField: 6
   InstantiationId: 6
   isRuntimeInstantiated: 0
 --- !u!114 &114805629303459014
@@ -832,7 +800,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114760501831926422}
-  viewIdField: 0
+  viewIdField: 8
   InstantiationId: 8
   isRuntimeInstantiated: 0
 --- !u!114 &114760501831926422
