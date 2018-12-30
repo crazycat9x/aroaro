@@ -5785,6 +5785,7 @@ GameObject:
   - component: {fileID: 1837953950}
   - component: {fileID: 1837953953}
   - component: {fileID: 1837953954}
+  - component: {fileID: 1837953956}
   - component: {fileID: 1837953952}
   m_Layer: 0
   m_Name: LeftController
@@ -6068,6 +6069,22 @@ MonoBehaviour:
   canClickOnHover: 0
   autoActivatingCanvas: {fileID: 0}
   collisionClick: 0
+--- !u!114 &1837953956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837953945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65eb64f0f2fd6d64faddbcf5d7d3bdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useButton: 3
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
+  interactGrab: {fileID: 0}
 --- !u!1 &1899443335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,6 +6289,7 @@ GameObject:
   - component: {fileID: 2002548842}
   - component: {fileID: 2002548845}
   - component: {fileID: 2002548846}
+  - component: {fileID: 2002548848}
   - component: {fileID: 2002548844}
   m_Layer: 0
   m_Name: RightController
@@ -6555,6 +6573,22 @@ MonoBehaviour:
   canClickOnHover: 0
   autoActivatingCanvas: {fileID: 0}
   collisionClick: 0
+--- !u!114 &2002548848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002548837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65eb64f0f2fd6d64faddbcf5d7d3bdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useButton: 3
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
+  interactGrab: {fileID: 0}
 --- !u!1 &2004866745
 GameObject:
   m_ObjectHideFlags: 0
