@@ -45,11 +45,8 @@
         /// <param name="other">The other<see cref="Collider"/></param>
         internal void OnTriggerEnter(Collider other)
         {
-            VRTK_PlayerObject playerObject = other.gameObject.GetComponent<VRTK_PlayerObject>();
-            if (playerObject != null && playerObject.objectType == VRTK_PlayerObject.ObjectTypes.Collider)
-            {
+            if (other.gameObject.GetComponent<VRTK_PlayerObject>()?.objectType == VRTK_PlayerObject.ObjectTypes.Collider)
                 StartCoroutine(LoadPortalScene());
-            }
         }
 
         /// <summary>

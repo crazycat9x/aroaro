@@ -28,6 +28,17 @@
         public GameObject rightHand;
 
         /// <summary>
+        /// Defines the menuScript
+        /// </summary>
+        public RemotePlayerMenu menuScript;
+
+        /// <summary>
+        /// Defines the pointerCount
+        /// </summary>
+        [HideInInspector]
+        public int pointerCount;
+
+        /// <summary>
         /// Defines the instantiationData
         /// </summary>
         private object[] instantiationData;
@@ -44,7 +55,8 @@
         /// <param name="changedProps">The changedProps<see cref="Hashtable"/></param>
         public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
         {
-            if (target.ActorNumber == photonView.OwnerActorNr && !photonView.IsMine) ToggleGazePointer((bool)changedProps[CustomPlayerProperties.GazePointerState]);
+            if (target.ActorNumber == photonView.OwnerActorNr && !photonView.IsMine)
+                ToggleGazePointer((bool)changedProps[CustomPlayerProperties.GazePointerState]);
         }
 
         /// <summary>
@@ -70,6 +82,32 @@
         }
 
         /// <summary>
+        /// The OnTriggerEnter
+        /// </summary>
+        /// <param name="other">The other<see cref="Collider"/></param>
+        internal void OnTriggerEnter(Collider other)
+        {
+            if (PointerUtilities.IsLocalPointer(other.gameObject))
+            {
+                pointerCount++;
+                if (pointerCount > 0) StartCoroutine(menuScript.ToggleMenu(true));
+            }
+        }
+
+        /// <summary>
+        /// The OnTriggerExit
+        /// </summary>
+        /// <param name="other">The other<see cref="Collider"/></param>
+        internal void OnTriggerExit(Collider other)
+        {
+            if (PointerUtilities.IsLocalPointer(other.gameObject))
+            {
+                pointerCount--;
+                if (pointerCount == 0) StartCoroutine(menuScript.ToggleMenu(false, 1f));
+            }
+        }
+
+        /// <summary>
         /// The Awake
         /// </summary>
         internal void Awake()
@@ -88,6 +126,19 @@
             {
                 // Hide gaze pointer for local avatar by default
                 ToggleGazePointer(false);
+
+                // Make avatar invisible as we don't need to see our own avatar
+                head.GetComponent<MeshRenderer>().enabled = false;
+                leftHand.GetComponent<MeshRenderer>().enabled = false;
+                rightHand.GetComponent<MeshRenderer>().enabled = false;
+                foreach (MeshRenderer r in head.GetComponentsInChildren<MeshRenderer>())
+                {
+                    r.enabled = false;
+                }
+
+                // Disable menu & menu activation collider as it's only used for remote player
+                menuScript.gameObject.SetActive(false);
+                gameObject.GetComponent<Collider>().enabled = false;
             }
             else
             {
