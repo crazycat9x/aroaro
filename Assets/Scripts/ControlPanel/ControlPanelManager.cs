@@ -22,6 +22,11 @@
         public Recorder recorder;
 
         /// <summary>
+        /// Defines the whiteboard
+        /// </summary>
+        public GameObject whiteboard;
+
+        /// <summary>
         /// Defines the leftController
         /// </summary>
         private GameObject leftController;
@@ -76,6 +81,15 @@
 
             canvas.enabled = state;
             gameObject.GetComponent<Collider>().enabled = state;
+        }
+
+        /// <summary>
+        /// The CreateWhiteboard
+        /// </summary>
+        public void CreateWhiteboard()
+        {
+            Transform headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
+            PhotonNetwork.Instantiate(whiteboard.name, headsetTransform.position + headsetTransform.forward, Quaternion.identity);
         }
 
         /// <summary>
