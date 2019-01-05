@@ -122,8 +122,8 @@ MonoBehaviour:
   Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents: []
-  viewIdField: 2
-  InstantiationId: 2
+  viewIdField: 3
+  InstantiationId: 3
   isRuntimeInstantiated: 0
 --- !u!114 &114708251233118528
 MonoBehaviour:
@@ -214,9 +214,10 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 1
-  InstantiationId: 1
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 2
+  InstantiationId: 2
   isRuntimeInstantiated: 0
 --- !u!114 &255611544614102554
 MonoBehaviour:
@@ -397,10 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecfef4b825f79349b238d48af887a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  menuScript: {fileID: 0}
+  head: {fileID: 1783470650965166}
+  leftHand: {fileID: 1072722563706658}
+  rightHand: {fileID: 1869868695920068}
+  menuScript: {fileID: 302305025175367936}
   pointerCount: 0
 --- !u!114 &114237145657355014
 MonoBehaviour:
@@ -414,9 +415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46949b0e4d35cd48a7359facfe9c620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  head: {fileID: 1783470650965166}
+  leftHand: {fileID: 1072722563706658}
+  rightHand: {fileID: 1869868695920068}
 --- !u!1 &1187139325968110
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,8 +595,8 @@ MonoBehaviour:
   Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents: []
-  viewIdField: 3
-  InstantiationId: 3
+  viewIdField: 4
+  InstantiationId: 4
   isRuntimeInstantiated: 0
 --- !u!114 &114805629303459014
 MonoBehaviour:
@@ -796,8 +797,8 @@ MonoBehaviour:
   Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents: []
-  viewIdField: 4
-  InstantiationId: 4
+  viewIdField: 5
+  InstantiationId: 5
   isRuntimeInstantiated: 0
 --- !u!114 &114760501831926422
 MonoBehaviour:
@@ -941,8 +942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d4f650772dd946863c88b7c5b129e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatar: {fileID: 0}
-  avatarSetup: {fileID: 0}
+  avatar: {fileID: 1115095681885242}
+  avatarSetup: {fileID: 114170805801080764}
 --- !u!1 &448737153367644953
 GameObject:
   m_ObjectHideFlags: 0
