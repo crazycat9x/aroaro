@@ -89,7 +89,7 @@
         public void CreateWhiteboard()
         {
             Transform headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
-            Vector3 whiteboardPosition = headsetTransform.position + headsetTransform.forward * 2;
+            Vector3 whiteboardPosition = headsetTransform.position + new Vector3(headsetTransform.forward.x, 0, headsetTransform.forward.z) * 2;
             Vector3 lookPosition = whiteboardPosition - headsetTransform.position;
             lookPosition.y = 0;
             PhotonNetwork.Instantiate(whiteboard.name, whiteboardPosition, Quaternion.LookRotation(lookPosition));
