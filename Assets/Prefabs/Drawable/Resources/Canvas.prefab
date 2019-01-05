@@ -143,10 +143,9 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
+  ObservedComponents: []
   viewIdField: 0
-  InstantiationId: 2
+  InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5269982924418785397
 MonoBehaviour:

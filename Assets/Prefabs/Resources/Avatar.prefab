@@ -100,7 +100,7 @@ MonoBehaviour:
   followsRotation: 1
   smoothsRotation: 0
   maxAllowedPerFrameAngleDifference: 1.5
-  followsScale: 0
+  followsScale: 1
   smoothsScale: 0
   maxAllowedPerFrameSizeDifference: 0.003
   _moment: 3
@@ -119,12 +119,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 114708251233118528}
-  viewIdField: 5
-  InstantiationId: 5
+  ObservedComponents: []
+  viewIdField: 2
+  InstantiationId: 2
   isRuntimeInstantiated: 0
 --- !u!114 &114708251233118528
 MonoBehaviour:
@@ -139,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
+  m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
 --- !u!1 &1115095681885242
 GameObject:
@@ -213,12 +212,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 255611544614102554}
-  viewIdField: 4
-  InstantiationId: 4
+  ObservedComponents: []
+  viewIdField: 1
+  InstantiationId: 1
   isRuntimeInstantiated: 0
 --- !u!114 &255611544614102554
 MonoBehaviour:
@@ -233,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
+  m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
 --- !u!114 &114228462516909540
 MonoBehaviour:
@@ -249,9 +247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logLevel: 1
   recorderInUse: {fileID: 0}
-  speakerInUse: {fileID: 114407879136182678}
+  speakerInUse: {fileID: 0}
   AutoCreateRecorderIfNotFound: 0
-  UsePrimaryRecorder: 1
+  UsePrimaryRecorder: 0
   SetupDebugSpeaker: 0
 --- !u!114 &114407879136182678
 MonoBehaviour:
@@ -399,10 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecfef4b825f79349b238d48af887a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 1783470650965166}
-  leftHand: {fileID: 1072722563706658}
-  rightHand: {fileID: 1869868695920068}
-  menuScript: {fileID: 302305025175367936}
+  head: {fileID: 0}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  menuScript: {fileID: 0}
   pointerCount: 0
 --- !u!114 &114237145657355014
 MonoBehaviour:
@@ -416,9 +414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46949b0e4d35cd48a7359facfe9c620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 1783470650965166}
-  leftHand: {fileID: 1072722563706658}
-  rightHand: {fileID: 1869868695920068}
+  head: {fileID: 0}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
 --- !u!1 &1187139325968110
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,12 +591,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 114805629303459014}
-  viewIdField: 6
-  InstantiationId: 6
+  ObservedComponents: []
+  viewIdField: 3
+  InstantiationId: 3
   isRuntimeInstantiated: 0
 --- !u!114 &114805629303459014
 MonoBehaviour:
@@ -627,14 +624,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec704cceb26f6f49b6c900fc83d8d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableTeleport: 0
+  enableTeleport: 1
   targetListPolicy: {fileID: 0}
-  pointerRenderer: {fileID: 114607235372648266}
-  activationButton: 0
-  holdButtonToActivate: 0
+  pointerRenderer: {fileID: 0}
+  activationButton: 10
+  holdButtonToActivate: 1
   activateOnEnable: 0
   activationDelay: 0
-  selectionButton: 0
+  selectionButton: 10
   selectOnPress: 0
   selectionDelay: 0
   selectAfterHoverDuration: 0
@@ -665,13 +662,13 @@ MonoBehaviour:
     maxAllowedPerFrameDistanceDifference: 0.003
     smoothsRotation: 0
     maxAllowedPerFrameAngleDifference: 1.5
-  validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
+  validCollisionColor: {r: 0, g: 1, b: 0, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
-  tracerVisibility: 2
-  cursorVisibility: 2
+  tracerVisibility: 0
+  cursorVisibility: 0
   maximumLength: 100
-  scaleFactor: 0.003
-  cursorScaleMultiplier: 5
+  scaleFactor: 0.002
+  cursorScaleMultiplier: 25
   cursorMatchTargetRotation: 0
   cursorDistanceRescale: 0
   maximumCursorScale: {x: Infinity, y: Infinity, z: Infinity}
@@ -777,7 +774,7 @@ MonoBehaviour:
   followsRotation: 1
   smoothsRotation: 0
   maxAllowedPerFrameAngleDifference: 1.5
-  followsScale: 0
+  followsScale: 1
   smoothsScale: 0
   maxAllowedPerFrameSizeDifference: 0.003
   _moment: 3
@@ -796,12 +793,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 114760501831926422}
-  viewIdField: 8
-  InstantiationId: 8
+  ObservedComponents: []
+  viewIdField: 4
+  InstantiationId: 4
   isRuntimeInstantiated: 0
 --- !u!114 &114760501831926422
 MonoBehaviour:
@@ -816,7 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
+  m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
 --- !u!1 &69885298231483917
 GameObject:
@@ -945,8 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d4f650772dd946863c88b7c5b129e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatar: {fileID: 1115095681885242}
-  avatarSetup: {fileID: 114170805801080764}
+  avatar: {fileID: 0}
+  avatarSetup: {fileID: 0}
 --- !u!1 &448737153367644953
 GameObject:
   m_ObjectHideFlags: 0
