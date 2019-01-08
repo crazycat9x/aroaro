@@ -26,7 +26,7 @@
         public bool resetTransformOnDrop;
 
         /// <summary>
-        /// Defines the originalTransform
+        /// The parent GameObject or "holder" of this pen
         /// </summary>
         [Tooltip("Default to the GameObject this script is attached to")]
         public Transform originalTransform;
@@ -75,6 +75,12 @@
             }
         }
 
+        private void InteractableObject_InteractableObjectGrabbed(object sender, InteractableObjectEventArgs e)
+        {
+            transform.parent = null;
+        }
+
+
         /// <summary>
         /// The Pen_InteractableObjectUngrabbed
         /// </summary>
@@ -87,6 +93,7 @@
             {
                 transform.position = originalTransform.position;
                 transform.rotation = originalTransform.rotation;
+                transform.parent = originalTransform;
             }
             else
             {
@@ -139,6 +146,7 @@
         internal void Start()
         {
             VRTK_InteractableObject interactableObject = gameObject.GetComponent<VRTK_InteractableObject>();
+            interactableObject.InteractableObjectGrabbed += InteractableObject_InteractableObjectGrabbed;
             interactableObject.InteractableObjectUngrabbed += Pen_InteractableObjectUngrabbed;
         }
 
