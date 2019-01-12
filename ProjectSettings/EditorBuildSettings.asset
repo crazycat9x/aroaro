@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/WhiteboardTestScene.unity
     guid: c6c743a36bcc104478bec9b45c573e88
   - enabled: 1
-    path: Assets/Scenes/KimSpace.unity
+    path: Assets/Scenes/KimSpace/KimSpace.unity
     guid: ae2017265681fb34ea4e32f5abad5fe6
   - enabled: 1
     path: Assets/Scenes/TestScene.unity

@@ -20,6 +20,15 @@
         public ControllableObject controllableObject;
 
         /// <summary>
+        /// Gets or sets a value indicating whether IsGrabable
+        /// </summary>
+        public bool IsGrabable
+        {
+            get { return controllableObject.IsGrabbable; }
+            set { controllableObject.IsGrabbable = value; }
+        }
+
+        /// <summary>
         /// The DestroyObject
         /// </summary>
         public void DestroyObject()
@@ -35,6 +44,13 @@
             controllableObject = targetGameObject.GetComponent<ControllableObject>();
             if (controllableObject == null)
                 controllableObject = targetGameObject.AddComponent<ControllableObject>();
+        }
+
+        /// <summary>
+        /// The Start
+        /// </summary>
+        internal void Start()
+        {
         }
 
         /// <summary>

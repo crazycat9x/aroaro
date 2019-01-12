@@ -2776,12 +2776,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 990847671}
-  actualHeadset: {fileID: 84920817}
-  actualLeftController: {fileID: 1107007811}
-  actualRightController: {fileID: 1251544561}
-  modelAliasLeftController: {fileID: 605246882}
-  modelAliasRightController: {fileID: 901176797}
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -5147,8 +5147,8 @@ MonoBehaviour:
   actualHeadset: {fileID: 1461482410}
   actualLeftController: {fileID: 2004866745}
   actualRightController: {fileID: 1296513883}
-  modelAliasLeftController: {fileID: 451832321}
-  modelAliasRightController: {fileID: 1235132381}
+  modelAliasLeftController: {fileID: 1956885433}
+  modelAliasRightController: {fileID: 2043696992}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
