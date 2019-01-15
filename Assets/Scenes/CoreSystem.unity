@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2776,12 +2776,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 0}
-  actualHeadset: {fileID: 0}
-  actualLeftController: {fileID: 0}
-  actualRightController: {fileID: 0}
-  modelAliasLeftController: {fileID: 0}
-  modelAliasRightController: {fileID: 0}
+  actualBoundaries: {fileID: 990847671}
+  actualHeadset: {fileID: 84920817}
+  actualLeftController: {fileID: 1107007811}
+  actualRightController: {fileID: 1251544561}
+  modelAliasLeftController: {fileID: 605246882}
+  modelAliasRightController: {fileID: 901176797}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -5591,7 +5591,6 @@ GameObject:
   - component: {fileID: 1837953949}
   - component: {fileID: 1837953948}
   - component: {fileID: 1837953947}
-  - component: {fileID: 1837953951}
   - component: {fileID: 1837953955}
   - component: {fileID: 1837953946}
   - component: {fileID: 1837953950}
@@ -5629,7 +5628,7 @@ MonoBehaviour:
   validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
   tracerVisibility: 2
-  cursorVisibility: 0
+  cursorVisibility: 2
   maximumLength: 100
   scaleFactor: 0.002
   cursorScaleMultiplier: 25
@@ -5652,20 +5651,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableTeleport: 0
   targetListPolicy: {fileID: 0}
-  pointerRenderer: {fileID: 1837953946}
+  pointerRenderer: {fileID: 0}
   activationButton: 0
   holdButtonToActivate: 0
   activateOnEnable: 1
   activationDelay: 0
-  selectionButton: 3
+  selectionButton: 0
   selectOnPress: 0
   selectionDelay: 0
   selectAfterHoverDuration: 0
   interactWithObjects: 0
   grabToPointerTip: 0
   attachedTo: {fileID: 0}
-  controllerEvents: {fileID: 0}
-  interactUse: {fileID: 0}
+  controllerEvents: {fileID: 1837953948}
+  interactUse: {fileID: 1837953956}
   customOrigin: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &1837953948
@@ -5754,8 +5753,8 @@ MonoBehaviour:
     maxAllowedPerFrameAngleDifference: 1.5
   validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
-  tracerVisibility: 0
-  cursorVisibility: 0
+  tracerVisibility: 2
+  cursorVisibility: 2
   maximumLength: {x: 10, y: Infinity}
   tracerDensity: 25
   cursorRadius: 0.5
@@ -5772,36 +5771,6 @@ MonoBehaviour:
     type: 3}
   invalidLocationObject: {fileID: 1413768137026182, guid: af1c322da33b9ec40b0f5a418ed90ef4,
     type: 3}
---- !u!114 &1837953951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837953945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec704cceb26f6f49b6c900fc83d8d18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableTeleport: 1
-  targetListPolicy: {fileID: 0}
-  pointerRenderer: {fileID: 1837953950}
-  activationButton: 0
-  holdButtonToActivate: 0
-  activateOnEnable: 0
-  activationDelay: 0
-  selectionButton: 10
-  selectOnPress: 0
-  selectionDelay: 0
-  selectAfterHoverDuration: 0
-  interactWithObjects: 0
-  grabToPointerTip: 0
-  attachedTo: {fileID: 0}
-  controllerEvents: {fileID: 0}
-  interactUse: {fileID: 0}
-  customOrigin: {fileID: 0}
-  controller: {fileID: 0}
 --- !u!114 &1837953952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5814,11 +5783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53f0ecb7696bbe4ea0b3a799c836b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerEvents: {fileID: 1837953948}
-  interactGrab: {fileID: 1837953954}
-  teleportPointer: {fileID: 1837953951}
-  cursorPointer: {fileID: 1837953947}
-  dashTime: 0
+  pointer: {fileID: 1837953947}
+  straightPointerRenderer: {fileID: 1837953946}
+  bezierPointerRenderer: {fileID: 1837953950}
 --- !u!114 &1837953953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6087,7 +6054,6 @@ GameObject:
   - component: {fileID: 2002548841}
   - component: {fileID: 2002548840}
   - component: {fileID: 2002548839}
-  - component: {fileID: 2002548843}
   - component: {fileID: 2002548847}
   - component: {fileID: 2002548838}
   - component: {fileID: 2002548842}
@@ -6125,7 +6091,7 @@ MonoBehaviour:
   validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
   tracerVisibility: 2
-  cursorVisibility: 0
+  cursorVisibility: 2
   maximumLength: 100
   scaleFactor: 0.002
   cursorScaleMultiplier: 25
@@ -6148,20 +6114,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableTeleport: 0
   targetListPolicy: {fileID: 0}
-  pointerRenderer: {fileID: 2002548838}
+  pointerRenderer: {fileID: 0}
   activationButton: 0
   holdButtonToActivate: 0
   activateOnEnable: 1
   activationDelay: 0
-  selectionButton: 3
+  selectionButton: 0
   selectOnPress: 0
   selectionDelay: 0
   selectAfterHoverDuration: 0
   interactWithObjects: 0
   grabToPointerTip: 0
   attachedTo: {fileID: 0}
-  controllerEvents: {fileID: 0}
-  interactUse: {fileID: 0}
+  controllerEvents: {fileID: 2002548840}
+  interactUse: {fileID: 2002548848}
   customOrigin: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &2002548840
@@ -6250,8 +6216,8 @@ MonoBehaviour:
     maxAllowedPerFrameAngleDifference: 1.5
   validCollisionColor: {r: 0.5411765, g: 0.9019608, b: 1, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
-  tracerVisibility: 0
-  cursorVisibility: 0
+  tracerVisibility: 2
+  cursorVisibility: 2
   maximumLength: {x: 10, y: Infinity}
   tracerDensity: 25
   cursorRadius: 0.5
@@ -6268,36 +6234,6 @@ MonoBehaviour:
     type: 3}
   invalidLocationObject: {fileID: 1413768137026182, guid: af1c322da33b9ec40b0f5a418ed90ef4,
     type: 3}
---- !u!114 &2002548843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002548837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec704cceb26f6f49b6c900fc83d8d18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableTeleport: 1
-  targetListPolicy: {fileID: 0}
-  pointerRenderer: {fileID: 2002548842}
-  activationButton: 0
-  holdButtonToActivate: 0
-  activateOnEnable: 0
-  activationDelay: 0
-  selectionButton: 10
-  selectOnPress: 0
-  selectionDelay: 0
-  selectAfterHoverDuration: 0
-  interactWithObjects: 0
-  grabToPointerTip: 0
-  attachedTo: {fileID: 0}
-  controllerEvents: {fileID: 0}
-  interactUse: {fileID: 0}
-  customOrigin: {fileID: 0}
-  controller: {fileID: 0}
 --- !u!114 &2002548844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6310,11 +6246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53f0ecb7696bbe4ea0b3a799c836b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerEvents: {fileID: 2002548840}
-  interactGrab: {fileID: 2002548846}
-  teleportPointer: {fileID: 2002548843}
-  cursorPointer: {fileID: 2002548839}
-  dashTime: 0
+  pointer: {fileID: 2002548839}
+  straightPointerRenderer: {fileID: 2002548838}
+  bezierPointerRenderer: {fileID: 2002548842}
 --- !u!114 &2002548845
 MonoBehaviour:
   m_ObjectHideFlags: 0
