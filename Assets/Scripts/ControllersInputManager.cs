@@ -126,6 +126,8 @@
                     pointer.enabled = true;
                     pointer.pointerRenderer.enabled = true;
                 }
+                Debug.Log(interactableObjectCount);
+                Debug.Log(other.gameObject.name);
             };
 
             childControllerBehaviours.onTriggerExit = (Collider other) =>
@@ -141,6 +143,8 @@
                     pointer.enabled = true;
                     pointer.pointerRenderer.enabled = true;
                 }
+                Debug.Log(interactableObjectCount);
+                Debug.Log(other.gameObject.name);
             };
         }
 
@@ -155,6 +159,8 @@
             switch (pointerRenderer)
             {
                 case PointerRenderers.StraightPointer:
+                    pointer.interactWithObjects = true;
+                    pointer.grabToPointerTip = true;
                     pointer.enableTeleport = false;
                     pointer.pointerRenderer = straightPointerRenderer;
                     pointer.selectionButton = VRTK_ControllerEvents.ButtonAlias.TriggerPress;
