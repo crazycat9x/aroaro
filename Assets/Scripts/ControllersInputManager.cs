@@ -30,11 +30,6 @@
         {
             pointer.enabled = false;
             pointer.pointerRenderer.enabled = false;
-            VisibilityStates straightPointerVisibility = pointerRenderer == PointerRenderers.StraightPointer ? VisibilityStates.AlwaysOn : VisibilityStates.AlwaysOff;
-            VisibilityStates bezierPointerVisibility = pointerRenderer == PointerRenderers.BezierPointer ? VisibilityStates.AlwaysOn : VisibilityStates.AlwaysOff;
-            straightPointerRenderer.cursorVisibility = straightPointerVisibility;
-            bezierPointerRenderer.tracerVisibility = bezierPointerVisibility;
-            bezierPointerRenderer.cursorVisibility = bezierPointerVisibility;
             switch (pointerRenderer)
             {
                 case PointerRenderers.StraightPointer:
@@ -77,18 +72,24 @@
         {
             boundary = VRTK_DeviceFinder.PlayAreaTransform();
             pointer.controllerEvents.TouchpadPressed += ControllerEvents_TouchpadPressed;
-            pointer.DestinationMarkerSet += ControllersInputManager_DestinationMarkerSet;
+            pointer.SelectionButtonReleased += Pointer_SelectionButtonReleased;
+            pointer.DestinationMarkerSet += Pointer_DestinationMarkerSet;
+        }
+
+        private void Pointer_DestinationMarkerSet(object sender, DestinationMarkerEventArgs e)
+        {
+            TogglePointerRenderer(PointerRenderers.StraightPointer);
+        }
+
+        private void Pointer_SelectionButtonReleased(object sender, ControllerInteractionEventArgs e)
+        {
+            if (pointer.enableTeleport && !pointer.IsStateValid())
+                TogglePointerRenderer(PointerRenderers.StraightPointer);
         }
 
         internal void Start()
         {
             TogglePointerRenderer(PointerRenderers.StraightPointer);
-        }
-
-        private void ControllersInputManager_DestinationMarkerSet(object sender, DestinationMarkerEventArgs e)
-        {
-            if (e.enableTeleport == true)
-                TogglePointerRenderer(PointerRenderers.StraightPointer);
         }
 
         private void ControllerEvents_TouchpadPressed(object sender, ControllerInteractionEventArgs e)
