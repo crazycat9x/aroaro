@@ -18,7 +18,6 @@
             /// Defines the StraightPointer
             /// </summary>
             StraightPointer,
-
             /// <summary>
             /// Defines the BezierPointer
             /// </summary>
@@ -118,9 +117,6 @@
             {
                 if (interactTouch.IsObjectInteractable(other.gameObject))
                     interactableObjectCount++;
-
-                Debug.Log(interactableObjectCount);
-                Debug.Log(interactGrab.GetGrabbedObject());
                 if (interactableObjectCount > 0 && interactGrab.GetGrabbedObject() == null)
                 {
                     pointer.enabled = false;
@@ -136,8 +132,7 @@
             {
                 if (interactTouch.IsObjectInteractable(other.gameObject))
                     interactableObjectCount--;
-                Debug.Log(interactableObjectCount);
-                if (interactableObjectCount == 0)
+                if (interactableObjectCount == 0 && interactGrab.GetGrabbedObject() == null)
                 {
                     pointer.enabled = false;
                     pointer.pointerRenderer.enabled = false;
@@ -222,7 +217,6 @@
             if (controller.GetComponent<BehavioursInjection>() == null)
                 SetupControllerBehaviours(controller);
         }
-
 
         /// <summary>
         /// The OnDisable
