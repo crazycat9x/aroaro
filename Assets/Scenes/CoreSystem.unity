@@ -2776,12 +2776,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 990847671}
-  actualHeadset: {fileID: 84920817}
-  actualLeftController: {fileID: 1107007811}
-  actualRightController: {fileID: 1251544561}
-  modelAliasLeftController: {fileID: 605246882}
-  modelAliasRightController: {fileID: 901176797}
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -5660,8 +5660,8 @@ MonoBehaviour:
   selectOnPress: 0
   selectionDelay: 0
   selectAfterHoverDuration: 0
-  interactWithObjects: 0
-  grabToPointerTip: 0
+  interactWithObjects: 1
+  grabToPointerTip: 1
   attachedTo: {fileID: 0}
   controllerEvents: {fileID: 1837953948}
   interactUse: {fileID: 1837953956}
@@ -5786,6 +5786,8 @@ MonoBehaviour:
   pointer: {fileID: 1837953947}
   straightPointerRenderer: {fileID: 1837953946}
   bezierPointerRenderer: {fileID: 1837953950}
+  interactTouch: {fileID: 1837953953}
+  interactGrab: {fileID: 1837953954}
 --- !u!114 &1837953953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6123,8 +6125,8 @@ MonoBehaviour:
   selectOnPress: 0
   selectionDelay: 0
   selectAfterHoverDuration: 0
-  interactWithObjects: 0
-  grabToPointerTip: 0
+  interactWithObjects: 1
+  grabToPointerTip: 1
   attachedTo: {fileID: 0}
   controllerEvents: {fileID: 2002548840}
   interactUse: {fileID: 2002548848}
@@ -6249,6 +6251,8 @@ MonoBehaviour:
   pointer: {fileID: 2002548839}
   straightPointerRenderer: {fileID: 2002548838}
   bezierPointerRenderer: {fileID: 2002548842}
+  interactTouch: {fileID: 2002548845}
+  interactGrab: {fileID: 2002548846}
 --- !u!114 &2002548845
 MonoBehaviour:
   m_ObjectHideFlags: 0
