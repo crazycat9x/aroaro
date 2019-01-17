@@ -1,6 +1,7 @@
 ﻿namespace Aroaro
 {
     using Aroaro.Utilities;
+    using System;
     using UnityEngine;
     using VRTK;
 
@@ -60,6 +61,29 @@
         private int interactableObjectCount = 0;
 
         /// <summary>
+        /// Defines the pointerInteractWithObject
+        /// </summary>
+        private bool pointerInteractWithObject;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether PointerInteractWithObject
+        /// </summary>
+        private bool PointerInteractWithObject
+        {
+            get { return pointerInteractWithObject; }
+            set
+            {
+                pointerInteractWithObject = value;
+                pointer.enabled = false;
+                pointer.pointerRenderer.enabled = false;
+                pointer.interactWithObjects = pointerInteractWithObject;
+                pointer.grabToPointerTip = pointerInteractWithObject;
+                pointer.enabled = true;
+                pointer.pointerRenderer.enabled = true;
+            }
+        }
+
+        /// <summary>
         /// The ControllerEvents_TouchpadPressed
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
@@ -112,40 +136,39 @@
         /// <param name="controller">The controller<see cref="GameObject"/></param>
         private void SetupControllerBehaviours(GameObject controller)
         {
-            BehavioursInjection childControllerBehaviours = controller.AddComponent<BehavioursInjection>();
-            childControllerBehaviours.onTriggerEnter = (Collider other) =>
+            Action<Collider> onTriggerEnter = (Collider other) =>
             {
                 if (interactTouch.IsObjectInteractable(other.gameObject))
                     interactableObjectCount++;
                 if (interactableObjectCount > 0 && interactGrab.GetGrabbedObject() == null)
-                {
-                    pointer.enabled = false;
-                    pointer.pointerRenderer.enabled = false;
-                    pointer.interactWithObjects = false;
-                    pointer.grabToPointerTip = false;
-                    pointer.enabled = true;
-                    pointer.pointerRenderer.enabled = true;
-                }
+                    PointerInteractWithObject = false;
                 Debug.Log(interactableObjectCount);
                 Debug.Log(other.gameObject.name);
             };
 
-            childControllerBehaviours.onTriggerExit = (Collider other) =>
+            Action<Collider> onTriggerExit = (Collider other) =>
             {
                 if (interactTouch.IsObjectInteractable(other.gameObject))
                     interactableObjectCount--;
                 if (interactableObjectCount == 0 && interactGrab.GetGrabbedObject() == null)
-                {
-                    pointer.enabled = false;
-                    pointer.pointerRenderer.enabled = false;
-                    pointer.interactWithObjects = true;
-                    pointer.grabToPointerTip = true;
-                    pointer.enabled = true;
-                    pointer.pointerRenderer.enabled = true;
-                }
+                    PointerInteractWithObject = true;
                 Debug.Log(interactableObjectCount);
                 Debug.Log(other.gameObject.name);
             };
+
+            BehavioursInjection controllerBehaviours = controller.AddComponent<BehavioursInjection>();
+            controllerBehaviours.onTriggerEnter = onTriggerEnter;
+            controllerBehaviours.onTriggerExit = onTriggerExit;
+
+            // Some controllers have childrens as colliders
+            foreach (Transform childOfController in controller.transform)
+            {
+                if (childOfController.GetComponent<Collider>() != null && childOfController.GetComponent<BehavioursInjection>() == null)
+                {
+                    BehavioursInjection childOfControllerBehaviours = childOfController.gameObject.AddComponent<BehavioursInjection>();
+                    childOfControllerBehaviours.onTriggerEnter = onTriggerEnter;
+                }
+            }
         }
 
         /// <summary>
