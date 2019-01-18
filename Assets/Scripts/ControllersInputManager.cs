@@ -28,7 +28,7 @@
         /// <summary>
         /// Defines the pointer
         /// </summary>
-        public VRTK_Pointer pointer;
+        public CustomPointer pointer;
 
         /// <summary>
         /// Defines the straightPointerRenderer
@@ -66,6 +66,11 @@
         private bool pointerInteractWithObject;
 
         /// <summary>
+        /// Defines the currentPointerRenderer
+        /// </summary>
+        private PointerRenderers currentPointerRenderer = PointerRenderers.StraightPointer;
+
+        /// <summary>
         /// Gets or sets a value indicating whether PointerInteractWithObject
         /// </summary>
         private bool PointerInteractWithObject
@@ -79,12 +84,34 @@
                     pointerInteractWithObject = value;
                     pointer.enabled = false;
                     pointer.pointerRenderer.enabled = false;
-                    pointer.interactWithObjects = pointerInteractWithObject;
                     pointer.grabToPointerTip = pointerInteractWithObject;
                     pointer.enabled = true;
                     pointer.pointerRenderer.enabled = true;
                 }
             }
+        }
+
+        /// <summary>
+        /// The TogglePointerRenderer
+        /// </summary>
+        /// <param name="pointerRenderer">The pointerRenderer<see cref="PointerRenderers"/></param>
+        private void TogglePointerRenderer(PointerRenderers pointerRenderer)
+        {
+            if (currentPointerRenderer == pointerRenderer) return;
+            currentPointerRenderer = pointerRenderer;
+            pointer.enabled = false;
+            pointer.pointerRenderer.enabled = false;
+            switch (pointerRenderer)
+            {
+                case PointerRenderers.StraightPointer:
+                    pointer.pointerRenderer = straightPointerRenderer;
+                    break;
+                case PointerRenderers.BezierPointer:
+                    pointer.pointerRenderer = bezierPointerRenderer;
+                    break;
+            }
+            pointer.enabled = true;
+            pointer.pointerRenderer.enabled = true;
         }
 
         /// <summary>
@@ -99,18 +126,38 @@
 
             // Touchpad right pressed
             if (e.touchpadAxis.x > 0.5)
+            {
                 boundary.rotation *= Quaternion.Euler(0, 30, 0);
+            }
             // Touchpad left pressed
             else if (e.touchpadAxis.x < -0.5)
+            {
                 boundary.rotation *= Quaternion.Euler(0, -30, 0);
+            }
             // Touchpad top pressed
             else if (e.touchpadAxis.y >= 0)
+            {
                 TogglePointerRenderer(PointerRenderers.BezierPointer);
+                pointer.enableTeleport = true;
+            }
             // Touchpad bottom pressed
             else
             {
                 // TODO: Implement backward dash
             }
+        }
+
+        /// <summary>
+        /// The ControllerEvents_TouchpadReleased
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
+        private void ControllerEvents_TouchpadReleased(object sender, ControllerInteractionEventArgs e)
+        {
+            if (pointer.IsStateValid() && pointer.enableTeleport)
+                pointer.Teleport();
+            else
+                TogglePointerRenderer(PointerRenderers.StraightPointer);
         }
 
         /// <summary>
@@ -121,17 +168,7 @@
         private void Pointer_DestinationMarkerSet(object sender, DestinationMarkerEventArgs e)
         {
             TogglePointerRenderer(PointerRenderers.StraightPointer);
-        }
-
-        /// <summary>
-        /// The Pointer_SelectionButtonReleased
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
-        private void Pointer_SelectionButtonReleased(object sender, ControllerInteractionEventArgs e)
-        {
-            if (pointer.enableTeleport && !pointer.IsStateValid())
-                TogglePointerRenderer(PointerRenderers.StraightPointer);
+            pointer.enableTeleport = false;
         }
 
         /// <summary>
@@ -174,41 +211,12 @@
         }
 
         /// <summary>
-        /// The TogglePointerRenderer
-        /// </summary>
-        /// <param name="pointerRenderer">The pointerRenderer<see cref="PointerRenderers"/></param>
-        private void TogglePointerRenderer(PointerRenderers pointerRenderer)
-        {
-            pointer.enabled = false;
-            pointer.pointerRenderer.enabled = false;
-            switch (pointerRenderer)
-            {
-                case PointerRenderers.StraightPointer:
-                    pointer.interactWithObjects = true;
-                    pointer.grabToPointerTip = true;
-                    pointer.enableTeleport = false;
-                    pointer.pointerRenderer = straightPointerRenderer;
-                    pointer.selectionButton = VRTK_ControllerEvents.ButtonAlias.TriggerPress;
-                    break;
-                case PointerRenderers.BezierPointer:
-                    pointer.interactWithObjects = false;
-                    pointer.grabToPointerTip = false;
-                    pointer.enableTeleport = true;
-                    pointer.pointerRenderer = bezierPointerRenderer;
-                    pointer.selectionButton = VRTK_ControllerEvents.ButtonAlias.TouchpadPress;
-                    break;
-            }
-            pointer.enabled = true;
-            pointer.pointerRenderer.enabled = true;
-        }
-
-        /// <summary>
         /// The TearDownEventHandlers
         /// </summary>
         private void TearDownEventHandlers()
         {
             pointer.controllerEvents.TouchpadPressed -= ControllerEvents_TouchpadPressed;
-            pointer.SelectionButtonReleased -= Pointer_SelectionButtonReleased;
+            pointer.controllerEvents.TouchpadReleased -= ControllerEvents_TouchpadReleased;
             pointer.DestinationMarkerSet -= Pointer_DestinationMarkerSet;
         }
 
@@ -227,7 +235,7 @@
         {
             boundary = VRTK_DeviceFinder.PlayAreaTransform();
             pointer.controllerEvents.TouchpadPressed += ControllerEvents_TouchpadPressed;
-            pointer.SelectionButtonReleased += Pointer_SelectionButtonReleased;
+            pointer.controllerEvents.TouchpadReleased += ControllerEvents_TouchpadReleased;
             pointer.DestinationMarkerSet += Pointer_DestinationMarkerSet;
         }
 
