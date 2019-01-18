@@ -73,13 +73,17 @@
             get { return pointerInteractWithObject; }
             set
             {
-                pointerInteractWithObject = value;
-                pointer.enabled = false;
-                pointer.pointerRenderer.enabled = false;
-                pointer.interactWithObjects = pointerInteractWithObject;
-                pointer.grabToPointerTip = pointerInteractWithObject;
-                pointer.enabled = true;
-                pointer.pointerRenderer.enabled = true;
+                // Check if we need to set as this is an expensive operation
+                if (pointerInteractWithObject != value)
+                {
+                    pointerInteractWithObject = value;
+                    pointer.enabled = false;
+                    pointer.pointerRenderer.enabled = false;
+                    pointer.interactWithObjects = pointerInteractWithObject;
+                    pointer.grabToPointerTip = pointerInteractWithObject;
+                    pointer.enabled = true;
+                    pointer.pointerRenderer.enabled = true;
+                }
             }
         }
 
@@ -138,6 +142,7 @@
         {
             Action<Collider> onTriggerEnter = (Collider other) =>
             {
+
                 if (!interactTouch.IsObjectInteractable(other.gameObject)) return;
                 interactableObjectCount++;
                 if (interactableObjectCount > 0 && interactGrab.GetGrabbedObject() == null)
@@ -163,6 +168,7 @@
                 {
                     BehavioursInjection childOfControllerBehaviours = childOfController.gameObject.AddComponent<BehavioursInjection>();
                     childOfControllerBehaviours.onTriggerEnter = onTriggerEnter;
+                    childOfControllerBehaviours.onTriggerExit = onTriggerExit;
                 }
             }
         }
