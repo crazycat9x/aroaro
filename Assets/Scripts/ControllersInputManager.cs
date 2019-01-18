@@ -138,22 +138,18 @@
         {
             Action<Collider> onTriggerEnter = (Collider other) =>
             {
-                if (interactTouch.IsObjectInteractable(other.gameObject))
-                    interactableObjectCount++;
+                if (!interactTouch.IsObjectInteractable(other.gameObject)) return;
+                interactableObjectCount++;
                 if (interactableObjectCount > 0 && interactGrab.GetGrabbedObject() == null)
                     PointerInteractWithObject = false;
-                Debug.Log(interactableObjectCount);
-                Debug.Log(other.gameObject.name);
             };
 
             Action<Collider> onTriggerExit = (Collider other) =>
             {
-                if (interactTouch.IsObjectInteractable(other.gameObject))
-                    interactableObjectCount--;
+                if (!interactTouch.IsObjectInteractable(other.gameObject)) return;
+                interactableObjectCount--;
                 if (interactableObjectCount == 0 && interactGrab.GetGrabbedObject() == null)
                     PointerInteractWithObject = true;
-                Debug.Log(interactableObjectCount);
-                Debug.Log(other.gameObject.name);
             };
 
             BehavioursInjection controllerBehaviours = controller.AddComponent<BehavioursInjection>();
