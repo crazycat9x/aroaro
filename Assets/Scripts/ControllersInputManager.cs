@@ -1,5 +1,7 @@
 ﻿namespace Aroaro
 {
+    using Aroaro.Utilities;
+    using System;
     using UnityEngine;
     using VRTK;
 
@@ -9,23 +11,44 @@
     public class ControllersInputManager : MonoBehaviour
     {
         /// <summary>
-        /// Defines the controllerEvents
+        /// Defines the PointerRenderers
         /// </summary>
-        public VRTK_ControllerEvents controllerEvents;
+        private enum PointerRenderers
+        {
+            /// <summary>
+            /// Defines the StraightPointer
+            /// </summary>
+            StraightPointer,
+            /// <summary>
+            /// Defines the BezierPointer
+            /// </summary>
+            BezierPointer
+        }
 
+        /// <summary>
+        /// Defines the pointer
+        /// </summary>
+        public CustomPointer pointer;
+
+        /// <summary>
+        /// Defines the straightPointerRenderer
+        /// </summary>
+        public VRTK_StraightPointerRenderer straightPointerRenderer;
+
+        /// <summary>
+        /// Defines the bezierPointerRenderer
+        /// </summary>
+        public VRTK_BezierPointerRenderer bezierPointerRenderer;
+
+        /// <summary>
+        /// Defines the interactTouch
+        /// </summary>
+        public VRTK_InteractTouch interactTouch;
+
+        /// <summary>
+        /// Defines the interactGrab
+        /// </summary>
         public VRTK_InteractGrab interactGrab;
-
-        /// <summary>
-        /// Defines the teleportPointer
-        /// </summary>
-        public VRTK_Pointer teleportPointer;
-
-        public VRTK_Pointer cursorPointer;
-
-        /// <summary>
-        /// Defines the dashTime
-        /// </summary>
-        public float dashTime;
 
         /// <summary>
         /// Defines the boundary
@@ -33,31 +56,89 @@
         private Transform boundary;
 
         /// <summary>
-        /// The SelectionButtonPressedHandler
+        /// Defines the interactableObjectCount
+        /// </summary>
+        private int interactableObjectCount = 0;
+
+        /// <summary>
+        /// Defines the pointerInteractWithObject
+        /// </summary>
+        private bool pointerInteractWithObject;
+
+        /// <summary>
+        /// Defines the currentPointerRenderer
+        /// </summary>
+        private PointerRenderers currentPointerRenderer = PointerRenderers.StraightPointer;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether PointerInteractWithObject
+        /// </summary>
+        private bool PointerInteractWithObject
+        {
+            get { return pointerInteractWithObject; }
+            set
+            {
+                // Check if we need to set as this is an expensive operation
+                if (pointerInteractWithObject != value)
+                {
+                    pointerInteractWithObject = value;
+                    pointer.enabled = false;
+                    pointer.pointerRenderer.enabled = false;
+                    pointer.grabToPointerTip = pointerInteractWithObject;
+                    pointer.enabled = true;
+                    pointer.pointerRenderer.enabled = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The TogglePointerRenderer
+        /// </summary>
+        /// <param name="pointerRenderer">The pointerRenderer<see cref="PointerRenderers"/></param>
+        private void TogglePointerRenderer(PointerRenderers pointerRenderer)
+        {
+            if (currentPointerRenderer == pointerRenderer) return;
+            currentPointerRenderer = pointerRenderer;
+            pointer.enabled = false;
+            pointer.pointerRenderer.enabled = false;
+            switch (pointerRenderer)
+            {
+                case PointerRenderers.StraightPointer:
+                    pointer.pointerRenderer = straightPointerRenderer;
+                    break;
+                case PointerRenderers.BezierPointer:
+                    pointer.pointerRenderer = bezierPointerRenderer;
+                    break;
+            }
+            pointer.enabled = true;
+            pointer.pointerRenderer.enabled = true;
+        }
+
+        /// <summary>
+        /// The ControllerEvents_TouchpadPressed
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="args">The args<see cref="ControllerInteractionEventArgs"/></param>
-        private void SelectionButtonPressedHandler(object sender, ControllerInteractionEventArgs args)
+        /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
+        private void ControllerEvents_TouchpadPressed(object sender, ControllerInteractionEventArgs e)
         {
             // Wait for SDKSetup to load
             if (boundary == null) return;
 
             // Touchpad right pressed
-            if (args.touchpadAxis.x > 0.5)
+            if (e.touchpadAxis.x > 0.5)
             {
                 boundary.rotation *= Quaternion.Euler(0, 30, 0);
             }
             // Touchpad left pressed
-            else if (args.touchpadAxis.x < -0.5)
+            else if (e.touchpadAxis.x < -0.5)
             {
                 boundary.rotation *= Quaternion.Euler(0, -30, 0);
             }
             // Touchpad top pressed
-            else if (args.touchpadAxis.y >= 0)
+            else if (e.touchpadAxis.y >= 0)
             {
-                // Must be called twice to be able to turn off again (weird bug)
-                teleportPointer.Toggle(true);
-                teleportPointer.Toggle(true);
+                TogglePointerRenderer(PointerRenderers.BezierPointer);
+                pointer.enableTeleport = true;
             }
             // Touchpad bottom pressed
             else
@@ -67,37 +148,66 @@
         }
 
         /// <summary>
-        /// The SelectionButtonReleasedHandler
+        /// The ControllerEvents_TouchpadReleased
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="args">The args<see cref="ControllerInteractionEventArgs"/></param>
-        private void SelectionButtonReleasedHandler(object sender, ControllerInteractionEventArgs args)
+        /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
+        private void ControllerEvents_TouchpadReleased(object sender, ControllerInteractionEventArgs e)
         {
-            if (!teleportPointer.IsStateValid()) teleportPointer.Toggle(false);
+            if (pointer.IsStateValid() && pointer.enableTeleport)
+                pointer.Teleport();
+            else
+                TogglePointerRenderer(PointerRenderers.StraightPointer);
         }
 
         /// <summary>
-        /// The DestinationMarkerSetHandler
+        /// The Pointer_DestinationMarkerSet
         /// </summary>
-        /// <param name="__">The __<see cref="object"/></param>
-        /// <param name="___">The ___<see cref="DestinationMarkerEventArgs"/></param>
-        private void DestinationMarkerSetHandler(object sender, DestinationMarkerEventArgs args)
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="DestinationMarkerEventArgs"/></param>
+        private void Pointer_DestinationMarkerSet(object sender, DestinationMarkerEventArgs e)
         {
-            teleportPointer.Toggle(false);
+            TogglePointerRenderer(PointerRenderers.StraightPointer);
+            pointer.enableTeleport = false;
         }
 
-        private void ObjectGrabbedHandler(object sender, ObjectInteractEventArgs args)
+        /// <summary>
+        /// The SetupControllerBehaviours
+        /// </summary>
+        /// <param name="controller">The controller<see cref="GameObject"/></param>
+        private void SetupControllerBehaviours(GameObject controller)
         {
-            // Must be called twice to be able to turn off again (weird bug)
-            cursorPointer.Toggle(true);
-            cursorPointer.Toggle(false);
-        }
+            Action<Collider> onTriggerEnter = (Collider other) =>
+            {
 
-        private void ObjectUngrabbedHandler(object sender, ObjectInteractEventArgs args)
-        {
-            // Must be called twice to be able to turn off again (weird bug)
-            cursorPointer.Toggle(true);
-            cursorPointer.Toggle(true);
+                if (!interactTouch.IsObjectInteractable(other.gameObject)) return;
+                interactableObjectCount++;
+                if (interactableObjectCount > 0 && interactGrab.GetGrabbedObject() == null)
+                    PointerInteractWithObject = false;
+            };
+
+            Action<Collider> onTriggerExit = (Collider other) =>
+            {
+                if (!interactTouch.IsObjectInteractable(other.gameObject)) return;
+                interactableObjectCount--;
+                if (interactableObjectCount == 0 && interactGrab.GetGrabbedObject() == null)
+                    PointerInteractWithObject = true;
+            };
+
+            BehavioursInjection controllerBehaviours = controller.AddComponent<BehavioursInjection>();
+            controllerBehaviours.onTriggerEnter = onTriggerEnter;
+            controllerBehaviours.onTriggerExit = onTriggerExit;
+
+            // Some controllers have childrens as colliders
+            foreach (Transform childOfController in controller.transform)
+            {
+                if (childOfController.GetComponent<Collider>() != null && childOfController.GetComponent<BehavioursInjection>() == null)
+                {
+                    BehavioursInjection childOfControllerBehaviours = childOfController.gameObject.AddComponent<BehavioursInjection>();
+                    childOfControllerBehaviours.onTriggerEnter = onTriggerEnter;
+                    childOfControllerBehaviours.onTriggerExit = onTriggerExit;
+                }
+            }
         }
 
         /// <summary>
@@ -105,11 +215,9 @@
         /// </summary>
         private void TearDownEventHandlers()
         {
-            teleportPointer.SelectionButtonPressed -= SelectionButtonPressedHandler;
-            teleportPointer.SelectionButtonReleased -= SelectionButtonReleasedHandler;
-            teleportPointer.DestinationMarkerSet -= DestinationMarkerSetHandler;
-            interactGrab.ControllerGrabInteractableObject -= ObjectGrabbedHandler;
-            interactGrab.ControllerUngrabInteractableObject -= ObjectUngrabbedHandler;
+            pointer.controllerEvents.TouchpadPressed -= ControllerEvents_TouchpadPressed;
+            pointer.controllerEvents.TouchpadReleased -= ControllerEvents_TouchpadReleased;
+            pointer.DestinationMarkerSet -= Pointer_DestinationMarkerSet;
         }
 
         /// <summary>
@@ -126,13 +234,27 @@
         internal void OnEnable()
         {
             boundary = VRTK_DeviceFinder.PlayAreaTransform();
-            teleportPointer.SelectionButtonPressed += SelectionButtonPressedHandler;
-            teleportPointer.SelectionButtonReleased += SelectionButtonReleasedHandler;
-            teleportPointer.DestinationMarkerSet += DestinationMarkerSetHandler;
-            interactGrab.ControllerGrabInteractableObject += ObjectGrabbedHandler;
-            interactGrab.ControllerUngrabInteractableObject += ObjectUngrabbedHandler;
+            pointer.controllerEvents.TouchpadPressed += ControllerEvents_TouchpadPressed;
+            pointer.controllerEvents.TouchpadReleased += ControllerEvents_TouchpadReleased;
+            pointer.DestinationMarkerSet += Pointer_DestinationMarkerSet;
+        }
 
-            
+        /// <summary>
+        /// The Start
+        /// </summary>
+        internal void Start()
+        {
+            TogglePointerRenderer(PointerRenderers.StraightPointer);
+        }
+
+        /// <summary>
+        /// The Update
+        /// </summary>
+        internal void Update()
+        {
+            GameObject controller = transform.Find("[VRTK][AUTOGEN][Controller][CollidersContainer]").gameObject;
+            if (controller.GetComponent<BehavioursInjection>() == null)
+                SetupControllerBehaviours(controller);
         }
 
         /// <summary>
