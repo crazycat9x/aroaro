@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d35248feef80c524ba6900185e0137fd
-timeCreated: 1515098028
-licenseType: Pro
+timeCreated: 1520415821
+licenseType: Free
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -26,16 +26,9 @@ PluginImporter:
         Exclude Win64: 0
         Exclude WindowsStoreApps: 1
   - first:
-      '': Editor
-    second:
-      enabled: 1
-      settings:
-        CPU: AnyCPU
-        OS: AnyOS
-  - first:
       Any: 
     second:
-      enabled: 1
+      enabled: 0
       settings: {}
   - first:
       Editor: Editor
@@ -48,13 +41,13 @@ PluginImporter:
   - first:
       Facebook: Win
     second:
-      enabled: 1
+      enabled: 0
       settings:
         CPU: AnyCPU
   - first:
       Facebook: Win64
     second:
-      enabled: 1
+      enabled: 0
       settings:
         CPU: AnyCPU
   - first:
@@ -62,19 +55,18 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        CPU: None
+        CPU: x86
   - first:
       Standalone: Linux64
     second:
       enabled: 1
       settings:
-        CPU: None
+        CPU: x86_64
   - first:
       Standalone: LinuxUniversal
     second:
       enabled: 1
-      settings:
-        CPU: None
+      settings: {}
   - first:
       Standalone: OSXIntel
     second:
@@ -91,8 +83,7 @@ PluginImporter:
       Standalone: OSXUniversal
     second:
       enabled: 1
-      settings:
-        CPU: None
+      settings: {}
   - first:
       Standalone: Win
     second:
