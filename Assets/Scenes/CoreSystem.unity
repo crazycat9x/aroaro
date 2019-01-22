@@ -1326,6 +1326,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 559543886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &559543888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1884512561028486, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &559543889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559543888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1f792ef28efd943afaf5855495bd42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyParentRootOnLoad: 1
+  AnimateControllerModel: 1
+  AlwaysUseAlternateLeftModel: 0
+  AlwaysUseAlternateRightModel: 0
+  AlternateLeftController: {fileID: 0}
+  AlternateRightController: {fileID: 0}
+  TouchpadTouchedOverride: {fileID: 0}
+  GLTFMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &574700484
 GameObject:
   m_ObjectHideFlags: 0
