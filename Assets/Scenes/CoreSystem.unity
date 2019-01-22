@@ -1263,6 +1263,69 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 384860901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &559543886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 715874757}
+    m_Modifications:
+    - target: {fileID: 1115584466216100, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_Name
+      value: '[WindowsMR_CameraRig]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
+--- !u!4 &559543887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4152726397693544, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &574700484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,6 +1791,77 @@ Transform:
   m_Father: {fileID: 1156766590}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &715874756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715874757}
+  - component: {fileID: 715874758}
+  m_Layer: 0
+  m_Name: WindowsMR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &715874757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715874756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 559543887}
+  m_Father: {fileID: 747804198}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715874758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715874756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPopulateObjectReferences: 1
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
+  cachedSystemSDKInfo:
+    baseTypeName: VRTK.SDK_BaseSystem
+    fallbackTypeName: VRTK.SDK_FallbackSystem
+    typeName: VRTK.SDK_WindowsMR
+    descriptionIndex: 0
+  cachedBoundariesSDKInfo:
+    baseTypeName: VRTK.SDK_BaseBoundaries
+    fallbackTypeName: VRTK.SDK_FallbackBoundaries
+    typeName: VRTK.SDK_WindowsMRBoundaries
+    descriptionIndex: 0
+  cachedHeadsetSDKInfo:
+    baseTypeName: VRTK.SDK_BaseHeadset
+    fallbackTypeName: VRTK.SDK_FallbackHeadset
+    typeName: VRTK.SDK_WindowsMRHeadset
+    descriptionIndex: 0
+  cachedControllerSDKInfo:
+    baseTypeName: VRTK.SDK_BaseController
+    fallbackTypeName: VRTK.SDK_FallbackController
+    typeName: VRTK.SDK_WindowsMRController
+    descriptionIndex: 0
 --- !u!1 &747804197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,6 +1893,7 @@ Transform:
   - {fileID: 790871806}
   - {fileID: 1705809332}
   - {fileID: 1630988038}
+  - {fileID: 715874757}
   m_Father: {fileID: 897927101}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2412,8 +2547,9 @@ MonoBehaviour:
   autoManageVRSettings: 1
   autoLoadSetup: 1
   setups:
-  - {fileID: 1705809333}
+  - {fileID: 715874758}
   - {fileID: 1630988039}
+  - {fileID: 1705809333}
   - {fileID: 790871807}
   - {fileID: 964384419}
   excludeTargetGroups: 1a0000001b000000
