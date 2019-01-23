@@ -112,12 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &16134297 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 147176, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &39765238
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,12 +330,6 @@ Transform:
   m_Father: {fileID: 1156766590}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &241530904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 192944, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &243084820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,18 +1239,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498364325}
   m_CullTransparentMesh: 0
---- !u!1 &533552284 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 124034, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &534187622 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189822, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &559543886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1318,6 +1294,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114807077506109298, guid: 702cef7d88a6428488e3a411d4104758,
+        type: 3}
+      propertyPath: handedness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114503418647812234, guid: 702cef7d88a6428488e3a411d4104758,
+        type: 3}
+      propertyPath: handedness
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 702cef7d88a6428488e3a411d4104758, type: 3}
 --- !u!4 &559543887 stripped
@@ -1352,6 +1338,42 @@ MonoBehaviour:
   AlternateRightController: {fileID: 0}
   TouchpadTouchedOverride: {fileID: 0}
   GLTFMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!1 &559543890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1218861472641196, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &559543891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1562214307688942, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &559543892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1948411752114774, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &559543893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1177596427991044, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &559543894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1747072855138370, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &559543895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1115584466216100, guid: 702cef7d88a6428488e3a411d4104758,
+    type: 3}
+  m_PrefabInstance: {fileID: 559543886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &574700484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,12 +1730,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616796104}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &662023727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 159396, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &672329581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,13 +1877,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 0}
-  actualHeadset: {fileID: 0}
-  actualLeftController: {fileID: 0}
-  actualRightController: {fileID: 0}
-  modelAliasLeftController: {fileID: 0}
-  modelAliasRightController: {fileID: 0}
+  autoPopulateObjectReferences: 0
+  actualBoundaries: {fileID: 559543895}
+  actualHeadset: {fileID: 559543890}
+  actualLeftController: {fileID: 559543894}
+  actualRightController: {fileID: 559543892}
+  modelAliasLeftController: {fileID: 559543893}
+  modelAliasRightController: {fileID: 559543891}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -2943,12 +2959,6 @@ Transform:
   m_Father: {fileID: 747804198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &986534597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &986534598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2,
@@ -5269,12 +5279,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 1181049654}
-  actualHeadset: {fileID: 1461482410}
-  actualLeftController: {fileID: 2004866745}
-  actualRightController: {fileID: 1296513883}
-  modelAliasLeftController: {fileID: 1956885433}
-  modelAliasRightController: {fileID: 2043696992}
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -5558,12 +5568,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 986534597}
-  actualHeadset: {fileID: 534187622}
-  actualLeftController: {fileID: 533552284}
-  actualRightController: {fileID: 662023727}
-  modelAliasLeftController: {fileID: 16134297}
-  modelAliasRightController: {fileID: 241530904}
+  actualBoundaries: {fileID: 0}
+  actualHeadset: {fileID: 0}
+  actualLeftController: {fileID: 0}
+  actualRightController: {fileID: 0}
+  modelAliasLeftController: {fileID: 0}
+  modelAliasRightController: {fileID: 0}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
