@@ -525,7 +525,8 @@ namespace VRTK
             VRTK_ControllerReference controllerReference = GetControllerReference(attachedTo);
             if (VRTK_ControllerReference.IsValid(controllerReference) && (cachedAttachedHand != controllerReference.hand || cachedPointerAttachPoint == null))
             {
-                cachedPointerAttachPoint = controllerReference.model.transform.Find(VRTK_SDK_Bridge.GetControllerElementPath(SDK_BaseController.ControllerElements.AttachPoint, controllerReference.hand));
+                string path = VRTK_SDK_Bridge.GetControllerElementPath(SDK_BaseController.ControllerElements.AttachPoint, controllerReference.hand);
+                cachedPointerAttachPoint = path == null ? null : controllerReference.model.transform.Find(path);
                 cachedAttachedHand = controllerReference.hand;
             }
             return (cachedPointerAttachPoint != null ? cachedPointerAttachPoint : transform);

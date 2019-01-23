@@ -245,6 +245,8 @@
         internal void Start()
         {
             TogglePointerRenderer(PointerRenderers.StraightPointer);
+            if (pointer.customOrigin == null)
+                pointer.customOrigin = transform;
         }
 
         /// <summary>

@@ -756,6 +756,42 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 11420968, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
+--- !u!1 &384860902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 189822, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &384860903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 192944, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &384860904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 159396, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &384860905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 147176, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &384860906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 124034, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &384860907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &431779029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,7 +2102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 1
+  autoPopulateObjectReferences: 0
   actualBoundaries: {fileID: 1520037468}
   actualHeadset: {fileID: 470903451}
   actualLeftController: {fileID: 1527449379}
@@ -2917,7 +2953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 1
+  autoPopulateObjectReferences: 0
   actualBoundaries: {fileID: 990847671}
   actualHeadset: {fileID: 84920817}
   actualLeftController: {fileID: 1107007811}
@@ -5278,13 +5314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 0}
-  actualHeadset: {fileID: 0}
-  actualLeftController: {fileID: 0}
-  actualRightController: {fileID: 0}
-  modelAliasLeftController: {fileID: 0}
-  modelAliasRightController: {fileID: 0}
+  autoPopulateObjectReferences: 0
+  actualBoundaries: {fileID: 1181049654}
+  actualHeadset: {fileID: 1461482410}
+  actualLeftController: {fileID: 2004866745}
+  actualRightController: {fileID: 1296513883}
+  modelAliasLeftController: {fileID: 1956885433}
+  modelAliasRightController: {fileID: 2043696992}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -5567,13 +5603,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda6d41317f444b900e374895f14e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPopulateObjectReferences: 1
-  actualBoundaries: {fileID: 0}
-  actualHeadset: {fileID: 0}
-  actualLeftController: {fileID: 0}
-  actualRightController: {fileID: 0}
-  modelAliasLeftController: {fileID: 0}
-  modelAliasRightController: {fileID: 0}
+  autoPopulateObjectReferences: 0
+  actualBoundaries: {fileID: 384860907}
+  actualHeadset: {fileID: 384860902}
+  actualLeftController: {fileID: 384860906}
+  actualRightController: {fileID: 384860904}
+  modelAliasLeftController: {fileID: 384860905}
+  modelAliasRightController: {fileID: 384860903}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
