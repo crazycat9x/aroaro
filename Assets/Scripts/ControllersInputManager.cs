@@ -221,8 +221,8 @@
         /// </summary>
         internal void Update()
         {
-            GameObject controller = transform.Find("[VRTK][AUTOGEN][Controller][CollidersContainer]").gameObject;
-            if (controller.GetComponent<BehavioursInjection>() == null)
+            GameObject controller = transform.Find("[VRTK][AUTOGEN][Controller][CollidersContainer]")?.gameObject;
+            if (controller != null && controller.GetComponent<BehavioursInjection>() == null)
                 SetupControllerBehaviours(controller);
         }
     }
