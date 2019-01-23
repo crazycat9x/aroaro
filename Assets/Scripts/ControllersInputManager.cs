@@ -214,8 +214,6 @@
             pointer.controllerEvents.TouchpadReleased += ControllerEvents_TouchpadReleased;
             pointer.DestinationMarkerSet += Pointer_DestinationMarkerSet;
             TogglePointerRenderer(PointerRenderers.StraightPointer);
-            if (pointer.customOrigin == null)
-                pointer.customOrigin = transform;
         }
 
         /// <summary>
