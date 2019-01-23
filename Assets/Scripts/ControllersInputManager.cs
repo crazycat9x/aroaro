@@ -51,11 +51,6 @@
         public VRTK_InteractGrab interactGrab;
 
         /// <summary>
-        /// Defines the boundary
-        /// </summary>
-        private Transform boundary;
-
-        /// <summary>
         /// Defines the interactableObjectCount
         /// </summary>
         private int interactableObjectCount = 0;
@@ -121,18 +116,18 @@
         /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
         private void ControllerEvents_TouchpadPressed(object sender, ControllerInteractionEventArgs e)
         {
-            // Wait for SDKSetup to load
-            if (boundary == null) return;
+            VRTK_SDKSetup loadedSetup = VRTK_SDKManager.instance.loadedSetup;
+            if (loadedSetup == null) return;
 
             // Touchpad right pressed
             if (e.touchpadAxis.x > 0.5)
             {
-                boundary.rotation *= Quaternion.Euler(0, 30, 0);
+                loadedSetup.actualBoundaries.transform.rotation *= Quaternion.Euler(0, 30, 0);
             }
             // Touchpad left pressed
             else if (e.touchpadAxis.x < -0.5)
             {
-                boundary.rotation *= Quaternion.Euler(0, -30, 0);
+                loadedSetup.actualBoundaries.transform.rotation *= Quaternion.Euler(0, -30, 0);
             }
             // Touchpad top pressed
             else if (e.touchpadAxis.y >= 0)
@@ -211,39 +206,13 @@
         }
 
         /// <summary>
-        /// The TearDownEventHandlers
-        /// </summary>
-        private void TearDownEventHandlers()
-        {
-            pointer.controllerEvents.TouchpadPressed -= ControllerEvents_TouchpadPressed;
-            pointer.controllerEvents.TouchpadReleased -= ControllerEvents_TouchpadReleased;
-            pointer.DestinationMarkerSet -= Pointer_DestinationMarkerSet;
-        }
-
-        /// <summary>
-        /// The Awake
-        /// </summary>
-        internal void Awake()
-        {
-            VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
-        }
-
-        /// <summary>
-        /// The OnEnable
-        /// </summary>
-        internal void OnEnable()
-        {
-            boundary = VRTK_DeviceFinder.PlayAreaTransform();
-            pointer.controllerEvents.TouchpadPressed += ControllerEvents_TouchpadPressed;
-            pointer.controllerEvents.TouchpadReleased += ControllerEvents_TouchpadReleased;
-            pointer.DestinationMarkerSet += Pointer_DestinationMarkerSet;
-        }
-
-        /// <summary>
         /// The Start
         /// </summary>
         internal void Start()
         {
+            pointer.controllerEvents.TouchpadPressed += ControllerEvents_TouchpadPressed;
+            pointer.controllerEvents.TouchpadReleased += ControllerEvents_TouchpadReleased;
+            pointer.DestinationMarkerSet += Pointer_DestinationMarkerSet;
             TogglePointerRenderer(PointerRenderers.StraightPointer);
             if (pointer.customOrigin == null)
                 pointer.customOrigin = transform;
@@ -257,23 +226,6 @@
             GameObject controller = transform.Find("[VRTK][AUTOGEN][Controller][CollidersContainer]").gameObject;
             if (controller.GetComponent<BehavioursInjection>() == null)
                 SetupControllerBehaviours(controller);
-        }
-
-        /// <summary>
-        /// The OnDisable
-        /// </summary>
-        internal void OnDisable()
-        {
-            TearDownEventHandlers();
-        }
-
-        /// <summary>
-        /// The OnDestroy
-        /// </summary>
-        internal void OnDestroy()
-        {
-            VRTK_SDKManager.instance.RemoveBehaviourToToggleOnLoadedSetupChange(this);
-            TearDownEventHandlers();
         }
     }
 }
