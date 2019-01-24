@@ -58,7 +58,9 @@
         /// </summary>
         internal void Update()
         {
-            transform.rotation = Quaternion.LookRotation(transform.position - VRTK_DeviceFinder.HeadsetTransform().position);
+            Transform headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
+            if (headsetTransform != null)
+                transform.rotation = Quaternion.LookRotation(transform.position - VRTK_DeviceFinder.HeadsetTransform().position);
         }
     }
 }
