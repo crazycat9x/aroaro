@@ -8,32 +8,10 @@
     /// <summary>
     /// Defines the <see cref="ControllableObject" />
     /// </summary>
-    [RequireComponent(typeof(VRTK_InteractableObject))]
-    public class ControllableObject : MonoBehaviourPun
+    public class ControllableObject : VRTK_InteractableObject
     {
 
-        /// <summary>
-        /// Defines the interactableObject
-        /// </summary>
-        private VRTK_InteractableObject interactableObject;
-
-        /// <summary>
-        /// Defines the isGrabbable
-        /// </summary>
-        private bool isGrabbable;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether IsGrabbable
-        /// </summary>
-        public bool IsGrabbable
-        {
-            get { return isGrabbable; }
-            set
-            {
-                isGrabbable = value;
-                interactableObject.isGrabbable = isGrabbable;
-            }
-        }
+        private PhotonView photonView;
 
         /// <summary>
         /// The DestroyObject
@@ -66,16 +44,16 @@
         {
             VRTK_ChildOfControllerGrabAttach primaryGrabMechanic = gameObject.AddComponent<VRTK_ChildOfControllerGrabAttach>();
             primaryGrabMechanic.precisionGrab = true;
-            interactableObject.grabAttachMechanicScript = primaryGrabMechanic;
-            IsGrabbable = false;
+            grabAttachMechanicScript = primaryGrabMechanic;
         }
 
         /// <summary>
         /// The Awake
         /// </summary>
-        internal void Awake()
+        protected override void Awake()
         {
-            interactableObject = gameObject.GetComponent<VRTK_InteractableObject>();
+            base.Awake();
+            photonView = gameObject.GetComponent<PhotonView>();
         }
 
         /// <summary>
@@ -89,9 +67,15 @@
 
             Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
 
+            // Return object ownership to scene so that anyone can take over
+            if (photonView != null)
+                photonView.TransferOwnership(0);
+
             // Setup default grab mechanic if none is specified
-            if (gameObject.GetComponent<VRTK_BaseGrabAttach>() == null)
+            if (grabAttachMechanicScript == null)
                 SetupDefaultGrabMechanic();
+
+            isGrabbable = false;
         }
     }
 }
