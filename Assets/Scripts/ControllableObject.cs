@@ -8,9 +8,10 @@
     /// <summary>
     /// Defines the <see cref="ControllableObject" />
     /// </summary>
-    [RequireComponent(typeof(VRTK_InteractableObject), typeof(VRTK_ChildOfControllerGrabAttach))]
+    [RequireComponent(typeof(VRTK_InteractableObject))]
     public class ControllableObject : MonoBehaviourPun
     {
+
         /// <summary>
         /// Defines the interactableObject
         /// </summary>
@@ -59,11 +60,11 @@
         }
 
         /// <summary>
-        /// The SetupGrabMechanic
+        /// The SetupDefaultGrabMechanic
         /// </summary>
-        private void SetupGrabMechanic()
+        private void SetupDefaultGrabMechanic()
         {
-            VRTK_ChildOfControllerGrabAttach primaryGrabMechanic = gameObject.GetComponent<VRTK_ChildOfControllerGrabAttach>();
+            VRTK_ChildOfControllerGrabAttach primaryGrabMechanic = gameObject.AddComponent<VRTK_ChildOfControllerGrabAttach>();
             primaryGrabMechanic.precisionGrab = true;
             interactableObject.grabAttachMechanicScript = primaryGrabMechanic;
             IsGrabbable = false;
@@ -88,7 +89,9 @@
 
             Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
 
-            SetupGrabMechanic();
+            // Setup default grab mechanic if none is specified
+            if (gameObject.GetComponent<VRTK_BaseGrabAttach>() == null)
+                SetupDefaultGrabMechanic();
         }
     }
 }
