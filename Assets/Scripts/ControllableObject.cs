@@ -10,6 +10,7 @@
     /// </summary>
     public class ControllableObject : VRTK_InteractableObject
     {
+        [Header("Additional Options")]
         public bool displayObjectMenu = false;
 
         private PhotonView photonView;
@@ -71,13 +72,10 @@
                 isGrabbable = false;
             }
 
-            // Return object ownership to scene so that anyone can take over
-            if (photonView != null)
-                photonView.TransferOwnership(0);
-
             // Setup default grab mechanic if none is specified
             if (grabAttachMechanicScript == null)
                 SetupDefaultGrabMechanic();
+
         }
     }
 }
