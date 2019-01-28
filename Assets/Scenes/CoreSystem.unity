@@ -711,7 +711,7 @@ MonoBehaviour:
   voiceDetection: 1
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Microphone (Realtek USB2.0 Audio)
+  unityMicrophoneDevice: 
   photonMicrophoneDeviceId: 0
   audioGroup: 0
   debugEchoMode: 0
@@ -6801,3 +6801,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d00ebb66e00edf439b7153ecfdad572, type: 3}
+--- !u!1 &6676795171471241577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6923451059704142210, guid: 4d00ebb66e00edf439b7153ecfdad572,
+    type: 3}
+  m_PrefabInstance: {fileID: 6676795171471241576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6676795171471241578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6676795171471241577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817f15b2a0426974bb4e88ef34aa22b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideControllerOnTouch: 1
+  hideDelayOnTouch: 0
+  hideControllerOnGrab: 1
+  hideDelayOnGrab: 0
+  hideControllerOnUse: 0
+  hideDelayOnUse: 0
