@@ -124,6 +124,7 @@ MonoBehaviour:
   objectHighlighter: {fileID: 0}
   touchHighlightColor: {r: 0, g: 0, b: 0, a: 0}
   usingState: 0
+  displayObjectMenu: 1
 --- !u!1 &5269982924418785406
 GameObject:
   m_ObjectHideFlags: 0

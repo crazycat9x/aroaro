@@ -10,6 +10,7 @@
     /// </summary>
     public class ControllableObject : VRTK_InteractableObject
     {
+        public bool displayObjectMenu = false;
 
         private PhotonView photonView;
 
@@ -61,11 +62,14 @@
         /// </summary>
         internal void Start()
         {
-            GameObject objectMenu = Resources.Load<GameObject>("ObjectMenu");
-            ObjectMenu objectMenuScript = objectMenu.GetComponent<ObjectMenu>();
-            objectMenuScript.targetGameObject = transform.gameObject;
-
-            Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
+            if (displayObjectMenu)
+            {
+                GameObject objectMenu = Resources.Load<GameObject>("ObjectMenu");
+                ObjectMenu objectMenuScript = objectMenu.GetComponent<ObjectMenu>();
+                objectMenuScript.targetGameObject = transform.gameObject;
+                Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
+                isGrabbable = false;
+            }
 
             // Return object ownership to scene so that anyone can take over
             if (photonView != null)
@@ -74,8 +78,6 @@
             // Setup default grab mechanic if none is specified
             if (grabAttachMechanicScript == null)
                 SetupDefaultGrabMechanic();
-
-            isGrabbable = false;
         }
     }
 }
