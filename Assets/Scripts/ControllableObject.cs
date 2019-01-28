@@ -10,9 +10,15 @@
     /// </summary>
     public class ControllableObject : VRTK_InteractableObject
     {
+        /// <summary>
+        /// Defines the displayObjectMenu
+        /// </summary>
         [Header("Additional Options")]
         public bool displayObjectMenu = false;
 
+        /// <summary>
+        /// Defines the photonView
+        /// </summary>
         private PhotonView photonView;
 
         /// <summary>
@@ -50,6 +56,33 @@
         }
 
         /// <summary>
+        /// The Grabbed
+        /// </summary>
+        /// <param name="currentGrabbingObject">The currentGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
+        {
+            base.Grabbed(currentGrabbingObject);
+            if (photonView == null) return;
+            int ownerId = photonView.OwnerActorNr;
+            if (ownerId != 0 && ownerId != PhotonNetwork.LocalPlayer.ActorNumber)
+                ForceStopInteracting();
+            else
+                photonView.TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+        }
+
+        /// <summary>
+        /// The Ungrabbed
+        /// </summary>
+        /// <param name="previousGrabbingObject">The previousGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Ungrabbed(VRTK_InteractGrab previousGrabbingObject = null)
+        {
+            base.Ungrabbed(previousGrabbingObject);
+            if (photonView == null) return;
+            if (photonView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
+                photonView.TransferOwnership(0);
+        }
+
+        /// <summary>
         /// The Awake
         /// </summary>
         protected override void Awake()
@@ -75,7 +108,6 @@
             // Setup default grab mechanic if none is specified
             if (grabAttachMechanicScript == null)
                 SetupDefaultGrabMechanic();
-
         }
     }
 }
