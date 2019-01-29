@@ -62,12 +62,8 @@
         public override void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
         {
             base.Grabbed(currentGrabbingObject);
-            if (photonView == null) return;
-            int ownerId = photonView.OwnerActorNr;
-            if (ownerId != 0 && ownerId != PhotonNetwork.LocalPlayer.ActorNumber)
-                ForceStopInteracting();
-            else
-                photonView.TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+            if (photonView != null)
+                photonView.RequestOwnership();
         }
 
         /// <summary>
@@ -77,8 +73,7 @@
         public override void Ungrabbed(VRTK_InteractGrab previousGrabbingObject = null)
         {
             base.Ungrabbed(previousGrabbingObject);
-            if (photonView == null) return;
-            if (photonView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
+            if (photonView != null)
                 photonView.TransferOwnership(0);
         }
 
