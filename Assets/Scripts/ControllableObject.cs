@@ -102,7 +102,6 @@
                 ObjectMenu objectMenuScript = objectMenu.GetComponent<ObjectMenu>();
                 objectMenuScript.targetGameObject = transform.gameObject;
                 Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
-                isGrabbable = false;
             }
 
             // Setup default grab mechanic if none is specified
