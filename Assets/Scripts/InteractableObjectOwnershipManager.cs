@@ -37,6 +37,7 @@
             else
             {
                 targetInteractableObject.isGrabbable = false;
+                targetInteractableObject.ForceStopInteracting();
             }
         }
 
