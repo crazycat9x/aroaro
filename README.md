@@ -1,6 +1,9 @@
 # Aroaro
 This project is a collection of modules that together form a VR collaborative learning environment
 
+# Notes
+The project used some blender models, Blender need to be installed to run and build the project via Unity and you may need to reimport models in the Models folder
+
 # Prefabs
 - ViewLoader: provide an easy way to develop and debug scene, will load all needed component to the scene this prefab attached to
 - Avatar: representing the remote player and utility menu for that player (mute, make invisible, etc)
