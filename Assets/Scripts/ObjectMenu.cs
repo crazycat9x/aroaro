@@ -24,8 +24,8 @@
         /// </summary>
         public bool IsGrabable
         {
-            get { return controllableObject.IsGrabbable; }
-            set { controllableObject.IsGrabbable = value; }
+            get { return controllableObject.isGrabbable; }
+            set { controllableObject.isGrabbable = value; }
         }
 
         /// <summary>

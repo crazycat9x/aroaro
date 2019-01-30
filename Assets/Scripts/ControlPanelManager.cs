@@ -92,7 +92,7 @@
             Vector3 whiteboardPosition = headsetTransform.position + new Vector3(headsetTransform.forward.x, 0, headsetTransform.forward.z) * 2;
             Vector3 lookPosition = headsetTransform.position - whiteboardPosition;
             lookPosition.y = 0;
-            PhotonNetwork.Instantiate(whiteboard.name, whiteboardPosition, Quaternion.LookRotation(lookPosition));
+            PhotonNetwork.InstantiateSceneObject(whiteboard.name, whiteboardPosition, Quaternion.LookRotation(lookPosition));
         }
 
         /// <summary>

@@ -8,31 +8,18 @@
     /// <summary>
     /// Defines the <see cref="ControllableObject" />
     /// </summary>
-    [RequireComponent(typeof(VRTK_InteractableObject), typeof(VRTK_ChildOfControllerGrabAttach))]
-    public class ControllableObject : MonoBehaviourPun
+    public class ControllableObject : VRTK_InteractableObject
     {
         /// <summary>
-        /// Defines the interactableObject
+        /// Defines the displayObjectMenu
         /// </summary>
-        private VRTK_InteractableObject interactableObject;
+        [Header("Additional Options")]
+        public bool displayObjectMenu = false;
 
         /// <summary>
-        /// Defines the isGrabbable
+        /// Defines the photonView
         /// </summary>
-        private bool isGrabbable;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether IsGrabbable
-        /// </summary>
-        public bool IsGrabbable
-        {
-            get { return isGrabbable; }
-            set
-            {
-                isGrabbable = value;
-                interactableObject.isGrabbable = isGrabbable;
-            }
-        }
+        private PhotonView photonView;
 
         /// <summary>
         /// The DestroyObject
@@ -59,22 +46,44 @@
         }
 
         /// <summary>
-        /// The SetupGrabMechanic
+        /// The SetupDefaultGrabMechanic
         /// </summary>
-        private void SetupGrabMechanic()
+        private void SetupDefaultGrabMechanic()
         {
-            VRTK_ChildOfControllerGrabAttach primaryGrabMechanic = gameObject.GetComponent<VRTK_ChildOfControllerGrabAttach>();
+            VRTK_ChildOfControllerGrabAttach primaryGrabMechanic = gameObject.AddComponent<VRTK_ChildOfControllerGrabAttach>();
             primaryGrabMechanic.precisionGrab = true;
-            interactableObject.grabAttachMechanicScript = primaryGrabMechanic;
-            IsGrabbable = false;
+            grabAttachMechanicScript = primaryGrabMechanic;
+        }
+
+        /// <summary>
+        /// The Grabbed
+        /// </summary>
+        /// <param name="currentGrabbingObject">The currentGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
+        {
+            base.Grabbed(currentGrabbingObject);
+            if (photonView != null)
+                photonView.RequestOwnership();
+        }
+
+        /// <summary>
+        /// The Ungrabbed
+        /// </summary>
+        /// <param name="previousGrabbingObject">The previousGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Ungrabbed(VRTK_InteractGrab previousGrabbingObject = null)
+        {
+            base.Ungrabbed(previousGrabbingObject);
+            if (photonView != null)
+                photonView.TransferOwnership(0);
         }
 
         /// <summary>
         /// The Awake
         /// </summary>
-        internal void Awake()
+        protected override void Awake()
         {
-            interactableObject = gameObject.GetComponent<VRTK_InteractableObject>();
+            base.Awake();
+            photonView = gameObject.GetComponent<PhotonView>();
         }
 
         /// <summary>
@@ -82,13 +91,17 @@
         /// </summary>
         internal void Start()
         {
-            GameObject objectMenu = Resources.Load<GameObject>("ObjectMenu");
-            ObjectMenu objectMenuScript = objectMenu.GetComponent<ObjectMenu>();
-            objectMenuScript.targetGameObject = transform.gameObject;
+            if (displayObjectMenu)
+            {
+                GameObject objectMenu = Resources.Load<GameObject>("ObjectMenu");
+                ObjectMenu objectMenuScript = objectMenu.GetComponent<ObjectMenu>();
+                objectMenuScript.targetGameObject = transform.gameObject;
+                Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
+            }
 
-            Instantiate(objectMenu, transform.position + new Vector3(0, transform.localScale.z, 0), transform.rotation, transform);
-
-            SetupGrabMechanic();
+            // Setup default grab mechanic if none is specified
+            if (grabAttachMechanicScript == null)
+                SetupDefaultGrabMechanic();
         }
     }
 }
