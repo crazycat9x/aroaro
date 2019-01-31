@@ -6,12 +6,12 @@
     using VRTK.GrabAttachMechanics;
 
     /// <summary>
-    /// Defines the <see cref="ControllableObject" />
+    /// The <see cref="ControllableObject" /> inherit from <see cref="VRTK_InteractableObject" /> and added the ability for object interaction to be synced across the network
     /// </summary>
     public class ControllableObject : VRTK_InteractableObject
     {
         /// <summary>
-        /// Defines the displayObjectMenu
+        /// Whether or not to display an object menu above the object
         /// </summary>
         [Header("Additional Options")]
         public bool displayObjectMenu = false;
@@ -22,7 +22,7 @@
         private PhotonView photonView;
 
         /// <summary>
-        /// The DestroyObject
+        /// Destroy the object this script attached to
         /// </summary>
         public void DestroyObject()
         {
@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        /// The DestroyNetworkedObject
+        /// Signal the owner to destroy the object
         /// </summary>
         [PunRPC]
         private void DestroyNetworkedObject()
@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// The SetupDefaultGrabMechanic
+        /// Setup default grab mechanic
         /// </summary>
         private void SetupDefaultGrabMechanic()
         {
@@ -56,7 +56,7 @@
         }
 
         /// <summary>
-        /// The Grabbed
+        /// Request ownership of the object on grab
         /// </summary>
         /// <param name="currentGrabbingObject">The currentGrabbingObject<see cref="VRTK_InteractGrab"/></param>
         public override void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
@@ -67,7 +67,7 @@
         }
 
         /// <summary>
-        /// The Ungrabbed
+        /// Relinquish ownership of the object on ungrab
         /// </summary>
         /// <param name="previousGrabbingObject">The previousGrabbingObject<see cref="VRTK_InteractGrab"/></param>
         public override void Ungrabbed(VRTK_InteractGrab previousGrabbingObject = null)
