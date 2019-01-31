@@ -5,22 +5,22 @@
     using VRTK;
 
     /// <summary>
-    /// Defines the <see cref="AvatarTransformFollow" />
+    /// The <see cref="AvatarTransformFollow" /> map the avatar position/rotation to the player movements and have that synced across the network
     /// </summary>
     public class AvatarTransformFollow : MonoBehaviourPun
     {
         /// <summary>
-        /// Defines the head
+        /// The gameobject representing the avatar head
         /// </summary>
         public GameObject head;
 
         /// <summary>
-        /// Defines the leftHand
+        /// The gameobject representing the avatar left hand
         /// </summary>
         public GameObject leftHand;
 
         /// <summary>
-        /// Defines the rightHand
+        /// The gameobject representing the avatar right hand
         /// </summary>
         public GameObject rightHand;
 
