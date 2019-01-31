@@ -2,6 +2,7 @@
 {
     using ExitGames.Client.Photon;
     using Photon.Pun;
+    using Photon.Realtime;
     using Photon.Voice.Unity;
     using UnityEngine;
     using VRTK;
@@ -92,7 +93,13 @@
             Vector3 whiteboardPosition = headsetTransform.position + new Vector3(headsetTransform.forward.x, 0, headsetTransform.forward.z) * 2;
             Vector3 lookPosition = headsetTransform.position - whiteboardPosition;
             lookPosition.y = 0;
-            PhotonNetwork.InstantiateSceneObject(whiteboard.name, whiteboardPosition, Quaternion.LookRotation(lookPosition));
+
+            // Raise the InstantiateSceneObject event with whiteboard prefab name and position, rotation for master client to execute
+            byte eventCode = (byte)PUNEventsHandler.EventCode.InstantiateSceneObject;
+            object[] content = new object[] { whiteboard.name, whiteboardPosition, Quaternion.LookRotation(lookPosition) };
+            RaiseEventOptions eventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.MasterClient };
+            SendOptions sendOptions = new SendOptions { Reliability = true };
+            PhotonNetwork.RaiseEvent(eventCode, content, eventOptions, sendOptions);
         }
 
         /// <summary>
