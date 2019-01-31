@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5810,7 +5810,6 @@ GameObject:
   - component: {fileID: 1837953946}
   - component: {fileID: 1837953950}
   - component: {fileID: 1837953953}
-  - component: {fileID: 1837953951}
   - component: {fileID: 1837953954}
   - component: {fileID: 1837953956}
   - component: {fileID: 1837953947}
@@ -5988,21 +5987,6 @@ MonoBehaviour:
     type: 3}
   invalidLocationObject: {fileID: 1413768137026182, guid: af1c322da33b9ec40b0f5a418ed90ef4,
     type: 3}
---- !u!114 &1837953951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837953945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda201177cd508f49849386d157bdd39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderRadius: 0.2
-  customColliderContainer: {fileID: 0}
-  interactTouch: {fileID: 1837953953}
 --- !u!114 &1837953952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6074,7 +6058,7 @@ MonoBehaviour:
   attachedTo: {fileID: 1837953945}
   controllerEvents: {fileID: 1837953948}
   customOrigin: {fileID: 1837953949}
-  controller: {fileID: 0}
+  controller: {fileID: 1837953948}
   pointerOriginTransform: {fileID: 0}
   hoveringElement: {fileID: 0}
   controllerRenderModel: {fileID: 0}
@@ -6291,7 +6275,6 @@ GameObject:
   - component: {fileID: 2002548838}
   - component: {fileID: 2002548842}
   - component: {fileID: 2002548845}
-  - component: {fileID: 2002548843}
   - component: {fileID: 2002548846}
   - component: {fileID: 2002548848}
   - component: {fileID: 2002548839}
@@ -6469,21 +6452,6 @@ MonoBehaviour:
     type: 3}
   invalidLocationObject: {fileID: 1413768137026182, guid: af1c322da33b9ec40b0f5a418ed90ef4,
     type: 3}
---- !u!114 &2002548843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002548837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda201177cd508f49849386d157bdd39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderRadius: 0.2
-  customColliderContainer: {fileID: 0}
-  interactTouch: {fileID: 2002548845}
 --- !u!114 &2002548844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6555,7 +6523,7 @@ MonoBehaviour:
   attachedTo: {fileID: 2002548837}
   controllerEvents: {fileID: 2002548840}
   customOrigin: {fileID: 2002548841}
-  controller: {fileID: 0}
+  controller: {fileID: 2002548840}
   pointerOriginTransform: {fileID: 0}
   hoveringElement: {fileID: 0}
   controllerRenderModel: {fileID: 0}
