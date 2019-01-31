@@ -6,63 +6,24 @@
     using VRTK;
 
     /// <summary>
-    /// Defines the <see cref="ControllersInputManager" />
+    /// The <see cref="ControllersInputManager" /> map user input to an action
     /// </summary>
     public class ControllersInputManager : MonoBehaviour
     {
-        /// <summary>
-        /// Defines the PointerRenderers
-        /// </summary>
         private enum PointerRenderers
         {
-            /// <summary>
-            /// Defines the StraightPointer
-            /// </summary>
             StraightPointer,
-            /// <summary>
-            /// Defines the BezierPointer
-            /// </summary>
             BezierPointer
         }
 
-        /// <summary>
-        /// Defines the pointer
-        /// </summary>
         public CustomPointer pointer;
-
-        /// <summary>
-        /// Defines the straightPointerRenderer
-        /// </summary>
         public VRTK_StraightPointerRenderer straightPointerRenderer;
-
-        /// <summary>
-        /// Defines the bezierPointerRenderer
-        /// </summary>
         public VRTK_BezierPointerRenderer bezierPointerRenderer;
-
-        /// <summary>
-        /// Defines the interactTouch
-        /// </summary>
         public VRTK_InteractTouch interactTouch;
-
-        /// <summary>
-        /// Defines the interactGrab
-        /// </summary>
         public VRTK_InteractGrab interactGrab;
-
-        /// <summary>
-        /// Defines the interactableObjectCount
-        /// </summary>
+        // The count of interactable object this controller is currently touching
         private int interactableObjectCount = 0;
-
-        /// <summary>
-        /// Defines the pointerInteractWithObject
-        /// </summary>
         private bool pointerInteractWithObject;
-
-        /// <summary>
-        /// Defines the currentPointerRenderer
-        /// </summary>
         private PointerRenderers currentPointerRenderer = PointerRenderers.StraightPointer;
 
         /// <summary>
@@ -86,10 +47,6 @@
             }
         }
 
-        /// <summary>
-        /// The TogglePointerRenderer
-        /// </summary>
-        /// <param name="pointerRenderer">The pointerRenderer<see cref="PointerRenderers"/></param>
         private void TogglePointerRenderer(PointerRenderers pointerRenderer)
         {
             if (currentPointerRenderer == pointerRenderer) return;
@@ -110,7 +67,7 @@
         }
 
         /// <summary>
-        /// The ControllerEvents_TouchpadPressed
+        /// Handle touchpad pressed event depending on the pressed axis (up - teleport, left - rotate left, right - rotate right, down - dash backward)
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
         /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
@@ -143,7 +100,7 @@
         }
 
         /// <summary>
-        /// The ControllerEvents_TouchpadReleased
+        /// Change the pointer renderer accordingly when touchpad is released
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
         /// <param name="e">The e<see cref="ControllerInteractionEventArgs"/></param>
@@ -156,7 +113,7 @@
         }
 
         /// <summary>
-        /// The Pointer_DestinationMarkerSet
+        /// Change the pointer renderer accordingly after teleported
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
         /// <param name="e">The e<see cref="DestinationMarkerEventArgs"/></param>
@@ -167,7 +124,7 @@
         }
 
         /// <summary>
-        /// The SetupControllerBehaviours
+        /// The SetupControllerBehaviours setup the controller and its children to disable grab to pointer when controller is touching an interactable object and re-enable it otherwise
         /// </summary>
         /// <param name="controller">The controller<see cref="GameObject"/></param>
         private void SetupControllerBehaviours(GameObject controller)
