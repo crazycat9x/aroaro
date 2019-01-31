@@ -42,11 +42,19 @@
         }
 
         /// <summary>
-        /// The Start
+        /// The OnEnable
         /// </summary>
-        internal void Start()
+        internal void OnEnable()
         {
             PhotonNetwork.AddCallbackTarget(this);
+        }
+
+        /// <summary>
+        /// The OnDisable
+        /// </summary>
+        internal void OnDisable()
+        {
+            PhotonNetwork.RemoveCallbackTarget(this);
         }
     }
 }
