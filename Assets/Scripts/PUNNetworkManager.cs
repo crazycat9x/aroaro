@@ -77,5 +77,12 @@
                 PhotonNetwork.ConnectUsingSettings();
             }
         }
+
+        // RPCs
+        [PunRPC]
+        public void InstantiateSceneObject()
+        {
+
+        }
     }
 }
