@@ -7,49 +7,49 @@
     using VRTK;
 
     /// <summary>
-    /// Defines the <see cref="AvatarSetupManager" />
+    /// The <see cref="AvatarSetupManager" /> managed all avatar setups (e.g. the gaze pointer state, the avatar color, visibility, etc)
     /// </summary>
     [RequireComponent(typeof(PhotonView))]
     public class AvatarSetupManager : MonoBehaviourPunCallbacks
     {
         /// <summary>
-        /// Defines the head
+        /// The gameobject representing the avatar head
         /// </summary>
         public GameObject head;
 
         /// <summary>
-        /// Defines the leftHand
+        /// The gameobject representing the avatar left hand
         /// </summary>
         public GameObject leftHand;
 
         /// <summary>
-        /// Defines the rightHand
+        /// The gameobject representing the avatar right hand
         /// </summary>
         public GameObject rightHand;
 
         /// <summary>
-        /// Defines the menuScript
+        /// The script that manages the menu on top of an avatar
         /// </summary>
         public RemotePlayerMenu menuScript;
 
         /// <summary>
-        /// Defines the pointerCount
+        /// How many pointer currently hovered on the avatar
         /// </summary>
         [HideInInspector]
         public int pointerCount;
 
         /// <summary>
-        /// Defines the instantiationData
+        /// The instantiation data of the avatar (e.g. the avatar color)
         /// </summary>
         private object[] instantiationData;
 
         /// <summary>
-        /// Defines the gazePointer
+        /// The gaze pointer representing the avatar line of sight
         /// </summary>
         private VRTK_StraightPointerRenderer gazePointer;
 
         /// <summary>
-        /// The OnPlayerPropertiesUpdate
+        /// This method trigger everytime the avatar state change, see PhotonPUN custom player properties for references
         /// </summary>
         /// <param name="target">The target<see cref="Player"/></param>
         /// <param name="changedProps">The changedProps<see cref="Hashtable"/></param>
@@ -60,9 +60,9 @@
         }
 
         /// <summary>
-        /// The ToggleGazePointer
+        /// Toggle the gaze pointer on and off
         /// </summary>
-        /// <param name="state">The state<see cref="bool"/></param>
+        /// <param name="state">true = on, false = off<see cref="bool"/></param>
         public void ToggleGazePointer(bool state)
         {
             VRTK_BasePointerRenderer.VisibilityStates visibilitySate = state ? VRTK_BasePointerRenderer.VisibilityStates.AlwaysOn : VRTK_BasePointerRenderer.VisibilityStates.AlwaysOff;
@@ -71,7 +71,7 @@
         }
 
         /// <summary>
-        /// The SetupAvatarColor
+        /// Setup the avatar color based on the instantiation data
         /// </summary>
         private void SetupAvatarColor()
         {
@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// The OnTriggerEnter
+        /// The OnTriggerEnter toggle the avatar menu on when there is more than 1 pointer hover over the avatar
         /// </summary>
         /// <param name="other">The other<see cref="Collider"/></param>
         internal void OnTriggerEnter(Collider other)
@@ -95,7 +95,7 @@
         }
 
         /// <summary>
-        /// The OnTriggerExit
+        /// The OnTriggerExit toggle the avatar menu off when there no pointer hover over the avatar
         /// </summary>
         /// <param name="other">The other<see cref="Collider"/></param>
         internal void OnTriggerExit(Collider other)
