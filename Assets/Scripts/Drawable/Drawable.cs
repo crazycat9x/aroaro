@@ -1,6 +1,9 @@
 ﻿namespace Aroaro
 {
+    using Paroxe.PdfRenderer;
+    using Paroxe.PdfRenderer.WebGL;
     using Photon.Pun;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -11,23 +14,20 @@
     [RequireComponent(typeof(PhotonView))]
     public class Drawable : MonoBehaviour
     {
-        /// <summary>
-        /// Defines the textureWidth
-        /// </summary>
+        public enum SourceFileType
+        {
+            PDF
+        }
+
+        public string textureSource;
+        public SourceFileType textureSourceType;
+
         private int textureWidth;
-
-        /// <summary>
-        /// Defines the textureHeight
-        /// </summary>
         private int textureHeight;
-
-        /// <summary>
-        /// Defines the texture
-        /// </summary>
         private Texture2D texture;
 
         /// <summary>
-        /// Defines the previousPositions
+        /// Previous pen position
         /// </summary>
         private Dictionary<int, Vector2> previousPositions = new Dictionary<int, Vector2>();
 
@@ -98,7 +98,7 @@
         /// <summary>
         /// The Start
         /// </summary>
-        internal void Start()
+        internal IEnumerator Start()
         {
             float localScaleX = transform.localScale.x;
             float localScaleY = transform.localScale.y;
@@ -113,6 +113,21 @@
                 textureWidth = Mathf.RoundToInt(textureWidth * localScaleX / localScaleY);
             }
             texture = new Texture2D(textureWidth, textureHeight);
+            
+            // Load pdf as texture if source is given
+            if (textureSource != null && textureSourceType == SourceFileType.PDF)
+            {
+                PDFJS_Promise<PDFDocument> documentPromise = PDFDocument.LoadDocumentFromUrlAsync(textureSource);
+                while (!documentPromise.HasFinished)
+                    yield return null;
+                PDFDocument document = documentPromise.Result;
+                if (document.IsValid)
+                {
+                    PDFRenderer renderer = new PDFRenderer();
+                    // Display first page for testing
+                    texture = renderer.RenderPageToTexture(document.GetPage(0), 1024, 1024);
+                }
+            }
             GetComponent<Renderer>().material.mainTexture = (Texture)texture;
         }
 
