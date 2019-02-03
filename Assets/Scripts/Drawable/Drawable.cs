@@ -12,7 +12,7 @@
     /// Defines the <see cref="Drawable" />
     /// </summary>
     [RequireComponent(typeof(PhotonView))]
-    public class Drawable : MonoBehaviour
+    public class Drawable : MonoBehaviourPun
     {
         public enum SourceFileType
         {
@@ -40,7 +40,7 @@
         /// <param name="penColor">The penColor<see cref="Color"/></param>
         public void Draw(int penId, Vector2 position, int penSize, Color32 penColor)
         {
-            gameObject.GetComponent<PhotonView>().RPC("DrawAndBroadCast", RpcTarget.AllBufferedViaServer, penId, position, penSize, penColor.r, penColor.g, penColor.b, penColor.a);
+            photonView.RPC("DrawAndBroadCast", RpcTarget.AllBufferedViaServer, penId, position, penSize, penColor.r, penColor.g, penColor.b, penColor.a);
         }
 
         /// <summary>
@@ -101,21 +101,21 @@
         internal IEnumerator Start()
         {
             float localScaleX = transform.localScale.x;
-            float localScaleY = transform.localScale.y;
-            if (localScaleY > localScaleX)
+            float localScaleZ = transform.localScale.z;
+            if (localScaleZ > localScaleX)
             {
                 textureWidth = 1024;
-                textureHeight = Mathf.RoundToInt(textureWidth * localScaleY / localScaleX);
+                textureHeight = Mathf.RoundToInt(textureWidth * localScaleZ / localScaleX);
             }
             else
             {
                 textureHeight = 1024;
-                textureWidth = Mathf.RoundToInt(textureWidth * localScaleX / localScaleY);
+                textureWidth = Mathf.RoundToInt(textureHeight * localScaleX / localScaleZ);
             }
             texture = new Texture2D(textureWidth, textureHeight);
-            
+
             // Load pdf as texture if source is given
-            if (textureSource != null && textureSourceType == SourceFileType.PDF)
+            if (!string.IsNullOrWhiteSpace(textureSource) && textureSourceType == SourceFileType.PDF)
             {
                 PDFJS_Promise<PDFDocument> documentPromise = PDFDocument.LoadDocumentFromUrlAsync(textureSource);
                 while (!documentPromise.HasFinished)
