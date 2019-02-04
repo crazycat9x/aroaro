@@ -37837,6 +37837,11 @@ PrefabInstance:
       propertyPath: textureSource
       value: https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Pie_Charts.pdf
       objectReference: {fileID: 0}
+    - target: {fileID: 5269982924418785397, guid: 2d1ea06e8a414483da4987e09ece44d0,
+        type: 3}
+      propertyPath: textureSourceType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1ea06e8a414483da4987e09ece44d0, type: 3}
 --- !u!1 &1236119134

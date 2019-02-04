@@ -16,6 +16,7 @@
     {
         public enum SourceFileType
         {
+            None,
             PDF
         }
 
@@ -25,10 +26,6 @@
         private int textureWidth;
         private int textureHeight;
         private Texture2D texture;
-
-        /// <summary>
-        /// Previous pen position
-        /// </summary>
         private Dictionary<int, Vector2> previousPositions = new Dictionary<int, Vector2>();
 
         /// <summary>
@@ -77,6 +74,22 @@
         }
 
         /// <summary>
+        /// The SetupTextureWithSource
+        /// </summary>
+        /// <param name="source">The source<see cref="string"/></param>
+        /// <param name="type">The type<see cref="SourceFileType"/></param>
+        public void SetupTextureWithSource(string source, SourceFileType type)
+        {
+            if (string.IsNullOrWhiteSpace(source)) return;
+            switch (type)
+            {
+                case SourceFileType.PDF:
+                    StartCoroutine(SetupPdfTexture(source));
+                    break;
+            }
+        }
+
+        /// <summary>
         /// The EndStroke
         /// </summary>
         /// <param name="penId">The penId<see cref="int"/></param>
@@ -84,6 +97,26 @@
         private void EndStroke(int penId)
         {
             previousPositions.Remove(penId);
+        }
+
+        /// <summary>
+        /// The SetupPdfTexture
+        /// </summary>
+        /// <param name="source">The source<see cref="string"/></param>
+        /// <returns>The <see cref="IEnumerator"/></returns>
+        private IEnumerator SetupPdfTexture(string source)
+        {
+            PDFJS_Promise<PDFDocument> documentPromise = PDFDocument.LoadDocumentFromUrlAsync(source);
+            while (!documentPromise.HasFinished)
+                yield return null;
+            PDFDocument document = documentPromise.Result;
+            if (document.IsValid)
+            {
+                PDFRenderer renderer = new PDFRenderer();
+                // Display first page for testing
+                texture = renderer.RenderPageToTexture(document.GetPage(0), 1024, 1024);
+            }
+            GetComponent<Renderer>().material.mainTexture = (Texture)texture;
         }
 
         /// <summary>
@@ -98,7 +131,7 @@
         /// <summary>
         /// The Start
         /// </summary>
-        internal IEnumerator Start()
+        internal void Start()
         {
             float localScaleX = transform.localScale.x;
             float localScaleZ = transform.localScale.z;
@@ -112,23 +145,16 @@
                 textureHeight = 1024;
                 textureWidth = Mathf.RoundToInt(textureHeight * localScaleX / localScaleZ);
             }
-            texture = new Texture2D(textureWidth, textureHeight);
-
-            // Load pdf as texture if source is given
-            if (!string.IsNullOrWhiteSpace(textureSource) && textureSourceType == SourceFileType.PDF)
+            if (textureSourceType == SourceFileType.None)
             {
-                PDFJS_Promise<PDFDocument> documentPromise = PDFDocument.LoadDocumentFromUrlAsync(textureSource);
-                while (!documentPromise.HasFinished)
-                    yield return null;
-                PDFDocument document = documentPromise.Result;
-                if (document.IsValid)
-                {
-                    PDFRenderer renderer = new PDFRenderer();
-                    // Display first page for testing
-                    texture = renderer.RenderPageToTexture(document.GetPage(0), 1024, 1024);
-                }
+                texture = new Texture2D(textureWidth, textureHeight);
+                GetComponent<Renderer>().material.mainTexture = (Texture)texture;
             }
-            GetComponent<Renderer>().material.mainTexture = (Texture)texture;
+            else
+            {
+                Debug.Log("exex");
+                SetupTextureWithSource(textureSource, textureSourceType);
+            }
         }
 
         /// <summary>
