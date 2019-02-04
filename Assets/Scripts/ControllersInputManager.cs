@@ -79,6 +79,7 @@
                     pointerInteractWithObject = value;
                     pointer.enabled = false;
                     pointer.pointerRenderer.enabled = false;
+                    pointer.interactWithObjects = pointerInteractWithObject;
                     pointer.grabToPointerTip = pointerInteractWithObject;
                     pointer.enabled = true;
                     pointer.pointerRenderer.enabled = true;
