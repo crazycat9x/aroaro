@@ -152,7 +152,6 @@
             }
             else
             {
-                Debug.Log("exex");
                 SetupTextureWithSource(textureSource, textureSourceType);
             }
         }
