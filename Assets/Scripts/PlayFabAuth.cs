@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -23,6 +24,12 @@ namespace Aroaro
         string keyboardText;
         string user;
         string password;
+
+        public List<Action<PlayFabError>> errorActions = new List<Action<PlayFabError>>();
+        public List<Action<LoginResult>> loginActions = new List<Action<LoginResult>>();
+        public List<Action<RegisterPlayFabUserResult>> registerActions = new List<Action<RegisterPlayFabUserResult>>();
+
+        public static PlayFabAuth instance = null;
 
         private void Start()
         {
@@ -52,6 +59,14 @@ namespace Aroaro
                     keyboardState = PFAuthKeyboardState.NotActive;
                 }
             }
+        }
+
+        private void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
         }
 
         public void ActivateEntryUser()
@@ -105,21 +120,26 @@ namespace Aroaro
             PlayFabClientAPI.RegisterPlayFabUser(req, OnRegisterSuccess, OnAuthFailure);
         }
 
-        // authentication callbacks
+        // action callbacks
         private void OnLoginSuccess(LoginResult res)
         {
-            //
+            foreach (Action<LoginResult> action in loginActions)
+                action(res);
         }
 
         private void OnRegisterSuccess(RegisterPlayFabUserResult res)
         {
-            //
+            foreach (Action<RegisterPlayFabUserResult> action in registerActions)
+                action(res);
         }
 
         private void OnAuthFailure(PlayFabError error)
         {
             Debug.LogError("PlayFab authentication failed:");
             Debug.LogError(error.GenerateErrorReport());
+
+            foreach (Action<PlayFabError> action in errorActions)
+                action(error);
         }
     }
 }
