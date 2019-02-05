@@ -22,4 +22,7 @@ The project used some blender models, Blender need to be installed to run and bu
 - Drawable.cs - Add ability for an object to be drawn on and have that drawing synchronized between the user
 - Pen.cs - For use with the pen prefab
 
-
+## Instruction on adding new scene
+- Create a new scene with Unity
+- Add the ViewLoader prefab to the root of the scene
+- Remove main camera and event system gameobject from the scene (if present) as this is handled by Aroaro CoreSystem (which in turn is loaded to the scene automically by the ViewLoader)
