@@ -1,6 +1,6 @@
 # PlayFab files
 *[tT]estTitleData*
-Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
+/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
 
 [Ll]ibrary/
 [Tt]emp/
@@ -38,4 +38,3 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
