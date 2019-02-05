@@ -6,6 +6,8 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 using HoloToolkit.UI.Keyboard;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Aroaro
 {
@@ -29,6 +31,7 @@ namespace Aroaro
 
         InputField userInput;
         InputField passInput;
+        TextMeshProUGUI infoText;
 
         public List<Action<PlayFabError>> errorActions = new List<Action<PlayFabError>>();
         public List<Action<LoginResult>> loginActions = new List<Action<LoginResult>>();
@@ -41,25 +44,42 @@ namespace Aroaro
             if (string.IsNullOrEmpty(PlayFabSettings.TitleId))
                 PlayFabSettings.TitleId = "4CBA"; // make sure the title is set to the aroaro ID
 
+            transform.Find("ContinuePanel/Panel/ContinueButton").gameObject.GetComponent<Button>()
+                .onClick.AddListener(() => StartCoroutine(Continue()));
+
             loggedIn = PlayFabClientAPI.IsClientLoggedIn();
             if (loggedIn)
                 transform.Find("ContinuePanel").gameObject.SetActive(true);
             else
             {
+                // show the auth panel
                 transform.Find("AuthPanel").gameObject.SetActive(true);
 
+                infoText = transform.Find("AuthPanel/Panel/InfoText").gameObject.GetComponent<TextMeshProUGUI>();
+
+                // add the listeners for the buttons
+                transform.Find("AuthPanel/Panel/LoginButton").gameObject.GetComponent<Button>()
+                    .onClick.AddListener(DoLogin);
+                transform.Find("AuthPanel/Panel/RegisterButton").gameObject.GetComponent<Button>()
+                    .onClick.AddListener(DoRegister);
+
+                // add the listeners for the inputs
                 userInput = transform.Find("AuthPanel/Panel/UsernameInput").gameObject.GetComponent<InputField>();
-                userInput.onEndEdit.AddListener((string txt) => {
+                userInput.onEndEdit.AddListener((string txt) =>
+                {
                     username = txt;
                     keyboardState = PFAuthKeyboardState.NotActive;
                     Keyboard.Instance.OnTextUpdated -= UpdateUserInput;
+                    Keyboard.Instance.Close(); // make sure kbd closes
                 });
 
                 passInput = transform.Find("AuthPanel/Panel/PasswordInput").gameObject.GetComponent<InputField>();
-                passInput.onEndEdit.AddListener((string txt) => {
+                passInput.onEndEdit.AddListener((string txt) =>
+                {
                     password = txt;
                     keyboardState = PFAuthKeyboardState.NotActive;
                     Keyboard.Instance.OnTextUpdated -= UpdatePassInput;
+                    Keyboard.Instance.Close();
                 });
             }
 
@@ -71,7 +91,7 @@ namespace Aroaro
             {
                 if (keyboardState == PFAuthKeyboardState.NotActive)
                 {
-                    if (userInput.isFocused)
+                    if (userInput.isFocused) // input is the current target
                     {
                         keyboardState = PFAuthKeyboardState.ActiveUser;
                         Keyboard.Instance.OnTextUpdated += UpdateUserInput;
@@ -81,15 +101,10 @@ namespace Aroaro
                         keyboardState = PFAuthKeyboardState.ActivePassword;
                         Keyboard.Instance.OnTextUpdated += UpdatePassInput;
                     }
-                        
+
                 }
                 else
-                {
                     Keyboard.Instance.PresentKeyboard();
-                    //keyboard = transform.Find("Keyboard").gameObject.GetComponent<Keyboard>();
-                    //keyboard.InputField = userInput;
-                    //keyboard.PresentKeyboard();
-                }
             }
         }
 
@@ -116,7 +131,11 @@ namespace Aroaro
         public void DoLogin()
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                infoText.text = "Please enter a username and password";
                 return; // display some error
+            }
+                
 
             LoginWithPlayFabRequest req = new LoginWithPlayFabRequest
             {
@@ -124,6 +143,9 @@ namespace Aroaro
                 Username = username,
                 Password = password
             };
+            
+            password = null;
+            passInput.text = null; // clear auth vars
 
             Login(req);
         }
@@ -131,7 +153,10 @@ namespace Aroaro
         public void DoRegister()
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                infoText.text = "Please enter a username and password";
                 return; // display some error
+            }
 
             RegisterPlayFabUserRequest req = new RegisterPlayFabUserRequest
             {
@@ -140,6 +165,9 @@ namespace Aroaro
                 Password = password,
                 RequireBothUsernameAndEmail = false
             };
+
+            password = null;
+            passInput.text = null; // clear auth vars
 
             Register(req);
         }
@@ -158,6 +186,12 @@ namespace Aroaro
         private void OnLoginSuccess(LoginResult res)
         {
             Debug.Log("logged in successfully");
+            transform.Find("AuthPanel").gameObject.SetActive(false);
+            transform.Find("ContinuePanel").gameObject.SetActive(true);
+
+            username = null;
+            userInput.text = null;
+
             foreach (Action<LoginResult> action in loginActions)
                 action(res);
         }
@@ -165,6 +199,12 @@ namespace Aroaro
         private void OnRegisterSuccess(RegisterPlayFabUserResult res)
         {
             Debug.Log("regstered successfully");
+            transform.Find("AuthPanel").gameObject.SetActive(false);
+            transform.Find("ContinuePanel").gameObject.SetActive(true);
+
+            username = null;
+            userInput.text = null;
+
             foreach (Action<RegisterPlayFabUserResult> action in registerActions)
                 action(res);
         }
@@ -173,9 +213,53 @@ namespace Aroaro
         {
             Debug.LogError("PlayFab authentication failed:");
             Debug.LogError(error.GenerateErrorReport());
+            
+            switch (error.Error)
+            {
+                case PlayFabErrorCode.AccountNotFound:
+                    infoText.text = "Account not found (have you registered?)";
+                    break;
+                case PlayFabErrorCode.InvalidUsernameOrPassword:
+                    infoText.text = "Invalid username or password";
+                    break;
+                case PlayFabErrorCode.EmailAddressNotAvailable:
+                    infoText.text = "Email address not available";
+                    break;
+                case PlayFabErrorCode.InvalidEmailAddress:
+                    infoText.text = "Invalid email address";
+                    break;
+                case PlayFabErrorCode.InvalidPassword:
+                    infoText.text = "Password must be 6-100 characters";
+                    break;
+                case PlayFabErrorCode.InvalidUsername:
+                    infoText.text = "Username must be 3-20 characters";
+                    break;
+                case PlayFabErrorCode.UsernameNotAvailable:
+                case PlayFabErrorCode.NameNotAvailable:
+                    infoText.text = "Username not available";
+                    break;
+                case PlayFabErrorCode.ProfaneDisplayName:
+                    infoText.text = "Please choose another username";
+                    break;
+                default:
+                    infoText.text = "Unknown error, please try again later";
+                    break;
+            }
 
             foreach (Action<PlayFabError> action in errorActions)
                 action(error);
+        }
+
+        private IEnumerator Continue()
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("WhiteboardTestScene", LoadSceneMode.Single);
+            asyncLoad.allowSceneActivation = false;
+            while (!asyncLoad.isDone)
+            {
+                if (asyncLoad.progress >= 0.9f)
+                    asyncLoad.allowSceneActivation = true;
+                yield return null;
+            }
         }
     }
 }
