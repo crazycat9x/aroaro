@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
+using UnityEngine.UI;
+using HoloToolkit.UI.Keyboard;
 
 namespace Aroaro
 {
@@ -18,12 +20,15 @@ namespace Aroaro
     {
         bool loggedIn;
 
-        TouchScreenKeyboard keyboard;
+        Keyboard keyboard;
         PFAuthKeyboardState keyboardState = PFAuthKeyboardState.NotActive;
 
         string keyboardText;
-        string user;
+        string username;
         string password;
+
+        InputField userInput;
+        InputField passInput;
 
         public List<Action<PlayFabError>> errorActions = new List<Action<PlayFabError>>();
         public List<Action<LoginResult>> loginActions = new List<Action<LoginResult>>();
@@ -37,26 +42,53 @@ namespace Aroaro
                 PlayFabSettings.TitleId = "4CBA"; // make sure the title is set to the aroaro ID
 
             loggedIn = PlayFabClientAPI.IsClientLoggedIn();
-            if (!loggedIn)
+            if (loggedIn)
+                transform.Find("ContinuePanel").gameObject.SetActive(true);
+            else
             {
-                // display the auth window if the client is not logged in
-                transform.Find("Container").gameObject.SetActive(true);
+                transform.Find("AuthPanel").gameObject.SetActive(true);
+
+                userInput = transform.Find("AuthPanel/Panel/UsernameInput").gameObject.GetComponent<InputField>();
+                userInput.onEndEdit.AddListener((string txt) => {
+                    username = txt;
+                    keyboardState = PFAuthKeyboardState.NotActive;
+                    Keyboard.Instance.OnTextUpdated -= UpdateUserInput;
+                });
+
+                passInput = transform.Find("AuthPanel/Panel/PasswordInput").gameObject.GetComponent<InputField>();
+                passInput.onEndEdit.AddListener((string txt) => {
+                    password = txt;
+                    keyboardState = PFAuthKeyboardState.NotActive;
+                    Keyboard.Instance.OnTextUpdated -= UpdatePassInput;
+                });
             }
+
         }
 
         private void Update()
         {
-            if (TouchScreenKeyboard.visible == false && keyboard != null)
+            if (!loggedIn && userInput != null && passInput != null)
             {
-                if (keyboard.status == TouchScreenKeyboard.Status.Done)
+                if (keyboardState == PFAuthKeyboardState.NotActive)
                 {
-                    if (keyboardState == PFAuthKeyboardState.ActiveUser)
-                        user = keyboard.text;
-                    else if (keyboardState == PFAuthKeyboardState.ActivePassword)
-                        password = keyboard.text;
-
-                    keyboard.text = null;
-                    keyboardState = PFAuthKeyboardState.NotActive;
+                    if (userInput.isFocused)
+                    {
+                        keyboardState = PFAuthKeyboardState.ActiveUser;
+                        Keyboard.Instance.OnTextUpdated += UpdateUserInput;
+                    }
+                    else if (passInput.isFocused)
+                    {
+                        keyboardState = PFAuthKeyboardState.ActivePassword;
+                        Keyboard.Instance.OnTextUpdated += UpdatePassInput;
+                    }
+                        
+                }
+                else
+                {
+                    Keyboard.Instance.PresentKeyboard();
+                    //keyboard = transform.Find("Keyboard").gameObject.GetComponent<Keyboard>();
+                    //keyboard.InputField = userInput;
+                    //keyboard.PresentKeyboard();
                 }
             }
         }
@@ -69,26 +101,27 @@ namespace Aroaro
                 Destroy(gameObject);
         }
 
-        public void ActivateEntryUser()
+        public void UpdateUserInput(string txt)
         {
-            keyboardState = PFAuthKeyboardState.ActiveUser;
-            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false, "Enter username");
+            if (!string.IsNullOrEmpty(txt) && userInput != null)
+                userInput.text = txt;
         }
 
-        public void ActivateEntryPassword()
+        public void UpdatePassInput(string txt)
         {
-            keyboardState = PFAuthKeyboardState.ActivePassword;
-            keyboard = keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true, false, "Enter password");
+            if (!string.IsNullOrEmpty(txt) && passInput != null)
+                passInput.text = txt;
         }
 
         public void DoLogin()
         {
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return; // display some error
 
-            LoginWithPlayFabRequest req = new LoginWithPlayFabRequest {
+            LoginWithPlayFabRequest req = new LoginWithPlayFabRequest
+            {
                 TitleId = PlayFabSettings.TitleId,
-                Username = user,
+                Username = username,
                 Password = password
             };
 
@@ -97,12 +130,13 @@ namespace Aroaro
 
         public void DoRegister()
         {
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return; // display some error
 
-            RegisterPlayFabUserRequest req = new RegisterPlayFabUserRequest {
+            RegisterPlayFabUserRequest req = new RegisterPlayFabUserRequest
+            {
                 TitleId = PlayFabSettings.TitleId,
-                Username = user,
+                Username = username,
                 Password = password,
                 RequireBothUsernameAndEmail = false
             };
@@ -123,12 +157,14 @@ namespace Aroaro
         // action callbacks
         private void OnLoginSuccess(LoginResult res)
         {
+            Debug.Log("logged in successfully");
             foreach (Action<LoginResult> action in loginActions)
                 action(res);
         }
 
         private void OnRegisterSuccess(RegisterPlayFabUserResult res)
         {
+            Debug.Log("regstered successfully");
             foreach (Action<RegisterPlayFabUserResult> action in registerActions)
                 action(res);
         }
