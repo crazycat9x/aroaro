@@ -135,7 +135,8 @@ namespace Aroaro
                 infoText.text = "Please enter a username and password";
                 return; // display some error
             }
-                
+
+            infoText.text = "Logging in, please wait...";
 
             LoginWithPlayFabRequest req = new LoginWithPlayFabRequest
             {
@@ -157,6 +158,8 @@ namespace Aroaro
                 infoText.text = "Please enter a username and password";
                 return; // display some error
             }
+
+            infoText.text = "Registering, please wait...";
 
             RegisterPlayFabUserRequest req = new RegisterPlayFabUserRequest
             {
