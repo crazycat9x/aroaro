@@ -283,6 +283,8 @@ namespace Aroaro
                     asyncLoad.allowSceneActivation = true;
                 yield return null;
             }
+
+            Destroy(GameObject.Find("/Core"));
         }
     }
 }
