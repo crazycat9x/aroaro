@@ -45,7 +45,11 @@ namespace Aroaro
                 PlayFabSettings.TitleId = "4CBA"; // make sure the title is set to the aroaro ID
 
             transform.Find("ContinuePanel/Panel/ContinueButton").gameObject.GetComponent<Button>()
-                .onClick.AddListener(() => StartCoroutine(Continue()));
+                .onClick.AddListener(() =>
+                {
+                    transform.Find("ContinuePanel").gameObject.SetActive(false); // hide panel
+                    StartCoroutine(Continue()); // transition scene
+                });
 
             loggedIn = PlayFabClientAPI.IsClientLoggedIn();
             if (loggedIn)
@@ -144,7 +148,7 @@ namespace Aroaro
                 Username = username,
                 Password = password
             };
-            
+
             password = null;
             passInput.text = null; // clear auth vars
 
@@ -194,6 +198,9 @@ namespace Aroaro
 
             username = null;
             userInput.text = null;
+            loggedIn = true;
+
+            UpdateWelcomeText();
 
             foreach (Action<LoginResult> action in loginActions)
                 action(res);
@@ -207,16 +214,29 @@ namespace Aroaro
 
             username = null;
             userInput.text = null;
+            loggedIn = true;
+
+            UpdateWelcomeText();
 
             foreach (Action<RegisterPlayFabUserResult> action in registerActions)
                 action(res);
+        }
+
+        private void UpdateWelcomeText()
+        {
+            if (loggedIn)
+                PlayFabClientAPI.GetAccountInfo(null, (GetAccountInfoResult data) =>
+                {
+                    transform.Find("ContinuePanel/Panel/WelcomeText").gameObject
+                        .GetComponent<TextMeshProUGUI>().text = string.Format("Welcome, {0}!", data.AccountInfo.Username);
+                }, (PlayFabError err) => Debug.LogError(err));
         }
 
         private void OnAuthFailure(PlayFabError error)
         {
             Debug.LogError("PlayFab authentication failed:");
             Debug.LogError(error.GenerateErrorReport());
-            
+
             switch (error.Error)
             {
                 case PlayFabErrorCode.AccountNotFound:
