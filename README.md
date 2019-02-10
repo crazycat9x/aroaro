@@ -21,6 +21,7 @@ The project used some blender models, Blender need to be installed to run and bu
 - RemotePlayerMenu.cs - Management script for controlling the remote player options
 - Drawable.cs - Add ability for an object to be drawn on and have that drawing synchronized between the user
 - Pen.cs - For use with the pen prefab
+- PlayFabAuth.cs - Handles authentication with PlayFab, incl registration
 
 ## Instruction on adding new scene
 - Create a new scene with Unity
