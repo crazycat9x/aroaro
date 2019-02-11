@@ -6,7 +6,6 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 using HoloToolkit.UI.Keyboard;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 namespace Aroaro
@@ -31,7 +30,7 @@ namespace Aroaro
 
         InputField userInput;
         InputField passInput;
-        TextMeshProUGUI infoText;
+        Text infoText;
 
         public List<Action<PlayFabError>> errorActions = new List<Action<PlayFabError>>();
         public List<Action<LoginResult>> loginActions = new List<Action<LoginResult>>();
@@ -59,7 +58,7 @@ namespace Aroaro
                 // show the auth panel
                 transform.Find("AuthPanel").gameObject.SetActive(true);
 
-                infoText = transform.Find("AuthPanel/Panel/InfoText").gameObject.GetComponent<TextMeshProUGUI>();
+                infoText = transform.Find("AuthPanel/Panel/InfoText").gameObject.GetComponent<Text>();
 
                 // add the listeners for the buttons
                 transform.Find("AuthPanel/Panel/LoginButton").gameObject.GetComponent<Button>()
@@ -228,7 +227,7 @@ namespace Aroaro
                 PlayFabClientAPI.GetAccountInfo(null, (GetAccountInfoResult data) =>
                 {
                     transform.Find("ContinuePanel/Panel/WelcomeText").gameObject
-                        .GetComponent<TextMeshProUGUI>().text = string.Format("Welcome, {0}!", data.AccountInfo.Username);
+                        .GetComponent<Text>().text = string.Format("Welcome, {0}!", data.AccountInfo.Username);
                 }, (PlayFabError err) => Debug.LogError(err));
         }
 
