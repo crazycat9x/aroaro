@@ -206,9 +206,17 @@
         }
 
         /// <summary>
+        /// The Awake
+        /// </summary>
+        internal void Awake()
+        {
+            VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
+        }
+
+        /// <summary>
         /// The Start
         /// </summary>
-        internal void Start()
+        internal void OnEnable()
         {
             pointer.controllerEvents.TouchpadPressed += ControllerEvents_TouchpadPressed;
             pointer.controllerEvents.TouchpadReleased += ControllerEvents_TouchpadReleased;
@@ -224,6 +232,24 @@
             GameObject controller = transform.Find("[VRTK][AUTOGEN][Controller][CollidersContainer]")?.gameObject;
             if (controller != null && controller.GetComponent<BehavioursInjection>() == null)
                 SetupControllerBehaviours(controller);
+        }
+
+        /// <summary>
+        /// The OnDisable
+        /// </summary>
+        internal void OnDisable()
+        {
+            pointer.controllerEvents.TouchpadPressed -= ControllerEvents_TouchpadPressed;
+            pointer.controllerEvents.TouchpadReleased -= ControllerEvents_TouchpadReleased;
+            pointer.DestinationMarkerSet -= Pointer_DestinationMarkerSet;
+        }
+
+        /// <summary>
+        /// The OnDestroy
+        /// </summary>
+        internal void OnDestroy()
+        {
+            VRTK_SDKManager.instance.RemoveBehaviourToToggleOnLoadedSetupChange(this);
         }
     }
 }
