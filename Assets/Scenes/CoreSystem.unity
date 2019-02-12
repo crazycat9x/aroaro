@@ -792,6 +792,11 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 384860901}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &384860908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 384860901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &431779029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,6 +2784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 934764427}
   - component: {fileID: 934764428}
+  - component: {fileID: 934764429}
   m_Layer: 0
   m_Name: PlayArea
   m_TagString: Untagged
@@ -2822,6 +2828,41 @@ MonoBehaviour:
   snapToNearestFloor: 1
   applyPlayareaParentOffset: 0
   customRaycast: {fileID: 0}
+--- !u!114 &934764429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934764426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174429e04b0388249a137b2dc0050b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableTeleport: 1
+  targetListPolicy: {fileID: 0}
+  enableBodyCollisions: 0
+  ignoreGrabbedCollisions: 1
+  ignoreCollisionsWith: []
+  headsetYOffset: 0.2
+  movementThreshold: 0.0015
+  playAreaMovementThreshold: 0.00075
+  standingHistorySamples: 5
+  leanYThreshold: 0.5
+  stepUpYOffset: 0.15
+  stepThicknessMultiplier: 0.5
+  stepDropThreshold: 0.08
+  customRaycast: {fileID: 0}
+  fallRestriction: 0
+  gravityFallYThreshold: 1
+  blinkYThreshold: 0.15
+  floorHeightTolerance: 0.001
+  fallCheckPrecision: 5
+  teleporter: {fileID: 0}
+  customPlayAreaRigidbody: {fileID: 0}
+  customBodyColliderContainer: {fileID: 0}
+  customFootColliderContainer: {fileID: 0}
 --- !u!1 &941554855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,12 +3079,6 @@ Transform:
   m_Father: {fileID: 747804198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &986534598 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 384860901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &990847671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5608,12 +5643,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667216695}
   m_CullTransparentMesh: 0
---- !u!4 &1680665875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 458990, guid: 4f35fa249b5008c44ac2998be6f82d4d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2075452996}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1695407253
 GameObject:
   m_ObjectHideFlags: 0
@@ -5674,8 +5703,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 986534598}
-  - {fileID: 1680665875}
+  - {fileID: 384860908}
+  - {fileID: 2075452997}
   m_Father: {fileID: 747804198}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6753,6 +6782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f35fa249b5008c44ac2998be6f82d4d, type: 3}
+--- !u!4 &2075452997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 2075452996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2115626231
 GameObject:
   m_ObjectHideFlags: 0
