@@ -138,7 +138,7 @@
             // Touchpad bottom pressed
             else
             {
-                // TODO: Implement backward dash
+                loadedSetup.actualBoundaries.transform.Translate(-transform.forward * 10, Space.World);
             }
         }
 
