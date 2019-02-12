@@ -559,11 +559,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: aroaro
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: The University of Auckland
+  metroCertificateIssuer: The University of Auckland
+  metroCertificateNotAfter: 00e6c6e56de1d501
   metroApplicationDescription: aroaro
   wsaImages: {}
   metroTileShortName: 
