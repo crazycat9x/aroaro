@@ -151,7 +151,7 @@
         protected override void Update()
         {
             base.Update();
-            if (Application.isPlaying && canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
+            if (IsUsing() && Application.isPlaying && canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
             {
                 canvas.Draw(gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, PenColor);
             }
