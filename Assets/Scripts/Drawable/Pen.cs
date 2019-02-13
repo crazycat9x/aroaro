@@ -6,7 +6,7 @@
     /// <summary>
     /// Defines the <see cref="Pen" />
     /// </summary>
-    public class Pen : MonoBehaviour
+    public class Pen : VRTK_InteractableObject
     {
         /// <summary>
         /// Defines the penColor
@@ -75,19 +75,23 @@
             }
         }
 
-        private void InteractableObject_InteractableObjectGrabbed(object sender, InteractableObjectEventArgs e)
+        /// <summary>
+        /// The Grabbed
+        /// </summary>
+        /// <param name="currentGrabbingObject">The currentGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
         {
+            base.Grabbed(currentGrabbingObject);
             transform.parent = null;
         }
 
-
         /// <summary>
-        /// The Pen_InteractableObjectUngrabbed
+        /// The Ungrabbed
         /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="InteractableObjectEventArgs"/></param>
-        private void Pen_InteractableObjectUngrabbed(object sender, InteractableObjectEventArgs e)
+        /// <param name="previousGrabbingObject">The previousGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Ungrabbed(VRTK_InteractGrab previousGrabbingObject = null)
         {
+            base.Ungrabbed(previousGrabbingObject);
             if (!resetTransformOnDrop) return;
             if (originalTransform != null)
             {
@@ -131,8 +135,9 @@
         /// <summary>
         /// The Awake
         /// </summary>
-        internal void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             originalPosition = transform.position;
             originalRotation = transform.rotation;
             penTipTransform = transform.Find("Tip");
@@ -141,20 +146,11 @@
         }
 
         /// <summary>
-        /// The Start
-        /// </summary>
-        internal void Start()
-        {
-            VRTK_InteractableObject interactableObject = gameObject.GetComponent<VRTK_InteractableObject>();
-            interactableObject.InteractableObjectGrabbed += InteractableObject_InteractableObjectGrabbed;
-            interactableObject.InteractableObjectUngrabbed += Pen_InteractableObjectUngrabbed;
-        }
-
-        /// <summary>
         /// The Update
         /// </summary>
-        internal void Update()
+        protected override void Update()
         {
+            base.Update();
             if (Application.isPlaying && canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
             {
                 canvas.Draw(gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, PenColor);
