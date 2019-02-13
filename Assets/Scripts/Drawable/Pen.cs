@@ -1,12 +1,13 @@
 ﻿namespace Aroaro
 {
+    using Photon.Pun;
     using UnityEngine;
     using VRTK;
 
     /// <summary>
     /// Defines the <see cref="Pen" />
     /// </summary>
-    public class Pen : MonoBehaviour
+    public class Pen : VRTK_InteractableObject
     {
         /// <summary>
         /// Defines the penColor
@@ -42,16 +43,6 @@
         private Transform penEndTransform;
 
         /// <summary>
-        /// Defines the hit
-        /// </summary>
-        private RaycastHit hit;
-
-        /// <summary>
-        /// Defines the canvas
-        /// </summary>
-        private Drawable canvas;
-
-        /// <summary>
         /// Defines the originalPosition
         /// </summary>
         private Vector3 originalPosition;
@@ -60,6 +51,11 @@
         /// Defines the originalRotation
         /// </summary>
         private Quaternion originalRotation;
+
+        /// <summary>
+        /// Defines the previousTouchingCanvas
+        /// </summary>
+        private Drawable previousTouchingCanvas;
 
         /// <summary>
         /// Gets or sets the PenColor
@@ -75,19 +71,23 @@
             }
         }
 
-        private void InteractableObject_InteractableObjectGrabbed(object sender, InteractableObjectEventArgs e)
+        /// <summary>
+        /// The Grabbed
+        /// </summary>
+        /// <param name="currentGrabbingObject">The currentGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
         {
+            base.Grabbed(currentGrabbingObject);
             transform.parent = null;
         }
 
-
         /// <summary>
-        /// The Pen_InteractableObjectUngrabbed
+        /// The Ungrabbed
         /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="InteractableObjectEventArgs"/></param>
-        private void Pen_InteractableObjectUngrabbed(object sender, InteractableObjectEventArgs e)
+        /// <param name="previousGrabbingObject">The previousGrabbingObject<see cref="VRTK_InteractGrab"/></param>
+        public override void Ungrabbed(VRTK_InteractGrab previousGrabbingObject = null)
         {
+            base.Ungrabbed(previousGrabbingObject);
             if (!resetTransformOnDrop) return;
             if (originalTransform != null)
             {
@@ -109,10 +109,7 @@
         internal void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.GetComponent<Drawable>() != null)
-            {
-                canvas = collision.gameObject.GetComponent<Drawable>();
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            }
         }
 
         /// <summary>
@@ -122,17 +119,15 @@
         internal void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.GetComponent<Drawable>() != null)
-            {
-                canvas = null;
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            }
         }
 
         /// <summary>
         /// The Awake
         /// </summary>
-        internal void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             originalPosition = transform.position;
             originalRotation = transform.rotation;
             penTipTransform = transform.Find("Tip");
@@ -141,23 +136,36 @@
         }
 
         /// <summary>
-        /// The Start
-        /// </summary>
-        internal void Start()
-        {
-            VRTK_InteractableObject interactableObject = gameObject.GetComponent<VRTK_InteractableObject>();
-            interactableObject.InteractableObjectGrabbed += InteractableObject_InteractableObjectGrabbed;
-            interactableObject.InteractableObjectUngrabbed += Pen_InteractableObjectUngrabbed;
-        }
-
-        /// <summary>
         /// The Update
         /// </summary>
-        internal void Update()
+        protected override void Update()
         {
-            if (Application.isPlaying && canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
+            base.Update();
+            if (IsUsing() && Physics.Raycast(penTipTransform.position, transform.up, out RaycastHit hit))
             {
-                canvas.Draw(gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, PenColor);
+                Drawable canvas = hit.collider.gameObject.GetComponent<Drawable>();
+
+                // Return if pen is not touching a drawable element
+                if (canvas == null) return;
+
+                previousTouchingCanvas = canvas;
+
+                // Convert Color to Color32 as it can be more efficiently sent over the network
+                Color32 penColor32 = (Color32)PenColor;
+                byte r = penColor32.r;
+                byte g = penColor32.g;
+                byte b = penColor32.b;
+                byte a = penColor32.a;
+
+                PhotonView.Get(canvas).RPC(nameof(canvas.Draw), RpcTarget.AllBufferedViaServer, gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, r, g, b, a);
+            }
+            else
+            {
+                if (previousTouchingCanvas != null)
+                {
+                    PhotonView.Get(previousTouchingCanvas).RPC(nameof(previousTouchingCanvas.EndStroke), RpcTarget.AllBufferedViaServer, gameObject.GetInstanceID());
+                    previousTouchingCanvas = null;
+                }
             }
         }
     }
