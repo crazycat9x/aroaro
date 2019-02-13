@@ -37,24 +37,12 @@
         /// <param name="penId">The penId<see cref="int"/></param>
         /// <param name="position">The position<see cref="Vector2"/></param>
         /// <param name="penSize">The penSize<see cref="int"/></param>
-        /// <param name="penColor">The penColor<see cref="Color"/></param>
-        public void Draw(int penId, Vector2 position, int penSize, Color32 penColor)
-        {
-            gameObject.GetComponent<PhotonView>().RPC("DrawAndBroadCast", RpcTarget.AllBufferedViaServer, penId, position, penSize, penColor.r, penColor.g, penColor.b, penColor.a);
-        }
-
-        /// <summary>
-        /// The DrawAndBroadCast
-        /// </summary>
-        /// <param name="penId">The penId<see cref="int"/></param>
-        /// <param name="position">The position<see cref="Vector2"/></param>
-        /// <param name="penSize">The penSize<see cref="int"/></param>
         /// <param name="r">The r<see cref="byte"/></param>
         /// <param name="g">The g<see cref="byte"/></param>
         /// <param name="b">The b<see cref="byte"/></param>
         /// <param name="a">The a<see cref="byte"/></param>
         [PunRPC]
-        private void DrawAndBroadCast(int penId, Vector2 position, int penSize, byte r, byte g, byte b, byte a)
+        public void Draw(int penId, Vector2 position, int penSize, byte r, byte g, byte b, byte a)
         {
             Color32 penColor = new Color32(r, g, b, a);
             int x = Mathf.RoundToInt(position.x * texture.width - (penSize / 2));
@@ -81,7 +69,7 @@
         /// </summary>
         /// <param name="penId">The penId<see cref="int"/></param>
         [PunRPC]
-        private void EndStroke(int penId)
+        public void EndStroke(int penId)
         {
             previousPositions.Remove(penId);
         }

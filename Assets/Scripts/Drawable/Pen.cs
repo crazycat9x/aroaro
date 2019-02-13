@@ -1,5 +1,6 @@
 ﻿namespace Aroaro
 {
+    using Photon.Pun;
     using UnityEngine;
     using VRTK;
 
@@ -42,16 +43,6 @@
         private Transform penEndTransform;
 
         /// <summary>
-        /// Defines the hit
-        /// </summary>
-        private RaycastHit hit;
-
-        /// <summary>
-        /// Defines the canvas
-        /// </summary>
-        private Drawable canvas;
-
-        /// <summary>
         /// Defines the originalPosition
         /// </summary>
         private Vector3 originalPosition;
@@ -60,6 +51,11 @@
         /// Defines the originalRotation
         /// </summary>
         private Quaternion originalRotation;
+
+        /// <summary>
+        /// Defines the previousTouchingCanvas
+        /// </summary>
+        private Drawable previousTouchingCanvas;
 
         /// <summary>
         /// Gets or sets the PenColor
@@ -113,10 +109,7 @@
         internal void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.GetComponent<Drawable>() != null)
-            {
-                canvas = collision.gameObject.GetComponent<Drawable>();
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            }
         }
 
         /// <summary>
@@ -126,10 +119,7 @@
         internal void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.GetComponent<Drawable>() != null)
-            {
-                canvas = null;
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            }
         }
 
         /// <summary>
@@ -151,9 +141,31 @@
         protected override void Update()
         {
             base.Update();
-            if (IsUsing() && Application.isPlaying && canvas != null && Physics.Raycast(penTipTransform.position, transform.up, out hit))
+            if (IsUsing() && Physics.Raycast(penTipTransform.position, transform.up, out RaycastHit hit))
             {
-                canvas.Draw(gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, PenColor);
+                Drawable canvas = hit.collider.gameObject.GetComponent<Drawable>();
+
+                // Return if pen is not touching a drawable element
+                if (canvas == null) return;
+
+                previousTouchingCanvas = canvas;
+
+                // Convert Color to Color32 as it can be more efficiently sent over the network
+                Color32 penColor32 = (Color32)PenColor;
+                byte r = penColor32.r;
+                byte g = penColor32.g;
+                byte b = penColor32.b;
+                byte a = penColor32.a;
+
+                PhotonView.Get(canvas).RPC(nameof(canvas.Draw), RpcTarget.AllBufferedViaServer, gameObject.GetInstanceID(), new Vector2(hit.textureCoord.x, hit.textureCoord.y), penSize, r, g, b, a);
+            }
+            else
+            {
+                if (previousTouchingCanvas != null)
+                {
+                    PhotonView.Get(previousTouchingCanvas).RPC(nameof(previousTouchingCanvas.EndStroke), RpcTarget.AllBufferedViaServer, gameObject.GetInstanceID());
+                    previousTouchingCanvas = null;
+                }
             }
         }
     }
