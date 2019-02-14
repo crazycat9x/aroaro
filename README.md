@@ -1,6 +1,8 @@
 # Aroaro
 This project is a collection of modules that together form a VR collaborative learning environment
 
+![Alt Text](Doc/demo.gif)
+
 # Notes
 The project used some blender models, Blender need to be installed to run and build the project via Unity and you may need to reimport models in the Models folder
 
