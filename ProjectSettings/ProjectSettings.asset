@@ -40,8 +40,10 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 0}
-  m_HolographicTrackingLossScreen: {fileID: 0}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: fd60cabed9f923e498644ec936eb22b0,
+    type: 3}
+  m_HolographicTrackingLossScreen: {fileID: 2800000, guid: fd60cabed9f923e498644ec936eb22b0,
+    type: 3}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
@@ -106,11 +108,6 @@ PlayerSettings:
   xboxOneDisableEsram: 0
   xboxOnePresentImmediateThreshold: 0
   switchQueueCommandMemory: 0
-  switchQueueControlMemory: 16384
-  switchQueueComputeMemory: 262144
-  switchNVNShaderPoolsGranularity: 33554432
-  switchNVNDefaultPoolsGranularity: 16777216
-  switchNVNOtherPoolsGranularity: 16777216
   vulkanEnableSetSRGBWrite: 0
   m_SupportedAspectRatios:
     4:3: 1
@@ -122,7 +119,7 @@ PlayerSettings:
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
-  m_HolographicPauseOnTrackingLoss: 1
+  m_HolographicPauseOnTrackingLoss: 0
   xboxOneDisableKinectGpuReservation: 0
   xboxOneEnable7thCore: 1
   isWsaHolographicRemotingEnabled: 0
@@ -260,7 +257,14 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: a67bb7214c42877489042f185600beb6, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetPlatformIcons: []
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
@@ -436,7 +440,6 @@ PlayerSettings:
   switchAllowsRuntimeAddOnContentInstall: 0
   switchDataLossConfirmation: 0
   switchUserAccountLockEnabled: 0
-  switchSystemResourceMemory: 16777216
   switchSupportedNpadStyles: 3
   switchNativeFsCacheSize: 32
   switchIsHoldTypeHorizontal: 0
@@ -564,15 +567,60 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: aroaro
-  metroPackageVersion: 
+  metroPackageVersion: 0.0.4.0
   metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: The University of Auckland
   metroCertificateIssuer: The University of Auckland
   metroCertificateNotAfter: 00e6c6e56de1d501
   metroApplicationDescription: aroaro
-  wsaImages: {}
-  metroTileShortName: 
+  wsaImages:
+    65636: Assets/Media/Store/StoreLogo.scale-100.png
+    65661: Assets/Media/Store/StoreLogo.scale-125.png
+    65676: Assets/Media/Store/StoreLogo.scale-140.png
+    65686: Assets/Media/Store/StoreLogo.scale-150.png
+    65716: Assets/Media/Store/StoreLogo.scale-180.png
+    65736: Assets/Media/Store/StoreLogo.scale-200.png
+    65776: Assets/Media/Store/StoreLogo.scale-240.png
+    65936: Assets/Media/Store/StoreLogo.scale-400.png
+    131172: Assets/Media/SplashScreen/SplashScreen.scale-100.png
+    131197: Assets/Media/SplashScreen/SplashScreen.scale-125.png
+    131212: Assets/Media/SplashScreen/SplashScreen.scale-140.png
+    131222: Assets/Media/SplashScreen/SplashScreen.scale-150.png
+    131252: Assets/Media/SplashScreen/SplashScreen.scale-180.png
+    131272: Assets/Media/SplashScreen/SplashScreen.scale-200.png
+    131472: Assets/Media/SplashScreen/SplashScreen.scale-400.png
+    2031632: Assets/Media/AppList/AppList.targetsize-16.png
+    2031640: Assets/Media/AppList/AppList.targetsize-24.png
+    2031648: Assets/Media/AppList/AppList.targetsize-32.png
+    2031664: Assets/Media/AppList/AppList.targetsize-48.png
+    2031716: Assets/Media/AppList/AppList.scale-100.png
+    2031741: Assets/Media/AppList/AppList.scale-125.png
+    2031766: Assets/Media/AppList/AppList.scale-150.png
+    2031816: Assets/Media/AppList/AppList.scale-200.png
+    2031872: Assets/Media/AppList/AppList.targetsize-256.png
+    2032016: Assets/Media/AppList/AppList.scale-400.png
+    2097252: Assets/Media/Small/Small71x71Logo.scale-100.png
+    2097277: Assets/Media/Small/Small71x71Logo.scale-125.png
+    2097302: Assets/Media/Small/Small71x71Logo.scale-150.png
+    2097352: Assets/Media/Small/Small71x71Logo.scale-200.png
+    2097552: Assets/Media/Small/Small71x71Logo.scale-400.png
+    2162788: Assets/Media/Medium/Medium150x150Logo.scale-100.png
+    2162813: Assets/Media/Medium/Medium150x150Logo.scale-125.png
+    2162838: Assets/Media/Medium/Medium150x150Logo.scale-150.png
+    2162888: Assets/Media/Medium/Medium150x150Logo.scale-200.png
+    2163088: Assets/Media/Medium/Medium150x150Logo.scale-400.png
+    2228324: Assets/Media/Large/Large310x310Logo.scale-100.png
+    2228349: Assets/Media/Large/Large310x310Logo.scale-125.png
+    2228374: Assets/Media/Large/Large310x310Logo.scale-150.png
+    2228424: Assets/Media/Large/Large310x310Logo.scale-200.png
+    2228624: Assets/Media/Large/Large310x310Logo.scale-400.png
+    2293860: Assets/Media/Wide/Wide310x150Logo.scale-100.png
+    2293885: Assets/Media/Wide/Wide310x150Logo.scale-125.png
+    2293910: Assets/Media/Wide/Wide310x150Logo.scale-150.png
+    2293960: Assets/Media/Wide/Wide310x150Logo.scale-200.png
+    2294160: Assets/Media/Wide/Wide310x150Logo.scale-400.png
+  metroTileShortName: Aroaro
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -587,13 +635,51 @@ PlayerSettings:
   metroSplashScreenUseBackgroundColor: 0
   platformCapabilities:
     WindowsStoreApps:
+      AllJoyn: False
+      Appointments: False
+      BackgroundMediaPlayback: False
+      BlockedChatMessages: False
+      Bluetooth: False
+      Chat: False
+      CodeGeneration: False
+      Contacts: False
+      EnterpriseAuthentication: False
+      HumanInterfaceDevice: False
+      InputInjectionBrokered: False
       InternetClient: True
       InternetClientServer: False
+      Location: False
+      LowLevelDevices: False
       Microphone: True
+      MusicLibrary: False
+      Objects3D: False
+      OfflineMapsManagement: False
+      PhoneCall: False
+      PhoneCallHistoryPublic: False
+      PicturesLibrary: False
+      PointOfService: False
       PrivateNetworkClientServer: False
+      Proximity: False
+      RecordedCallsFolder: False
+      RemoteSystem: False
+      RemovableStorage: False
+      SharedUserCertificates: False
       SpatialPerception: False
+      SystemManagement: False
+      UserAccountInformation: False
+      UserDataTasks: False
+      UserNotificationListener: False
+      VideosLibrary: False
+      VoipCall: False
       WebCam: False
-  metroTargetDeviceFamilies: {}
+  metroTargetDeviceFamilies:
+    Desktop: False
+    Holographic: False
+    IoT: False
+    IoTHeadless: False
+    Mobile: False
+    Team: False
+    Xbox: False
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 

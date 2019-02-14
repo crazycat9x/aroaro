@@ -36,4 +36,5 @@ MonoBehaviour:
   - EndStroke
   - DestroyNetworkedObject
   - InstantiateSceneObject
+  - Draw
   DisableAutoOpenWizard: 1
